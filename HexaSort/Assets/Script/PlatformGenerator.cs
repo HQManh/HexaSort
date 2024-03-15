@@ -39,8 +39,6 @@ public class PlatformGenerator : MonoBehaviour
     [SerializeField]
     List<ArrayPlat> pieceList = new();
 
-
-    // Start is called before the first frame update
     void Start()
     {
         height = platPiece.GetComponentInChildren<MeshRenderer>().bounds.size.x;

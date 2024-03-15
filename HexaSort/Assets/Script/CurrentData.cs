@@ -6,8 +6,11 @@ using UnityEngine;
 public class CurrentData : MonoBehaviour
 {
     public static CurrentData Instance;
-    public static int maxColorID = 0;
+    public int maxColorID = 0;
     public List<Material> materials = new();
+    public static bool isPick= false;
+    public static List<PiecePro> currentPick;
+    public static PlatformPiece currenPlat;
     [SerializeField]
     Material defaultMaterial;
 
@@ -24,5 +27,10 @@ public class CurrentData : MonoBehaviour
         var t = Instantiate(defaultMaterial);
         t.color = Color.white;
         materials.Add(t);
+    }
+
+    public void Shuffle(Transform from, Transform to)
+    {
+
     }
 }

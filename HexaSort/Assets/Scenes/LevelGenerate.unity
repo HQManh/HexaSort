@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce7c0aba2f6719438fa102cd7b60ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platPiece: {fileID: 6281701901768730130, guid: 23f8f216fa757a1408d4302238ced3b8, type: 3}
+  platPiece: {fileID: 7579432686219544184, guid: 35614830794c8974cab47807c4c4f174, type: 3}
   rootPlat: {fileID: 1571931940}
   position:
   - list:
