@@ -50,7 +50,7 @@ public class PlatformPiece : MonoBehaviour
                 var a = temp.transform.parent.parent;
                 a.parent = container;
                 LeanTween.moveLocal(a.gameObject, transform.localPosition - new Vector3(0f, 0f, 0.15f * (1 + pieces.Count +stt)), 0.25f);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
                 stt++;
             }
         }
