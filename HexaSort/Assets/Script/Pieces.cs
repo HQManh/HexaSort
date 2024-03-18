@@ -5,6 +5,12 @@ using UnityEngine;
 public class Pieces : MonoBehaviour
 {
     public List<PiecePro> piecePros = new();
+    Vector3 startPos;
+
+    private void Start()
+    {
+        startPos = transform.localPosition;
+    }
 
     private void OnMouseDrag()
     {
@@ -15,7 +21,7 @@ public class Pieces : MonoBehaviour
             p.gameObject.layer = 2;
         }
         CurrentData.isPick = true;
-        CurrentData.currentPick = piecePros;
+        CurrentData.currentPick = this;
     }
 
     private void OnMouseUp()
@@ -29,10 +35,14 @@ public class Pieces : MonoBehaviour
         }
         else
         {
-            StartCoroutine(CurrentData.currenPlat.SetPos());
+            CurrentData.currenPlat.SetPos();
+            CurrentData.Instance.CheckPiece();
             CurrentData.isPick = false;
+            Destroy(this.transform.GetChild(0).gameObject);
         }
+        transform.localPosition = startPos;
 
     }
+
 
 }

@@ -31,6 +31,8 @@ public class PiecesGenerator : MonoBehaviour
         {
             var t = GetInfo();
             var rootTemp = piecePos.GetChild(i);
+            var a = rootTemp.GetComponent<Pieces>();
+            a.piecePros.Clear();
             int sum = 0;
             var root = Instantiate(rootPieces, rootTemp);
             root.transform.localPosition = Vector3.zero;
@@ -40,7 +42,6 @@ public class PiecesGenerator : MonoBehaviour
                 {
                     var newObject = Instantiate(piecePre, root.transform);
                     newObject.transform.localPosition = new Vector3(0f,0f, -0.15f * (k+sum));
-                    var a = rootTemp.GetComponent<Pieces>();
                     var b = newObject.GetComponentInChildren<PiecePro>();
                     b.id= t[j].colorID;
                     b.SetColor();
@@ -49,7 +50,7 @@ public class PiecesGenerator : MonoBehaviour
                 sum += t[j].amount;
             }
         }
-
+        CurrentData.numPiece = 3;
     }
 
 
@@ -58,19 +59,15 @@ public class PiecesGenerator : MonoBehaviour
         int numColors = UnityEngine.Random.Range(1, 4);
         amount = UnityEngine.Random.Range(numColors, 7);
         List<PieceDetail> info = new();
+        List<int> colors = new();
         for (int i=0;i < numColors; i++)
         {
             PieceDetail piece = new();
-            int id;
-            do
+            int id = UnityEngine.Random.Range(2, CurrentData.Instance.maxColorID + 2);
+            while (colors.Contains(id))
             {
-                id = UnityEngine.Random.Range(2, CurrentData.Instance.maxColorID+2);
-                foreach (var t in info)
-                {
-                    if(t.colorID == id) continue;
-                }
-                break;
-            } while (true);
+                id = UnityEngine.Random.Range(2, CurrentData.Instance.maxColorID + 2);
+            }
             if (numColors - i == 1)
             {
                 piece.amount = amount;
@@ -82,6 +79,7 @@ public class PiecesGenerator : MonoBehaviour
             piece.amount = a;
             piece.colorID = id;
             info.Add(piece);
+            colors.Add(id);
             amount -= a;
         }
         return info.ToArray();

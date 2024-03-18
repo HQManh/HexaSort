@@ -8,11 +8,14 @@ public class CurrentData : MonoBehaviour
     public static CurrentData Instance;
     public int maxColorID = 0;
     public List<Material> materials = new();
-    public static bool isPick= false;
-    public static List<PiecePro> currentPick;
+    public static bool isPick = false;
+    public static int numPiece;
+    public static Pieces currentPick = new();
     public static PlatformPiece currenPlat;
     [SerializeField]
     Material defaultMaterial;
+    [SerializeField]
+    PiecesGenerator piecesGenerator;
 
     private void Awake()
     {
@@ -29,8 +32,13 @@ public class CurrentData : MonoBehaviour
         materials.Add(t);
     }
 
-    public void Shuffle(Transform from, Transform to)
+    public void CheckPiece()
     {
-
+        numPiece--;
+        if(numPiece == 0)
+        {
+            piecesGenerator.GeneratePieces();
+        }
     }
+
 }

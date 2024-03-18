@@ -233,7 +233,79 @@ MonoBehaviour:
       type: 0
     - isSet: 0
       type: 0
-  pieceList: []
+  pieceList:
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - pieces:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
