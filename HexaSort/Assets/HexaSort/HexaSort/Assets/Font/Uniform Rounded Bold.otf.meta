@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 7ae45c093603466fa48e1a0fedbcd118
+timeCreated: 1710838001
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: "Uniform Rounded Bold"
+  fontNames:
+  - Uniform Rounded
+  fallbackFontReferences: []
+  customCharacters:
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData:
+  assetBundleName: 
+  assetBundleVariant: 

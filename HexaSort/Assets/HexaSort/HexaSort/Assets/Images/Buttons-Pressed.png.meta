@@ -1,0 +1,399 @@
+fileFormatVersion: 2
+guid: 19eea2c566644a169275529104a543cb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Buttons-V2-Black
+  - first:
+      213: 21300002
+    second: Buttons-V2-Yellow
+  - first:
+      213: 21300004
+    second: Buttons-V2-Disabled
+  - first:
+      213: 21300006
+    second: Buttons-V2-Green
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 48
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 360
+  spriteBorder: {x: 100, y: 100, z: 100, w: 100}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 48
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Buttons-V2-Green
+      rect:
+        serializedVersion: 2
+        x: 1.07612
+        y: 257.0761
+        width: 253.8477
+        height: 253.8477
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.5000001}
+      border: {x: 98.92388, y: 98.92389, z: 98.92387, w: 98.92386}
+      outline:
+      - - {x: -127, y: -92}
+        - {x: -127, y: 94.00001}
+        - {x: -92, y: -127}
+      - - {x: -96, y: 127}
+        - {x: -92, y: -127}
+        - {x: -127, y: 94.00001}
+      - - {x: 85.00001, y: 127}
+        - {x: -92, y: -127}
+        - {x: -96, y: 127}
+      - - {x: 95.00002, y: -127}
+        - {x: -92, y: -127}
+        - {x: 85.00001, y: 127}
+      - - {x: 126, y: 100}
+        - {x: 95.00002, y: -127}
+        - {x: 85.00001, y: 127}
+      - - {x: 127, y: -92}
+        - {x: 95.00002, y: -127}
+        - {x: 126, y: 100}
+      - - {x: 127, y: 93}
+        - {x: 127, y: -92}
+        - {x: 126, y: 100}
+      physicsShape:
+      - - {x: 126, y: -69.99998}
+        - {x: 126, y: -52.99998}
+        - {x: 119, y: -50.99998}
+        - {x: 118, y: 68.00002}
+        - {x: 108, y: 96.00002}
+        - {x: 80.00002, y: 115}
+        - {x: 68.00002, y: 117}
+        - {x: -71.99998, y: 117}
+        - {x: -91.99999, y: 107}
+        - {x: -104, y: 97.00002}
+        - {x: -114, y: 81.00002}
+        - {x: -117, y: 71.00002}
+        - {x: -125, y: -52.99998}
+        - {x: -126, y: -52.99998}
+        - {x: -126, y: -69.99998}
+        - {x: -125, y: -85.99998}
+        - {x: -103, y: -113}
+        - {x: -79.99998, y: -125}
+        - {x: -60.99998, y: -127}
+        - {x: 65.00002, y: -127}
+        - {x: 84.00002, y: -124}
+        - {x: 102, y: -114}
+        - {x: 124, y: -83.99998}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons-V2-Disabled
+      rect:
+        serializedVersion: 2
+        x: 1.07612
+        y: 1.07612
+        width: 253.8477
+        height: 253.8477
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.5000001}
+      border: {x: 98.92388, y: 78.92388, z: 98.92387, w: 174.9239}
+      outline:
+      - - {x: -127, y: -92}
+        - {x: -127, y: 94.00001}
+        - {x: -92, y: -127}
+      - - {x: -96, y: 127}
+        - {x: -92, y: -127}
+        - {x: -127, y: 94.00001}
+      - - {x: 85.00001, y: 127}
+        - {x: -92, y: -127}
+        - {x: -96, y: 127}
+      - - {x: 95.00002, y: -127}
+        - {x: -92, y: -127}
+        - {x: 85.00001, y: 127}
+      - - {x: 126, y: 100}
+        - {x: 95.00002, y: -127}
+        - {x: 85.00001, y: 127}
+      - - {x: 127, y: -92}
+        - {x: 95.00002, y: -127}
+        - {x: 126, y: 100}
+      - - {x: 127, y: 93}
+        - {x: 127, y: -92}
+        - {x: 126, y: 100}
+      physicsShape:
+      - - {x: 126, y: -74.99998}
+        - {x: 126, y: -52.99998}
+        - {x: 119, y: -50.99998}
+        - {x: 117, y: 64.00002}
+        - {x: 117, y: 75.00002}
+        - {x: 98.00002, y: 106}
+        - {x: 81.00002, y: 113}
+        - {x: 65.00002, y: 116}
+        - {x: 58.00002, y: 117}
+        - {x: -69.99998, y: 117}
+        - {x: -79.99998, y: 114}
+        - {x: -93.99998, y: 106}
+        - {x: -110, y: 88.00002}
+        - {x: -117, y: 70.00002}
+        - {x: -118, y: -51.99999}
+        - {x: -126, y: -52.99998}
+        - {x: -126, y: -73.99998}
+        - {x: -125, y: -85.99998}
+        - {x: -103, y: -113}
+        - {x: -79.99998, y: -125}
+        - {x: -60.99998, y: -127}
+        - {x: 65.00002, y: -127}
+        - {x: 84.00002, y: -124}
+        - {x: 102, y: -114}
+        - {x: 125, y: -83.99998}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons-V2-Black
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1.07612
+        width: 251.9239
+        height: 253.8477
+      alignment: 9
+      pivot: {x: 0.50809, y: 0.5000001}
+      border: {x: 100, y: 98.92388, z: 95.92387, w: 98.92387}
+      outline:
+      - - {x: -125.962, y: -127}
+        - {x: -125.962, y: 119}
+        - {x: 126.0381, y: -127}
+      - - {x: -89.96195, y: 127}
+        - {x: 126.0381, y: -127}
+        - {x: -125.962, y: 119}
+      - - {x: 99.03805, y: 127}
+        - {x: 126.0381, y: -127}
+        - {x: -89.96195, y: 127}
+      - - {x: 126.0381, y: 100}
+        - {x: 126.0381, y: -127}
+        - {x: 99.03805, y: 127}
+      physicsShape:
+      - - {x: 125.0381, y: -69.99998}
+        - {x: 125.0381, y: -52.99998}
+        - {x: 117.0381, y: -50.99998}
+        - {x: 116.0381, y: 67.00002}
+        - {x: 111.0381, y: 87.00002}
+        - {x: 90.03806, y: 108}
+        - {x: 81.03806, y: 113}
+        - {x: 62.03806, y: 117}
+        - {x: -65.96194, y: 117}
+        - {x: -78.96194, y: 115}
+        - {x: -93.96194, y: 107}
+        - {x: -113.9619, y: 86.00002}
+        - {x: -118.9619, y: 64.00002}
+        - {x: -125.9619, y: -39.99998}
+        - {x: -125.9619, y: -68.99999}
+        - {x: -124.9619, y: -74.99998}
+        - {x: -123.9619, y: -84.99998}
+        - {x: -104.9619, y: -114}
+        - {x: -80.96194, y: -125}
+        - {x: -61.96194, y: -127}
+        - {x: 64.03806, y: -127}
+        - {x: 83.03806, y: -124}
+        - {x: 101.0381, y: -114}
+        - {x: 123.0381, y: -83.99998}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons-V2-Yellow
+      rect:
+        serializedVersion: 2
+        x: 257.0761
+        y: 257.0761
+        width: 253.8477
+        height: 253.8477
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.5000001}
+      border: {x: 98.92389, y: 98.92389, z: 98.92386, w: 98.92386}
+      outline:
+      - - {x: -127, y: -92}
+        - {x: -127, y: 94.00001}
+        - {x: -92, y: -127}
+      - - {x: -96, y: 127}
+        - {x: -92, y: -127}
+        - {x: -127, y: 94.00001}
+      - - {x: 85.00001, y: 127}
+        - {x: -92, y: -127}
+        - {x: -96, y: 127}
+      - - {x: 95.00002, y: -127}
+        - {x: -92, y: -127}
+        - {x: 85.00001, y: 127}
+      - - {x: 126, y: 100}
+        - {x: 95.00002, y: -127}
+        - {x: 85.00001, y: 127}
+      - - {x: 127, y: -92}
+        - {x: 95.00002, y: -127}
+        - {x: 126, y: 100}
+      - - {x: 127, y: 93}
+        - {x: 127, y: -92}
+        - {x: 126, y: 100}
+      physicsShape:
+      - - {x: 122, y: -82.99998}
+        - {x: 126, y: -68.99999}
+        - {x: 126, y: -52.99998}
+        - {x: 118, y: -50.99998}
+        - {x: 117, y: 67.00002}
+        - {x: 112, y: 87.00002}
+        - {x: 92.00002, y: 109}
+        - {x: 68.00002, y: 117}
+        - {x: -65.99998, y: 117}
+        - {x: -76.99998, y: 114}
+        - {x: -93.99998, y: 108}
+        - {x: -115, y: 84.00002}
+        - {x: -117, y: 65.00002}
+        - {x: -124, y: -52.99998}
+        - {x: -126, y: -53.99999}
+        - {x: -126, y: -62.99998}
+        - {x: -123, y: -84.99998}
+        - {x: -112, y: -102}
+        - {x: -102, y: -112}
+        - {x: -79.99998, y: -125}
+        - {x: -60.99998, y: -127}
+        - {x: 65.00002, y: -127}
+        - {x: 84.00002, y: -124}
+        - {x: 101, y: -113}
+        - {x: 115, y: -96.99999}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Buttons-V2-Black: 21300000
+      Buttons-V2-Disabled: 21300004
+      Buttons-V2-Green: 21300006
+      Buttons-V2-Yellow: 21300002
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

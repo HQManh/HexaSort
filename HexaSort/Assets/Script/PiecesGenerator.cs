@@ -1,7 +1,6 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.SpriteAssetUtilities;
 using UnityEngine;
 
 public class PiecesGenerator : MonoBehaviour
@@ -41,7 +40,7 @@ public class PiecesGenerator : MonoBehaviour
                 for (int k=0; k< t[j].amount ; k++)
                 {
                     var newObject = Instantiate(piecePre, root.transform);
-                    newObject.transform.localPosition = new Vector3(0f,0f, -0.15f * (k+sum));
+                    newObject.transform.localPosition = new Vector3(0f,0f, -0.35f * (k+sum));
                     var b = newObject.GetComponentInChildren<PiecePro>();
                     b.id= t[j].colorID;
                     b.SetColor();
@@ -56,17 +55,17 @@ public class PiecesGenerator : MonoBehaviour
 
     PieceDetail[] GetInfo()
     {
-        int numColors = UnityEngine.Random.Range(1, 4);
-        amount = UnityEngine.Random.Range(numColors, 7);
+        int numColors = Random.Range(1, 4);
+        amount = Random.Range(numColors, 7);
         List<PieceDetail> info = new();
         List<int> colors = new();
         for (int i=0;i < numColors; i++)
         {
             PieceDetail piece = new();
-            int id = UnityEngine.Random.Range(2, CurrentData.Instance.maxColorID + 2);
+            int id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
             while (colors.Contains(id))
             {
-                id = UnityEngine.Random.Range(2, CurrentData.Instance.maxColorID + 2);
+                id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
             }
             if (numColors - i == 1)
             {
@@ -75,7 +74,7 @@ public class PiecesGenerator : MonoBehaviour
                 info.Add(piece);
                 return info.ToArray();
             }
-            int a = UnityEngine.Random.Range(1, amount-2);
+            int a = Random.Range(1, amount-2);
             piece.amount = a;
             piece.colorID = id;
             info.Add(piece);

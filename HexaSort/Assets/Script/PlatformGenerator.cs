@@ -59,7 +59,7 @@ public class PlatformGenerator : MonoBehaviour
                 {
                     var temp= Instantiate(platPiece, rootPlat);
                     t= temp.GetComponentInChildren<PlatformPiece>();
-                    temp.transform.position = new Vector3(j * (0.925f*2) + (0.925f) * (i%2), i * (width/2),0f) ;
+                    temp.transform.position = new Vector3(j * (1.7f*2) + (1.7f) * (i%2), i * (width/2),0f) ;
                 }
                 listTemp.Add(t);
             }

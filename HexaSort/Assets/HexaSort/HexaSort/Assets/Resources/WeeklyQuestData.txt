@@ -1,0 +1,73 @@
+Task Rolodex,,,,,,,,,,,
+Task Detail,,,,,,,,,,,
+Set Id,Stars,Mission ID,Task,Mission,Subtype,Target,Times,Min Level,Max Level,,Design Difficulty(ONLY For my understanding)
+0,10,1,Collect [Target] [Subtype] Hex tiles [Times] ,Collect Hex Tiles,any,3000,1,0,10,,
+0,10,2,Use [Subtype] [Times],Use Feature,Spin Wheel,1,2,0,10,,
+0,15,3,Use [Subtype] [Times] ,Use Booster,Refresh,1,10,0,10,,
+0,15,4,Use [Subtype] [Times] ,Use Booster,Hammer,1,7,0,10,,
+0,20,5,Collect [Target] coins through levels [Times],Collect Coins,None,150,1,0,10,,
+0,30,6,Use [Subtype] [Times] ,Use Booster,Swap,1,5,0,10,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+1,10,7,Merge a Stack of [Target] Hex tiles [Times],Merge Stack,None,15,5,11,100,,E
+1,10,8,Collect [Target] [Subtype] Hex tiles [Times] ,Collect Hex Tiles,Red,500,1,11,100,,H
+1,15,9,Complete [Target] levels consecutively [Times],Level Completion Streak,None,5,1,11,100,,M
+1,15,10,Use [Subtype] [Times] ,Use Booster,Hammer,1,7,11,100,,H
+1,20,11,Use [Subtype] [Times],Use Feature,Spin Wheel,1,2,11,100,,M
+1,30,12,Complete [Target] levels [Times],Complete Level,None,30,1,11,100,,E
+,,,,,,,,,,,
+,,,,,,,,,,,
+2,10,13,Use Play On [Times],Use Play On,None,1,1,11,100,,M
+2,10,14,Participate in [Subtype] [Times],Participate in Event,Hexa Blaze Streak,1,1,11,100,,E
+2,15,15,Play [Target] Consecutive days [Times],Playtime Streak,None,3,1,11,100,,M
+2,15,16,Collect [Target] [Subtype] Hex tiles [Times] ,Collect Hex Tiles,Purple,700,1,11,100,,H
+2,20,17,Get promoted to the next league [Times],League Promotion,None,1,1,11,100,,E
+2,30,18,Collect [Target] coins through levels [Times],Collect Coins,None,200,1,11,100,,H
+,,,,,,,,,,,
+,,,,,,,,,,,
+3,10,19,Play for [Target] minutes [Times],Gameplay Time,None,50,1,11,100,,M
+3,10,20,Collect [Target] [Subtype] Hex tiles [Times] ,Collect Hex Tiles,any,3000,1,11,100,,M
+3,15,21,Use Play On [Times],Use Play On,None,1,2,11,100,,H
+3,15,22,Complete [Target] levels consecutively [Times],Level Completion Streak,None,5,1,11,100,,E
+3,20,23,Use [Subtype] [Times],Use Booster,Refresh,1,10,11,100,,H
+3,30,24,Use [Target] [Subtype] [Times],Use Feature,Extra Slot,15,1,11,100,,E
+,,,,,,,,,,,
+,,,,,,,,,,,
+4,10,25,Participate in [Subtype] [Times],Participate in Event,Hexa Blaze Streak,1,1,11,100,,M
+4,10,26,Unlock [Target] Locked Slots [Times],Unlock Locked Slots,None,35,1,11,100,,M
+4,15,27,Merge [Target] Hex stacks at once [Times],Merge Stacks Together,None,3,5,11,100,,H
+4,15,28,Use [Subtype] [Times],Use Feature,Spin Wheel,1,2,11,100,,E
+4,20,29,Use [Subtype] [Times],Use Booster,Swap,1,5,11,100,,E
+4,30,30,Complete [Target] levels [Times],Complete Level,None,40,1,11,100,,M/H
+,,,,,,,,,,,
+,,,,,,,,,,,
+5,15,31,Play for [Target] minutes [Times],Gameplay Time,None,60,1,101,100000,,H
+5,15,32,Win 1st place in a league [Times],Win Position,None,1,1,101,100000,,E
+5,20,33,Collect [Target] [Subtype] Hex tiles [Times] ,Collect Hex Tiles,any,5000,1,101,100000,,M
+5,20,34,Use Play On [Times],Use Play On,None,1,2,101,100000,,H
+5,30,35,Use [Subtype] [Times],Use Booster,Hammer,1,10,101,100000,,M
+5,50,36,Use [Target] [Subtype] [Times],Use Feature,Extra Slot,20,1,101,100000,,E
+,,,,,,,,,,,
+,,,,,,,,,,,
+6,15,37,Merge a Stack of [Target] Hex tiles [Times],Merge Stack,None,15,5,101,100000,,H
+6,15,38,Collect [Target] [Subtype] Hex tiles [Times] ,Collect Hex Tiles,Blue,500,1,101,100000,,E
+6,20,39,Complete [Target] Levels consecutively[Times],Level Completion Streak,None,7,1,101,100000,,E
+6,20,40,Use [Subtype] [Times],Use Feature,Spin Wheel,1,2,101,100000,,H
+6,30,41,Use [Subtype] [Times] ,Use Booster,Hammer,1,10,101,100000,,M
+6,50,42,Collect [Target] coins through gameplay [Times],Collect Coins,None,250,1,101,100000,,M
+,,,,,,,,,,,
+,,,,,,,,,,,
+7,15,43,Participate in [Subtype] [Times],Participate in Event,Hexa Blaze Streak,1,1,101,100000,,
+7,15,44,Complete [Target] levels in a single attempt [Times],Level Complete in One attempt,None,5,1,101,100000,,
+7,20,45,Use [Subtype] [Times],Use Booster,Refresh,1,15,101,100000,,
+7,20,46,Merge [Target] Hex stacks at once [Times],Merge Stacks Together,None,3,5,101,100000,,
+7,30,47,Complete [Target] levels [Times],Complete Level,None,40,1,101,100000,,
+7,50,48,Use [Target] [Subtype] [Times],Use Feature,Extra Slot,25,1,101,100000,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+8,15,49,Play for [Target] minutes [Times],Gameplay Time,None,60,1,101,100000,,
+8,15,50,Unlock [Target] Locked Slots [Times],Unlock Locked Slots,None,40,1,101,100000,,
+8,20,51,Play [Target] Consecutive days [Times],Playtime Streak,None,3,1,101,100000,,
+8,20,52,Complete [Target] Levels consecutively [Times],Level Completion Streak,None,7,1,101,100000,,
+8,30,53,Use [Subtype] [Times],Use Booster,Swap,1,5,101,100000,,
+8,50,54,Collect [Target] coins through gameplay [Times],Collect Coins,None,250,1,101,100000,,

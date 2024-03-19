@@ -1,0 +1,225 @@
+{
+  "com.lionstudios.release.bundle": {
+    "version": "1.2.4",
+    "dependencies": {
+      "com.lionstudios.release.heroiclabs.nakama-unity": {
+        "version": "3.8.0",
+        "dependencies": {
+          "com.unity.modules.unitywebrequest": {
+            "version": "1.0.0",
+            "dependencies": null
+          }
+        }
+      },
+      "com.lionstudios.release.lionkitcore": {
+        "version": "3.2.3",
+        "dependencies": {
+          "com.unity.nuget.newtonsoft-json": {
+            "version": "3.0.2",
+            "dependencies": null
+          }
+        }
+      },
+      "com.lionstudios.release.lionsdkservice": {
+        "version": "3.2.0",
+        "dependencies": {
+          "com.lionstudios.release.lionkitcore": {
+            "version": "3.2.0",
+            "dependencies": null
+          },
+          "com.unity.nuget.newtonsoft-json": {
+            "version": "3.0.2",
+            "dependencies": null
+          },
+          "com.lionstudios.release.lionanalytics": {
+            "version": "3.2.0",
+            "dependencies": {
+              "com.lionstudios.release.lionkitcore": {
+                "version": "3.2.0",
+                "dependencies": null
+              }
+            }
+          }
+        }
+      },
+      "com.lionstudios.release.lionanalytics": {
+        "version": "3.2.0",
+        "dependencies": {
+          "com.lionstudios.release.lionkitcore": {
+            "version": "3.2.0",
+            "dependencies": null
+          }
+        }
+      },
+      "com.lionstudios.release.nakamaclient": {
+        "version": "1.2.0",
+        "dependencies": {
+          "com.unity.textmeshpro": {
+            "version": "3.0.6",
+            "dependencies": {
+              "com.unity.ugui": {
+                "version": "1.0.0",
+                "dependencies": {
+                  "com.unity.modules.ui": {
+                    "version": "1.0.0",
+                    "dependencies": null
+                  },
+                  "com.unity.modules.imgui": {
+                    "version": "1.0.0",
+                    "dependencies": null
+                  }
+                }
+              }
+            }
+          },
+          "com.lionstudios.release.lionanalytics": {
+            "version": "3.2.0",
+            "dependencies": {
+              "com.lionstudios.release.lionkitcore": {
+                "version": "3.2.0",
+                "dependencies": null
+              }
+            }
+          }
+        }
+      },
+      "com.lionstudios.release.iap": {
+        "version": "1.2.2",
+        "dependencies": {
+          "com.unity.purchasing": {
+            "version": "4.10.0",
+            "dependencies": {
+              "com.unity.ugui": {
+                "version": "1.0.0",
+                "dependencies": {
+                  "com.unity.modules.ui": {
+                    "version": "1.0.0",
+                    "dependencies": null
+                  },
+                  "com.unity.modules.imgui": {
+                    "version": "1.0.0",
+                    "dependencies": null
+                  }
+                }
+              },
+              "com.unity.modules.unitywebrequest": {
+                "version": "1.0.0",
+                "dependencies": null
+              },
+              "com.unity.modules.jsonserialize": {
+                "version": "1.0.0",
+                "dependencies": null
+              },
+              "com.unity.modules.androidjni": {
+                "version": "1.0.0",
+                "dependencies": null
+              },
+              "com.unity.services.core": {
+                "version": "1.8.2",
+                "dependencies": null
+              }
+            }
+          },
+          "com.lionstudios.release.lionanalytics": {
+            "version": "3.2.0",
+            "dependencies": {
+              "com.lionstudios.release.lionkitcore": {
+                "version": "3.2.0",
+                "dependencies": null
+              }
+            }
+          },
+          "com.lionstudios.release.nakamaclient": {
+            "version": "1.2.0",
+            "dependencies": {
+              "com.unity.textmeshpro": {
+                "version": "3.0.6",
+                "dependencies": {
+                  "com.unity.ugui": {
+                    "version": "1.0.0",
+                    "dependencies": {
+                      "com.unity.modules.ui": {
+                        "version": "1.0.0",
+                        "dependencies": null
+                      },
+                      "com.unity.modules.imgui": {
+                        "version": "1.0.0",
+                        "dependencies": null
+                      }
+                    }
+                  }
+                }
+              },
+              "com.lionstudios.release.lionanalytics": {
+                "version": "3.2.0",
+                "dependencies": {
+                  "com.lionstudios.release.lionkitcore": {
+                    "version": "3.2.0",
+                    "dependencies": null
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "com.lionstudios.release.splash": {
+        "version": "1.0.0",
+        "dependencies": {
+          "com.unity.render-pipelines.universal": {
+            "version": "10.8.1",
+            "dependencies": null
+          },
+          "com.unity.render-pipelines.core": {
+            "version": "10.8.1",
+            "dependencies": null
+          },
+          "com.lionstudios.release.lionanalytics": {
+            "version": "3.0.0",
+            "dependencies": null
+          }
+        }
+      },
+      "com.lionstudios.release.autobuilder": {
+        "version": "1.1.0",
+        "dependencies": {
+          "com.lionstudios.release.lionkitcore": {
+            "version": "3.1.1",
+            "dependencies": null
+          }
+        }
+      },
+      "com.lionstudios.release.ingamemessaging": {
+        "version": "1.1.0",
+        "dependencies": {
+          "com.lionstudios.release.lionanalytics": {
+            "version": "3.1.0",
+            "dependencies": null
+          },
+          "com.lionstudios.release.nakamaclient": {
+            "version": "1.1.0",
+            "dependencies": null
+          }
+        }
+      },
+      "com.lionstudios.release.settingsmenu": {
+        "version": "1.2.0",
+        "dependencies": {
+          "com.lionstudios.release.lionanalytics": {
+            "version": "3.2.0",
+            "dependencies": {
+              "com.lionstudios.release.lionkitcore": {
+                "version": "3.2.0",
+                "dependencies": null
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "com.lionstudios.release.helpshift.unity-sdk": {
+    "version": "10.2.3",
+    "dependencies": null
+  }
+}

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+  m_Name: "Uniform Rounded Bold SDF 1"
+  m_EditorClassIdentifier: 
+  hashCode: 1513109410
+  material: {fileID: 2100000, guid: f8d66e2311b34d688ebb3739d97f57c0, type: 2}
+  materialHashCode: 1907015746
+  m_Version: "1.1.0"
+  m_SourceFontFileGUID: "9ed5737051988420e8a84907316365e9"
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 7ae45c093603466fa48e1a0fedbcd118, type: 3}
+  m_SourceFontFile: {fileID: 0}
+  m_AtlasPopulationMode: 1718185557
+  m_FaceInfo:
+    m_FaceIndex: 544043631
+    m_FamilyName: 
+    m_StyleName: 
+    m_PointSize: 
+    m_Scale: 
+    m_UnitsPerEM: 
+    m_LineHeight: 
+    m_AscentLine: 
+    m_CapLine: 
+    m_MeanLine: 
+    m_Baseline: 
+    m_DescentLine: 
+    m_SuperscriptOffset: 
+    m_SuperscriptSize: 
+    m_SubscriptOffset: 
+    m_SubscriptSize: 
+    m_UnderlineOffset: 
+    m_UnderlineThickness: 
+    m_StrikethroughOffset: 
+    m_StrikethroughThickness: 
+    m_TabWidth: 

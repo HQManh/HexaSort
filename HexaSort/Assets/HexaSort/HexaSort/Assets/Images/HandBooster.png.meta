@@ -1,0 +1,390 @@
+fileFormatVersion: 2
+guid: 927be75bef9f4763b1664131a12095e5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Boosters_2
+  - first:
+      213: 21300002
+    second: Boosters_1
+  - first:
+      213: 21300004
+    second: Boosters_0
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 50
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boosters_2
+      rect:
+        serializedVersion: 2
+        x: 29.07612
+        y: 6.07612
+        width: 204.8971
+        height: 238.8477
+      alignment: 9
+      pivot: {x: 0.4827978, y: 0.5104669}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -102.5247, y: -119.5}
+        - {x: -102.5247, y: 85.5}
+        - {x: -15.52468, y: -119.5}
+      - - {x: -45.52468, y: 119.5}
+        - {x: -15.52468, y: -119.5}
+        - {x: -102.5247, y: 85.5}
+      - - {x: 51.47532, y: 119.5}
+        - {x: -15.52468, y: -119.5}
+        - {x: -45.52468, y: 119.5}
+      - - {x: 102.4753, y: 2.5}
+        - {x: -15.52468, y: -119.5}
+        - {x: 51.47532, y: 119.5}
+      - - {x: 91.47532, y: 67.5}
+        - {x: 102.4753, y: 2.5}
+        - {x: 51.47532, y: 119.5}
+      - - {x: 102.4753, y: 37.5}
+        - {x: 102.4753, y: 2.5}
+        - {x: 91.47532, y: 67.5}
+      physicsShape:
+      - - {x: 12.47532, y: -73.5}
+        - {x: 22.47532, y: -65.5}
+        - {x: 38.47532, y: -48.5}
+        - {x: 56.47532, y: -20.5}
+        - {x: 80.47532, y: -9.5}
+        - {x: 98.47532, y: 3.5}
+        - {x: 101.4753, y: 10.5}
+        - {x: 101.4753, y: 25.5}
+        - {x: 97.47532, y: 31.5}
+        - {x: 87.47532, y: 40.5}
+        - {x: 82.47531, y: 45.5}
+        - {x: 87.47532, y: 54.5}
+        - {x: 86.47532, y: 68.5}
+        - {x: 75.47532, y: 81.5}
+        - {x: 68.47532, y: 85.5}
+        - {x: 52.47532, y: 82.49999}
+        - {x: 53.47532, y: 99.5}
+        - {x: 51.47532, y: 105.5}
+        - {x: 43.47532, y: 115.5}
+        - {x: 29.47532, y: 118.5}
+        - {x: 20.47532, y: 118.5}
+        - {x: 8.475319, y: 109.5}
+        - {x: 2.475319, y: 98.5}
+        - {x: 1.475318, y: 107.5}
+        - {x: -11.52468, y: 118.5}
+        - {x: -29.52468, y: 118.5}
+        - {x: -38.52468, y: 112.5}
+        - {x: -43.52468, y: 101.5}
+        - {x: -46.52468, y: 92.5}
+        - {x: -47.52468, y: 69.49999}
+        - {x: -52.52468, y: 47.5}
+        - {x: -68.52468, y: 61.5}
+        - {x: -85.52468, y: 63.5}
+        - {x: -98.52468, y: 54.5}
+        - {x: -101.5247, y: 46.5}
+        - {x: -101.5247, y: 32.5}
+        - {x: -87.52468, y: -0.5}
+        - {x: -77.52468, y: -29.5}
+        - {x: -87.52468, y: -38.5}
+        - {x: -100.5247, y: -65.5}
+        - {x: -101.5247, y: -74.5}
+        - {x: -101.5247, y: -78.5}
+        - {x: -90.52468, y: -91.5}
+        - {x: -79.52468, y: -99.5}
+        - {x: -48.52468, y: -116.5}
+        - {x: -38.52468, y: -118.5}
+        - {x: -24.52468, y: -118.5}
+        - {x: -17.52468, y: -115.5}
+        - {x: -12.52468, y: -110.5}
+        - {x: 3.475319, y: -88.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boosters_0
+      rect:
+        serializedVersion: 2
+        x: 22.02675
+        y: 271.0268
+        width: 222.8971
+        height: 236.8971
+      alignment: 9
+      pivot: {x: 0.4754357, y: 0.4768873}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -111.4753, y: -24.47533}
+        - {x: -111.4753, y: 62.52467}
+        - {x: -94.47531, y: -100.4753}
+      - - {x: -83.47531, y: 118.5247}
+        - {x: -94.47531, y: -100.4753}
+        - {x: -111.4753, y: 62.52467}
+      - - {x: -70.47531, y: -118.4753}
+        - {x: -94.47531, y: -100.4753}
+        - {x: -83.47531, y: 118.5247}
+      - - {x: -21.47531, y: 118.5247}
+        - {x: -70.47531, y: -118.4753}
+        - {x: -83.47531, y: 118.5247}
+      - - {x: -42.47531, y: -118.4753}
+        - {x: -70.47531, y: -118.4753}
+        - {x: -21.47531, y: 118.5247}
+      - - {x: -29.47531, y: -108.4753}
+        - {x: -42.47531, y: -118.4753}
+        - {x: -21.47531, y: 118.5247}
+      - - {x: 73.52469, y: -75.47533}
+        - {x: -29.47531, y: -108.4753}
+        - {x: -21.47531, y: 118.5247}
+      - - {x: 111.5247, y: 41.52467}
+        - {x: 73.52469, y: -75.47533}
+        - {x: -21.47531, y: 118.5247}
+      - - {x: 111.5247, y: 3.524673}
+        - {x: 73.52469, y: -75.47533}
+        - {x: 111.5247, y: 41.52467}
+      physicsShape:
+      - - {x: 1.524689, y: -42.47533}
+        - {x: 32.52469, y: -57.47533}
+        - {x: 50.52469, y: -65.47533}
+        - {x: 66.52469, y: -63.47533}
+        - {x: 76.52469, y: -53.47533}
+        - {x: 108.5247, y: 12.52467}
+        - {x: 110.5247, y: 21.52467}
+        - {x: 110.5247, y: 31.52467}
+        - {x: 106.5247, y: 38.52467}
+        - {x: 97.52469, y: 46.52467}
+        - {x: 55.52469, y: 66.52467}
+        - {x: 0.5246887, y: 94.52467}
+        - {x: -47.47531, y: 117.5247}
+        - {x: -57.47531, y: 117.5247}
+        - {x: -66.47531, y: 116.5247}
+        - {x: -74.47531, y: 108.5247}
+        - {x: -110.4753, y: 37.52467}
+        - {x: -110.4753, y: 20.52467}
+        - {x: -109.4753, y: 13.52467}
+        - {x: -99.47531, y: 6.524673}
+        - {x: -54.47531, y: -15.47533}
+        - {x: -57.47531, y: -21.47533}
+        - {x: -81.47531, y: -71.47533}
+        - {x: -85.4753, y: -81.47533}
+        - {x: -85.4753, y: -98.47533}
+        - {x: -75.47531, y: -111.4753}
+        - {x: -61.47531, y: -116.4753}
+        - {x: -58.47531, y: -117.4753}
+        - {x: -44.47531, y: -117.4753}
+        - {x: -32.47531, y: -108.4753}
+        - {x: -27.47531, y: -98.47533}
+        - {x: -8.475311, y: -56.47533}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boosters_1
+      rect:
+        serializedVersion: 2
+        x: 262.0761
+        y: 270.0761
+        width: 245.8477
+        height: 237.8477
+      alignment: 9
+      pivot: {x: 0.4959325, y: 0.4789782}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -123, y: -88.99998}
+        - {x: -123, y: 42.00002}
+        - {x: -116, y: -119}
+      - - {x: -33.99998, y: 97.00002}
+        - {x: -116, y: -119}
+        - {x: -123, y: 42.00002}
+      - - {x: 44.00002, y: -119}
+        - {x: -116, y: -119}
+        - {x: -33.99998, y: 97.00002}
+      - - {x: 3.000015, y: 119}
+        - {x: 44.00002, y: -119}
+        - {x: -33.99998, y: 97.00002}
+      - - {x: 65.00002, y: 119}
+        - {x: 44.00002, y: -119}
+        - {x: 3.000015, y: 119}
+      - - {x: 123, y: -23.99998}
+        - {x: 44.00002, y: -119}
+        - {x: 65.00002, y: 119}
+      - - {x: 105, y: 87.00002}
+        - {x: 123, y: -23.99998}
+        - {x: 65.00002, y: 119}
+      - - {x: 123, y: 64.00002}
+        - {x: 123, y: -23.99998}
+        - {x: 105, y: 87.00002}
+      physicsShape:
+      - - {x: 17.00002, y: -86.99998}
+        - {x: 26.00001, y: -63.99998}
+        - {x: 53.00001, y: -39.99998}
+        - {x: 72.00001, y: -32.99998}
+        - {x: 91.00001, y: -31.99998}
+        - {x: 116, y: -11.99998}
+        - {x: 121, y: 1.000015}
+        - {x: 121, y: 22.00001}
+        - {x: 118, y: 39.00002}
+        - {x: 110, y: 62.00001}
+        - {x: 100, y: 81.00001}
+        - {x: 87.00002, y: 93.00001}
+        - {x: 79.00001, y: 98.00002}
+        - {x: 46.00002, y: 114}
+        - {x: 43.00002, y: 115}
+        - {x: 36.00002, y: 118}
+        - {x: 25.00002, y: 118}
+        - {x: 12.00002, y: 116}
+        - {x: -2.999985, y: 106}
+        - {x: -11.99998, y: 95.00002}
+        - {x: -16.99998, y: 85.00002}
+        - {x: -17.99998, y: 69.00002}
+        - {x: -39.99998, y: 51.00002}
+        - {x: -61.99998, y: 32.00002}
+        - {x: -87.99998, y: 31.00002}
+        - {x: -98.99998, y: 27.00002}
+        - {x: -117, y: 10.00001}
+        - {x: -122, y: -2.999985}
+        - {x: -122, y: -19.99998}
+        - {x: -118, y: -36.99998}
+        - {x: -111, y: -64.99998}
+        - {x: -101, y: -81.99998}
+        - {x: -86.99998, y: -94.99998}
+        - {x: -38.99998, y: -118}
+        - {x: -16.99998, y: -118}
+        - {x: -1.999985, y: -109}
+        - {x: 9.000014, y: -96.99998}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Boosters_0: 21300004
+      Boosters_1: 21300002
+      Boosters_2: 21300000
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

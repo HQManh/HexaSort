@@ -1,0 +1,839 @@
+fileFormatVersion: 2
+guid: 4f021616efce4308a1580d2d214314cf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Atlas-Close-B
+  - first:
+      213: 21300002
+    second: Atlas-Coin
+  - first:
+      213: 21300004
+    second: Atlas-Reward-Video
+  - first:
+      213: 21300006
+    second: Atlas-Arrow-A
+  - first:
+      213: 21300008
+    second: Atlas-Frame-Add
+  - first:
+      213: 21300010
+    second: Atlas-NotificationDot
+  - first:
+      213: 21300012
+    second: Atlas-Star
+  - first:
+      213: 21300014
+    second: Atlas-Coin-Outline-Dark
+  - first:
+      213: 21300016
+    second: Atlas-Lock-A
+  - first:
+      213: 21300018
+    second: Atlas-Check-B
+  - first:
+      213: 21300020
+    second: Atlas-No-Ads-Small
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 48
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 2
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 48
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Atlas-Arrow-A
+      rect:
+        serializedVersion: 2
+        x: 395.0761
+        y: 920.0267
+        width: 104.8971
+        height: 88.91912
+      alignment: 9
+      pivot: {x: 0.5045313, y: 0.4495464}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -52.52468, y: -38.48629}
+        - {x: -52.52468, y: -2.486294}
+        - {x: -51.52468, y: -44.48629}
+      - - {x: -21.52468, y: 44.51371}
+        - {x: -51.52468, y: -44.48629}
+        - {x: -52.52468, y: -2.486294}
+      - - {x: 49.47532, y: -44.48629}
+        - {x: -51.52468, y: -44.48629}
+        - {x: -21.52468, y: 44.51371}
+      - - {x: 18.47532, y: 44.51371}
+        - {x: 49.47532, y: -44.48629}
+        - {x: -21.52468, y: 44.51371}
+      - - {x: 24.47532, y: 43.51371}
+        - {x: 49.47532, y: -44.48629}
+        - {x: 18.47532, y: 44.51371}
+      - - {x: 52.47532, y: -6.486294}
+        - {x: 49.47532, y: -44.48629}
+        - {x: 24.47532, y: 43.51371}
+      - - {x: 52.47532, y: -35.48629}
+        - {x: 49.47532, y: -44.48629}
+        - {x: 52.47532, y: -6.486294}
+      physicsShape:
+      - - {x: 51.47532, y: -19.48629}
+        - {x: 44.47532, y: -5.486294}
+        - {x: 15.47532, y: 36.51371}
+        - {x: 11.47532, y: 40.51371}
+        - {x: 5.475322, y: 43.51371}
+        - {x: -7.524677, y: 43.51371}
+        - {x: -16.52468, y: 36.51371}
+        - {x: -27.52468, y: 17.51371}
+        - {x: -44.52468, y: -8.486294}
+        - {x: -49.52468, y: -16.48629}
+        - {x: -51.52468, y: -21.48629}
+        - {x: -51.52468, y: -29.48629}
+        - {x: -49.52468, y: -34.48629}
+        - {x: -41.52468, y: -42.48629}
+        - {x: -35.52468, y: -44.48629}
+        - {x: 40.47532, y: -44.48629}
+        - {x: 50.47532, y: -36.48629}
+        - {x: 51.47532, y: -31.48629}
+        - {x: 52.47532, y: -23.48629}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Check-B
+      rect:
+        serializedVersion: 2
+        x: 130.0761
+        y: 130.0761
+        width: 123.8478
+        height: 123.8478
+      alignment: 9
+      pivot: {x: 0.4999999, y: 0.4999999}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -62.00001, y: -35.00001}
+        - {x: -62.00001, y: 38.99999}
+        - {x: -31.00001, y: -62.00001}
+      - - {x: -39.00001, y: 61.99999}
+        - {x: -31.00001, y: -62.00001}
+        - {x: -62.00001, y: 38.99999}
+      - - {x: 54.99999, y: 61.99999}
+        - {x: -31.00001, y: -62.00001}
+        - {x: -39.00001, y: 61.99999}
+      - - {x: 28.99999, y: -62.00001}
+        - {x: -31.00001, y: -62.00001}
+        - {x: 54.99999, y: 61.99999}
+      - - {x: 43.99999, y: -57.00001}
+        - {x: 28.99999, y: -62.00001}
+        - {x: 54.99999, y: 61.99999}
+      - - {x: 61.99999, y: -42.00001}
+        - {x: 43.99999, y: -57.00001}
+        - {x: 54.99999, y: 61.99999}
+      - - {x: 61.99999, y: 34.99999}
+        - {x: 61.99999, y: -42.00001}
+        - {x: 54.99999, y: 61.99999}
+      physicsShape:
+      - - {x: 58.99999, y: -24.00001}
+        - {x: 61.99999, y: -11.00001}
+        - {x: 61.99999, y: 13.99999}
+        - {x: 54.99999, y: 29.99999}
+        - {x: 48.99999, y: 38.99999}
+        - {x: 34.99999, y: 52.99999}
+        - {x: 12.99999, y: 61.99999}
+        - {x: -10.00001, y: 61.99999}
+        - {x: -23.00001, y: 58.99999}
+        - {x: -35.00001, y: 51.99999}
+        - {x: -50.00001, y: 38.99999}
+        - {x: -61.00001, y: 20.99999}
+        - {x: -62.00001, y: 15.99999}
+        - {x: -62.00001, y: -15.00001}
+        - {x: -59, y: -24.00001}
+        - {x: -50.00001, y: -39.00001}
+        - {x: -32.00001, y: -55.00001}
+        - {x: -18.00001, y: -62.00001}
+        - {x: 12.99999, y: -62.00001}
+        - {x: 23.99999, y: -59}
+        - {x: 37.99999, y: -50.00001}
+        - {x: 48.99999, y: -39.00001}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23305410000000000800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-No-Ads-Small
+      rect:
+        serializedVersion: 2
+        x: 768.0761
+        y: 646.0761
+        width: 127.8478
+        height: 117.8478
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.4915145}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -63.99999, y: -17.99999}
+        - {x: -63.99999, y: 26.00001}
+        - {x: -42.99999, y: -58.99999}
+      - - {x: -35.99999, y: 59.00001}
+        - {x: -42.99999, y: -58.99999}
+        - {x: -63.99999, y: 26.00001}
+      - - {x: 38.00001, y: -58.99999}
+        - {x: -42.99999, y: -58.99999}
+        - {x: -35.99999, y: 59.00001}
+      - - {x: 43.00001, y: 59.00001}
+        - {x: 38.00001, y: -58.99999}
+        - {x: -35.99999, y: 59.00001}
+      - - {x: 64.00001, y: -25.99999}
+        - {x: 38.00001, y: -58.99999}
+        - {x: 43.00001, y: 59.00001}
+      - - {x: 64.00001, y: 16.00001}
+        - {x: 64.00001, y: -25.99999}
+        - {x: 43.00001, y: 59.00001}
+      physicsShape:
+      - - {x: 64.00001, y: -3.999992}
+        - {x: 64.00001, y: 7.000008}
+        - {x: 63.00001, y: 11.00001}
+        - {x: 44.00001, y: 43.00001}
+        - {x: 35.00001, y: 55.00001}
+        - {x: 25.00001, y: 59}
+        - {x: -24.99999, y: 59}
+        - {x: -31.99999, y: 57.00001}
+        - {x: -44.99999, y: 43.00001}
+        - {x: -56.99999, y: 22.00001}
+        - {x: -63.99999, y: 6.000008}
+        - {x: -63.99999, y: -6.999992}
+        - {x: -62.99999, y: -10.99999}
+        - {x: -39.99999, y: -48.99999}
+        - {x: -34.99999, y: -54.99999}
+        - {x: -24.99999, y: -58.99999}
+        - {x: 25.00001, y: -58.99999}
+        - {x: 32.00001, y: -56.99999}
+        - {x: 45.00001, y: -42.99999}
+        - {x: 63.00001, y: -10.99999}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43305410000000000800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Close-B
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 128
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: -47}
+        - {x: -64, y: 48}
+        - {x: -51, y: -64}
+      - - {x: -47, y: 64}
+        - {x: -51, y: -64}
+        - {x: -64, y: 48}
+      - - {x: 57, y: -64}
+        - {x: -51, y: -64}
+        - {x: -47, y: 64}
+      - - {x: 39, y: 64}
+        - {x: 57, y: -64}
+        - {x: -47, y: 64}
+      - - {x: 64, y: 59}
+        - {x: 57, y: -64}
+        - {x: 39, y: 64}
+      - - {x: 64, y: -49}
+        - {x: 57, y: -64}
+        - {x: 64, y: 59}
+      physicsShape:
+      - - {x: 64, y: 19}
+        - {x: 53, y: 42}
+        - {x: 41, y: 52}
+        - {x: 24, y: 62}
+        - {x: 13, y: 64}
+        - {x: -13, y: 64}
+        - {x: -24, y: 62}
+        - {x: -41, y: 51}
+        - {x: -52, y: 41}
+        - {x: -64, y: 21}
+        - {x: -64, y: -15}
+        - {x: -58, y: -35}
+        - {x: -41, y: -52}
+        - {x: -24, y: -62}
+        - {x: -15, y: -64}
+        - {x: 17, y: -64}
+        - {x: 43, y: -54}
+        - {x: 63, y: -24}
+        - {x: 64, y: -19}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Reward-Video
+      rect:
+        serializedVersion: 2
+        x: 898.0761
+        y: 897.0513
+        width: 118.8971
+        height: 126.9487
+      alignment: 9
+      pivot: {x: 0.520819, y: 0.4958592}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -59.52468, y: -55.52567}
+        - {x: -59.52468, y: 46.47433}
+        - {x: -51.52468, y: -63.52567}
+      - - {x: -22.52468, y: 63.47433}
+        - {x: -51.52468, y: -63.52567}
+        - {x: -59.52468, y: 46.47433}
+      - - {x: 52.47532, y: -63.52567}
+        - {x: -51.52468, y: -63.52567}
+        - {x: -22.52468, y: 63.47433}
+      - - {x: 56.47532, y: 63.47433}
+        - {x: 52.47532, y: -63.52567}
+        - {x: -22.52468, y: 63.47433}
+      - - {x: 59.47532, y: -61.52567}
+        - {x: 52.47532, y: -63.52567}
+        - {x: 56.47532, y: 63.47433}
+      - - {x: 59.47532, y: 60.47433}
+        - {x: 59.47532, y: -61.52567}
+        - {x: 56.47532, y: 63.47433}
+      physicsShape:
+      - - {x: 47.47532, y: 23.47433}
+        - {x: 55.47532, y: 31.47433}
+        - {x: 56.47532, y: 55.47433}
+        - {x: 49.47532, y: 62.47433}
+        - {x: 42.47532, y: 63.47433}
+        - {x: 29.47532, y: 63.47433}
+        - {x: -50.52468, y: 41.47433}
+        - {x: -58.52468, y: 32.47433}
+        - {x: -58.52468, y: 18.47433}
+        - {x: -57.52468, y: 15.47433}
+        - {x: -57.52468, y: 13.47433}
+        - {x: -55.52468, y: -57.52567}
+        - {x: -47.52468, y: -62.52567}
+        - {x: 52.47532, y: -62.52567}
+        - {x: 59.47532, y: -54.52567}
+        - {x: 59.47532, y: 14.47433}
+        - {x: 54.47532, y: 20.47433}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Coin-Outline-Dark
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 640
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64, y: -27}
+        - {x: -64, y: 16}
+        - {x: -32, y: -64}
+      - - {x: -52, y: 61}
+        - {x: -32, y: -64}
+        - {x: -64, y: 16}
+      - - {x: -47, y: 64}
+        - {x: -32, y: -64}
+        - {x: -52, y: 61}
+      - - {x: 49, y: 64}
+        - {x: -32, y: -64}
+        - {x: -47, y: 64}
+      - - {x: 16, y: -64}
+        - {x: -32, y: -64}
+        - {x: 49, y: 64}
+      - - {x: 60, y: -56}
+        - {x: 16, y: -64}
+        - {x: 49, y: 64}
+      - - {x: 64, y: 35}
+        - {x: 60, y: -56}
+        - {x: 49, y: 64}
+      - - {x: 64, y: -52}
+        - {x: 60, y: -56}
+        - {x: 64, y: 35}
+      physicsShape:
+      - - {x: 64, y: -9.999999}
+        - {x: 64, y: 20}
+        - {x: 57, y: 28}
+        - {x: 38, y: 49}
+        - {x: 28, y: 60}
+        - {x: 19, y: 64}
+        - {x: -21, y: 64}
+        - {x: -34, y: 62}
+        - {x: -43, y: 53}
+        - {x: -52, y: 38}
+        - {x: -64, y: 2}
+        - {x: -64, y: -17}
+        - {x: -58, y: -26}
+        - {x: -46, y: -38}
+        - {x: -32, y: -55}
+        - {x: -23, y: -64}
+        - {x: 9, y: -64}
+        - {x: 44, y: -53}
+        - {x: 59, y: -43}
+        - {x: 63, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Lock-A
+      rect:
+        serializedVersion: 2
+        x: 915.0267
+        y: 648.0267
+        width: 89.9465
+        height: 111.8971
+      alignment: 9
+      pivot: {x: 0.5000002, y: 0.5002207}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -44.99998, y: -52.9753}
+        - {x: -44.99998, y: 39.0247}
+        - {x: -43.99998, y: -55.9753}
+      - - {x: -25.99998, y: 56.0247}
+        - {x: -43.99998, y: -55.9753}
+        - {x: -44.99998, y: 39.0247}
+      - - {x: 38.00002, y: -55.9753}
+        - {x: -43.99998, y: -55.9753}
+        - {x: -25.99998, y: 56.0247}
+      - - {x: 21.00002, y: 56.0247}
+        - {x: 38.00002, y: -55.9753}
+        - {x: -25.99998, y: 56.0247}
+      - - {x: 40.00002, y: 48.0247}
+        - {x: 38.00002, y: -55.9753}
+        - {x: 21.00002, y: 56.0247}
+      - - {x: 45.00002, y: -51.9753}
+        - {x: 38.00002, y: -55.9753}
+        - {x: 40.00002, y: 48.0247}
+      - - {x: 45.00002, y: 17.0247}
+        - {x: 45.00002, y: -51.9753}
+        - {x: 40.00002, y: 48.0247}
+      physicsShape:
+      - - {x: 45.00002, y: 18.0247}
+        - {x: 34.00002, y: 40.02469}
+        - {x: 14.00002, y: 56.0247}
+        - {x: -11.99998, y: 56.0247}
+        - {x: -25.99998, y: 51.0247}
+        - {x: -44.99998, y: 18.0247}
+        - {x: -44.99998, y: -43.9753}
+        - {x: -36.99998, y: -53.9753}
+        - {x: -31.99998, y: -55.9753}
+        - {x: 33.00002, y: -55.9753}
+        - {x: 37.00002, y: -52.9753}
+        - {x: 43.00001, y: -47.9753}
+        - {x: 45.00002, y: -43.9753}
+        - {x: 2.000015, y: 22.0247}
+        - {x: -1.999985, y: 22.0247}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03305410000000000800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Frame-Add
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 896
+        width: 128
+        height: 128
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 50, y: 50, z: 50, w: 50}
+      outline:
+      - - {x: -64, y: -41}
+        - {x: -64, y: 53}
+        - {x: -50, y: -64}
+      - - {x: -56, y: 64}
+        - {x: -50, y: -64}
+        - {x: -64, y: 53}
+      - - {x: 47, y: 64}
+        - {x: -50, y: -64}
+        - {x: -56, y: 64}
+      - - {x: 45, y: -64}
+        - {x: -50, y: -64}
+        - {x: 47, y: 64}
+      - - {x: 64, y: -51}
+        - {x: 45, y: -64}
+        - {x: 47, y: 64}
+      - - {x: 64, y: 58}
+        - {x: 64, y: -51}
+        - {x: 47, y: 64}
+      physicsShape:
+      - - {x: 64, y: -32}
+        - {x: 64, y: 29}
+        - {x: 63, y: 34}
+        - {x: 57, y: 49}
+        - {x: 46, y: 59}
+        - {x: 32, y: 64}
+        - {x: -39, y: 64}
+        - {x: -58, y: 50}
+        - {x: -63, y: 37}
+        - {x: -64, y: 30}
+        - {x: -64, y: -40}
+        - {x: -50, y: -57}
+        - {x: -37, y: -64}
+        - {x: 32, y: -64}
+        - {x: 34, y: -63}
+        - {x: 49, y: -57}
+        - {x: 59, y: -46}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Star
+      rect:
+        serializedVersion: 2
+        x: 514.0761
+        y: 128
+        width: 123.8478
+        height: 122.9239
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.5206474}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.99999, y: -35.46194}
+        - {x: -61.99999, y: 38.53806}
+        - {x: -31.99999, y: -61.46194}
+      - - {x: -38.99999, y: 61.53806}
+        - {x: -31.99999, y: -61.46194}
+        - {x: -61.99999, y: 38.53806}
+      - - {x: 55.00001, y: 61.53806}
+        - {x: -31.99999, y: -61.46194}
+        - {x: -38.99999, y: 61.53806}
+      - - {x: 32.00001, y: -61.46194}
+        - {x: -31.99999, y: -61.46194}
+        - {x: 55.00001, y: 61.53806}
+      - - {x: 44.00001, y: -57.46194}
+        - {x: 32.00001, y: -61.46194}
+        - {x: 55.00001, y: 61.53806}
+      - - {x: 62.00001, y: -42.46194}
+        - {x: 44.00001, y: -57.46194}
+        - {x: 55.00001, y: 61.53806}
+      - - {x: 62.00001, y: 34.53806}
+        - {x: 62.00001, y: -42.46194}
+        - {x: 55.00001, y: 61.53806}
+      physicsShape:
+      - - {x: 62.00001, y: -15.46194}
+        - {x: 62.00001, y: 13.53806}
+        - {x: 59, y: 23.53806}
+        - {x: 50.00001, y: 37.53806}
+        - {x: 38.00001, y: 49.53806}
+        - {x: 24.00001, y: 58.53806}
+        - {x: 12.00001, y: 61.53806}
+        - {x: -12.99999, y: 61.53806}
+        - {x: -29.99999, y: 55.53806}
+        - {x: -49.99999, y: 38.53806}
+        - {x: -55.99999, y: 29.53806}
+        - {x: -61.99999, y: 12.53806}
+        - {x: -61.99999, y: -9.461941}
+        - {x: -60.99999, y: -17.46194}
+        - {x: -52.99999, y: -35.46194}
+        - {x: -38.99999, y: -49.46194}
+        - {x: -25.99999, y: -58.46194}
+        - {x: -14.99999, y: -61.46194}
+        - {x: 18.00001, y: -61.46194}
+        - {x: 24.00001, y: -59.46194}
+        - {x: 38.00001, y: -50.46194}
+        - {x: 55.00001, y: -32.46194}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2305410000000000800000000000000
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-NotificationDot
+      rect:
+        serializedVersion: 2
+        x: 514.0761
+        y: 386.0761
+        width: 123.8478
+        height: 123.8478
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.5000001}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -61.99999, y: -34.99999}
+        - {x: -61.99999, y: 39.00001}
+        - {x: -30.99999, y: -61.99999}
+      - - {x: -38.99999, y: 62.00001}
+        - {x: -30.99999, y: -61.99999}
+        - {x: -61.99999, y: 39.00001}
+      - - {x: 55.00001, y: 62.00001}
+        - {x: -30.99999, y: -61.99999}
+        - {x: -38.99999, y: 62.00001}
+      - - {x: 29.00001, y: -61.99999}
+        - {x: -30.99999, y: -61.99999}
+        - {x: 55.00001, y: 62.00001}
+      - - {x: 44.00001, y: -56.99999}
+        - {x: 29.00001, y: -61.99999}
+        - {x: 55.00001, y: 62.00001}
+      - - {x: 62.00001, y: -41.99999}
+        - {x: 44.00001, y: -56.99999}
+        - {x: 55.00001, y: 62.00001}
+      - - {x: 62.00001, y: 35.00001}
+        - {x: 62.00001, y: -41.99999}
+        - {x: 55.00001, y: 62.00001}
+      physicsShape:
+      - - {x: 55.00001, y: -31.99999}
+        - {x: 62.00001, y: -13.99999}
+        - {x: 62.00001, y: 11.00001}
+        - {x: 61.00001, y: 25.00001}
+        - {x: 40, y: 53}
+        - {x: 15.00001, y: 62.00001}
+        - {x: -12.99999, y: 62.00001}
+        - {x: -29.99999, y: 56.00001}
+        - {x: -49.99999, y: 39.00001}
+        - {x: -55.99999, y: 30.00001}
+        - {x: -61.99999, y: 13.00001}
+        - {x: -61.99999, y: -8.999992}
+        - {x: -60.99999, y: -16.99999}
+        - {x: -52.99999, y: -34.99999}
+        - {x: -38.99999, y: -48.99999}
+        - {x: -34.99999, y: -51.99999}
+        - {x: -24.99999, y: -56.99999}
+        - {x: -12.99999, y: -61.99999}
+        - {x: 11.00001, y: -61.99999}
+        - {x: 24.00001, y: -58.99999}
+        - {x: 38.00001, y: -49.99999}
+        - {x: 50.00001, y: -36.99999}
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Coin
+      rect:
+        serializedVersion: 2
+        x: 4.026751
+        y: 903.0761
+        width: 115.8971
+        height: 116.8971
+      alignment: 9
+      pivot: {x: 0.5174696, y: 0.4869571}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -57.97532, y: -27.52468}
+        - {x: -57.97532, y: 15.47532}
+        - {x: -35.97532, y: -58.52468}
+      - - {x: -55.97532, y: 40.47532}
+        - {x: -35.97532, y: -58.52468}
+        - {x: -57.97532, y: 15.47532}
+      - - {x: -32.97532, y: 58.47532}
+        - {x: -35.97532, y: -58.52468}
+        - {x: -55.97532, y: 40.47532}
+      - - {x: 24.02468, y: -58.52468}
+        - {x: -35.97532, y: -58.52468}
+        - {x: -32.97532, y: 58.47532}
+      - - {x: 25.02468, y: 58.47532}
+        - {x: 24.02468, y: -58.52468}
+        - {x: -32.97532, y: 58.47532}
+      - - {x: 58.02468, y: -44.52468}
+        - {x: 24.02468, y: -58.52468}
+        - {x: 25.02468, y: 58.47532}
+      - - {x: 58.02468, y: 21.47532}
+        - {x: 58.02468, y: -44.52468}
+        - {x: 25.02468, y: 58.47532}
+      physicsShape:
+      - - {x: 57.02468, y: -5.524677}
+        - {x: 58.02468, y: 3.475322}
+        - {x: 58.02468, y: 15.47532}
+        - {x: 53.02468, y: 23.47532}
+        - {x: 34.02468, y: 43.47532}
+        - {x: 23.02468, y: 56.47532}
+        - {x: 14.02468, y: 58.47532}
+        - {x: 9.024681, y: 58.47532}
+        - {x: 9.024681, y: 57.47532}
+        - {x: -29.97532, y: 56.47532}
+        - {x: -37.97532, y: 49.47532}
+        - {x: -44.97532, y: 36.47532}
+        - {x: -48.97532, y: 28.47532}
+        - {x: -57.97532, y: -0.5246773}
+        - {x: -57.97532, y: -13.52468}
+        - {x: -53.97532, y: -20.52468}
+        - {x: -20.97532, y: -54.52467}
+        - {x: -11.97532, y: -58.52468}
+        - {x: -1.975319, y: -58.52468}
+        - {x: 47.02468, y: -43.52468}
+        - {x: 55.02468, y: -32.52468}
+        - {x: 56.02468, y: -17.52468}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Atlas-Arrow-A: 21300006
+      Atlas-Check-B: 21300018
+      Atlas-Close-B: 21300000
+      Atlas-Coin: 21300002
+      Atlas-Coin-Outline-Dark: 21300014
+      Atlas-Frame-Add: 21300008
+      Atlas-Lock-A: 21300016
+      Atlas-No-Ads-Small: 21300020
+      Atlas-NotificationDot: 21300010
+      Atlas-Reward-Video: 21300004
+      Atlas-Star: 21300012
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

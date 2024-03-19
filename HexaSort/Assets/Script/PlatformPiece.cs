@@ -15,6 +15,7 @@ public class PlatformPiece : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         if(CurrentData.Instance != null )
         {
+            CurrentData.freePieces++;
             meshRenderer.material = CurrentData.Instance.materials[0];
         }
     }
@@ -44,29 +45,25 @@ public class PlatformPiece : MonoBehaviour
             foreach(var temp in t)
             {
                 pieces.Add(temp);
-                var a = temp.transform.parent.parent;
+                var a = temp.transform;
                 a.parent = container;
                 //LeanTween.moveLocal(a.gameObject, transform.localPosition - new Vector3(0f, 0f, 0.15f * (1 + pieces.Count +stt)), 0.25f);
-                a.transform.localPosition = transform.localPosition - new Vector3(0f, 0f, 0.15f * (pieces.Count));
+                a.transform.localPosition = transform.localPosition - new Vector3(0f, 0f, 0.35f * (pieces.Count));
             }
+            GetAmount();
+            CheckAround();
         }
-        GetAmount();
-        StartCoroutine(CheckAround());
+
     }
 
     public void GetAmount()
     {
+        numOfColor.Clear();
         for(int i=0;i<pieces.Count;i++)
         {
             if (numOfColor.ContainsKey(pieces[i].id))
             {
                 numOfColor[pieces[i].id]++;
-                if(numOfColor[pieces[i].id] == 10)
-                {
-                    Break(pieces[i].id);
-                    numOfColor[pieces[i].id] = 0;
-                    break;
-                }
             }
             else
             {
@@ -76,21 +73,34 @@ public class PlatformPiece : MonoBehaviour
 
     }
 
-    void Break(int id)
+    public void CheckBreak()
     {
-        int score = 0;
-        while (pieces[^1].id == id)
+        GetAmount();
+        if (pieces.Count == 0) return;
+        if (numOfColor[pieces[^1].id] >= 10)
         {
-            pieces.RemoveAt(pieces.Count - 1);
-            Destroy(pieces[^1]);
-            score++; 
+            int id = pieces[^1].id;
+            int a = numOfColor[pieces[^1].id];
+            for(int i=0; i< a; i++)
+            {
+                var t = pieces[^1];
+                Destroy(t.gameObject);
+                pieces.RemoveAt(pieces.Count -1);
+            }
+            numOfColor[id] = 0;
+            CurrentData.Instance.UpdateScore(a);
+            CheckAround();
         }
+
     }
 
 
-    public IEnumerator CheckAround()
+    public void CheckAround()
     {
-        bool isContinue = false;
+        GetAmount();
+        int count = 0;
+        //int id = pieces[^1].id;
+        List<PlatformPiece> platformPieces = new();
         foreach (var t in neighbor)
         {
             if (pieces.Count == 0) break;
@@ -100,26 +110,46 @@ public class PlatformPiece : MonoBehaviour
             }
             if (t.pieces[^1].id == pieces[^1].id)
             {
+                count++;
+                platformPieces.Add(t);
                 int amount = numOfColor[t.pieces[^1].id];
-                for(int i = 0; i < amount; i++)
+                MovingPiece m = new()
                 {
-                    pieces[^1].transform.parent.parent.parent = t.container;
-                    pieces[^1].transform.parent.parent.localPosition = t.pieces[^1].transform.parent.parent.localPosition -  new Vector3(0f, 0f, 0.15f);
-                    t.pieces.Add(pieces[^1]);
-                    pieces.RemoveAt(pieces.Count - 1);
-                }
-                isContinue = true;
-                yield return null;
-                numOfColor[t.pieces[^1].id] = 0;
-                StartCoroutine(t.CheckAround());
+                    from = this,
+                    to = t,
+                    amount = amount,
+                };
+                CurrentData.movingStack.Push(m);
+                //for(int i = 0; i < amount; i++)
+                //{
+                //    pieces[^1].transform.parent.parent.parent = t.container;
+                //    pieces[^1].transform.parent.parent.localPosition = t.pieces[^1].transform.parent.parent.localPosition -  new Vector3(0f, 0f, 0.15f);
+                //    t.pieces.Add(pieces[^1]);
+                //    pieces.RemoveAt(pieces.Count - 1);
+                //}
+                //isContinue = true;
+                //yield return null;
+                //numOfColor[t.pieces[^1].id] = 0;
+                //StartCoroutine(t.CheckAround());
+                //CurrentData.desPiece.Add(t);
             }
-            yield return null;
+            //if(count != 0)
+            //{
+            //    switch (count)
+            //    {
+            //        case 1:
+
+            //            break;
+            //        case 2:
+
+            //            break;
+            //        default:
+                        
+            //            break;
+            //    }
+            //}
+
         }
-        if (isContinue)
-        {
-            StartCoroutine(CheckAround());
-        }
-        yield return null;
     }
 
 

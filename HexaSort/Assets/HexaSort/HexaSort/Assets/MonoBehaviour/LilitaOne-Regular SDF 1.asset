@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+  m_Name: "LilitaOne-Regular SDF 1"
+  m_EditorClassIdentifier: 
+  hashCode: 1706162118
+  material: {fileID: 2100000, guid: 1f191fe5d39649e393d732577dbd5185, type: 2}
+  materialHashCode: -2099322330
+  m_Version: "1.1.0"
+  m_SourceFontFileGUID: "c16eb7d7c3953489db00312b8b09df4b"
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: cfb457daa01f4dc7b773dafe609ccad9, type: 3}
+  m_SourceFontFile: {fileID: 0}
+  m_AtlasPopulationMode: 1768712524
+  m_FaceInfo:
+    m_FaceIndex: 1327522164
+    m_FamilyName: 
+    m_StyleName: "Regular"
+    m_PointSize: 70
+    m_Scale: 1
+    m_UnitsPerEM: 0
+    m_LineHeight: 80.01
+    m_AscentLine: 64.61
+    m_CapLine: 50
+    m_MeanLine: 36
+    m_Baseline: 0
+    m_DescentLine: -15.4
+    m_SuperscriptOffset: 64.61
+    m_SuperscriptSize: 0.5
+    m_SubscriptOffset: -15.4
+    m_SubscriptSize: 0.5
+    m_UnderlineOffset: -7
+    m_UnderlineThickness: 3.5
+    m_StrikethroughOffset: 14.4
+    m_StrikethroughThickness: 3.5
+    m_TabWidth: 13
+  m_GlyphTable: []
+  m_CharacterTable: []
+  m_AtlasTextures:
+  - {fileID: 2800000, guid: 44836b42251c49dba32da6c404741916, type: 3}
+  m_AtlasTextureIndex: 0
+  m_IsMultiAtlasTexturesEnabled: 1
+  m_ClearDynamicDataOnBuild: 0
+  m_UsedGlyphRects: []
+  m_FreeGlyphRects:
+  - m_X: 0
+    m_Y: 0
+    m_Width: 1023
+    m_Height: 1023
+  m_fontInfo:
+    Name: 
+    PointSize: 0
+    Scale: 0
+    CharacterCount: 0
+    LineHeight: 0
+    Baseline: 0
+    Ascender: 0
+    CapHeight: 0
+    Descender: 0
+    CenterLine: 0
+    SuperscriptOffset: 0
+    SubscriptOffset: 0
+    SubSize: 0
+    Underline: 0
+    UnderlineThickness: 0
+    strikethrough: 0
+    strikethroughThickness: 0
+    TabWidth: 0
+    Padding: 0
+    AtlasWidth: 0
+    AtlasHeight: 0
+  atlas: {fileID: 0}
+  m_AtlasWidth: 1024
+  m_AtlasHeight: 1024
+  m_AtlasPadding: 5
+  m_AtlasRenderMode: 4165
+  m_glyphInfoList: []
+  m_KerningTable:
+    kerningPairs: []
+  m_FontFeatureTable:
+    m_GlyphPairAdjustmentRecords: []
+  fallbackFontAssets: []
+  m_FallbackFontAssetTable: []
+  m_CreationSettings:
+    sourceFontFileName: 
+    sourceFontFileGUID: "c16eb7d7c3953489db00312b8b09df4b"
+    pointSizeSamplingMode: 0
+    pointSize: 70
+    padding: 5
+    packingMode: 0
+    atlasWidth: 1024
+    atlasHeight: 1024
+    characterSetSelectionMode: 6
+    characterSequence: "20-7E,2026"
+    referencedFontAssetGUID: 
+    referencedTextAssetGUID: 
+    fontStyle: 0
+    fontStyleModifier: 0
+    renderMode: 4165
+    includeFontFeatures: 0
+  m_FontWeightTable:
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  fontWeights: []
+  normalStyle: 0
+  normalSpacingOffset: -0.7
+  boldStyle: 0.75
+  boldSpacing: 7
+  italicStyle: 35
+  tabSize: 10
