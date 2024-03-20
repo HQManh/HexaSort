@@ -32,6 +32,7 @@ public class Pieces : MonoBehaviour
             {
                 p.gameObject.layer = 0;
             }
+            LeanTween.moveLocal(gameObject, startPos, 0.2f);
         }
         else
         {
@@ -39,9 +40,9 @@ public class Pieces : MonoBehaviour
             CurrentData.Instance.CheckPiece();
             CurrentData.isPick = false;
             Destroy(this.transform.GetChild(0).gameObject);
+            transform.localPosition = startPos;
         }
-        transform.localPosition = startPos;
-
+        
     }
 
 

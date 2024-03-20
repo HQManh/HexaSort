@@ -8,6 +8,7 @@ public class LevelInfo : MonoBehaviour
 
     private void Start()
     {
-        CurrentData.Instance.SetGoal(goalScore);
+        CurrentData.freePieces = transform.GetChild(0).childCount;
+        CurrentData.Instance.SetGoal(this);
     }
 }
