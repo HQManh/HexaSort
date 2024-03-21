@@ -12,16 +12,20 @@ public class Pieces : MonoBehaviour
         startPos = transform.localPosition;
     }
 
-    private void OnMouseDrag()
+    private void OnMouseDown()
     {
-        var t = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = (Vector2)t;
         foreach (var p in piecePros)
         {
             p.gameObject.layer = 2;
         }
         CurrentData.isPick = true;
-        CurrentData.currentPick = this;
+        CurrentData.currentPick = piecePros;
+    }
+
+    private void OnMouseDrag()
+    {
+        var t = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = (Vector2)t;
     }
 
     private void OnMouseUp()

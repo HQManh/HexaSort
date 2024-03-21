@@ -8,6 +8,7 @@ public class MovingPiece
     public PlatformPiece from;
     public PlatformPiece to;
     public int amount;
+    public bool isCheck = false;
 }
 
 
@@ -18,7 +19,7 @@ public class CurrentData : MonoBehaviour
     public List<Material> materials = new();
     public static bool isPick = false;
     public static int numPiece;
-    public static Pieces currentPick = new();
+    public static List<PiecePro> currentPick = new();
     public static PlatformPiece currenPlat;
     public static int freePieces =0;
     public static int lastTween;
@@ -29,7 +30,10 @@ public class CurrentData : MonoBehaviour
     public static int numOfCheck =0;
     public static Stack<MovingPiece> movingStack = new();
     public static bool isMove = false;
+    public static bool isHammer = false;
+    public static bool isHand = false;
     bool isStart = false;
+    List<PlatformPiece> needCheckPieces = new();
     [SerializeField]
     Material defaultMaterial;
     [SerializeField]
@@ -67,8 +71,13 @@ public class CurrentData : MonoBehaviour
         numPiece--;
         if(numPiece == 0)
         {
-            piecesGenerator.GeneratePieces();
+            piecesGenerator.GeneratePieces(false);
         }
+    }
+
+    public void SwapBooster()
+    {
+        piecesGenerator.GeneratePieces(true);
     }
 
     void CheckMoving()
@@ -90,7 +99,6 @@ public class CurrentData : MonoBehaviour
         var f = piece.from;
         var t = piece.to;
         Vector3 pos2 = t.pieces[^1].transform.localPosition;
-        Debug.Log(piece.amount);
         for (int i=0; i < piece.amount; i++)
         {
             var fPiece = f.pieces[^1];
@@ -137,10 +145,25 @@ public class CurrentData : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;
+        //needCheckPieces.Add(t);
+        //needCheckPieces.Add(f);
         t.CheckAround();
         f.CheckAround();
+        //if (piece.isCheck)
+        //{
+        //    CheckMovingPiece();
+        //}
         yield return null;
     }
+
+    void CheckMovingPiece()
+    {
+        foreach(var t in needCheckPieces)
+        {
+            t.CheckAround();
+        }
+    }
+
 
     private void Update()
     {

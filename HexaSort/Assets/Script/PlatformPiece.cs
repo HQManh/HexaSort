@@ -1,49 +1,112 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlatformPiece : MonoBehaviour
 {
+    [SerializeField]
+    GameObject lockState;
+    [SerializeField]
+    GameObject adsState;
+    public PlatType platType;
     public List<PiecePro> pieces = new();
     public Dictionary<int, int> numOfColor = new();
     public List<PlatformPiece> neighbor = new();
     public Transform container;
+    bool currentPick = false;
     MeshRenderer meshRenderer;
 
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        if(CurrentData.Instance != null )
+        if (CurrentData.Instance != null)
         {
             CurrentData.freePieces++;
             meshRenderer.material = CurrentData.Instance.materials[0];
         }
     }
 
+    private void OnMouseDown()
+    {
+        if (CurrentData.isHammer)
+        {
+            if (pieces.Count == 0) return;
+            CurrentData.isHammer = false;
+            StartCoroutine(BreakPieceHammer());
+        }
+        Debug.Log(CurrentData.isHand);
+        if(CurrentData.isHand)
+        {
+            if(pieces.Count == 0) return;
+            CurrentData.isPick = true;
+            CurrentData.currentPick = pieces;
+            currentPick = true;
+        }
+    }
+
+    private void OnMouseDrag()
+    {
+        if (!CurrentData.isHand) return;
+        //if(CurrentData.currenPlat == this) return;
+        var t = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        container.position = (Vector2)t;
+    }
+
+    private void OnMouseUp()
+    {
+        if (CurrentData.isHand)
+        {
+            if(CurrentData.currenPlat == null)
+            {
+                container.localPosition = Vector3.zero;
+            }
+            else
+            {
+                var t = CurrentData.currenPlat;
+                container.parent = t.transform.parent;
+                container.localPosition = Vector3.zero;
+                t.container.parent = transform.parent;
+                t.container.localPosition = Vector3.zero;
+                (container,t.container) = (t.container,container);
+                (pieces, t.pieces) = (t.pieces, pieces);
+                CurrentData.isHand = false;
+                CheckAround();
+                t.CheckAround();
+            }
+        }
+    }
 
     private void OnMouseEnter()
     {
-        if(pieces.Count != 0)
+        if (pieces.Count == 0)
         {
-            return;
+            meshRenderer.material = CurrentData.Instance.materials[1];
+            CurrentData.currenPlat = this;
         }
-        meshRenderer.material = CurrentData.Instance.materials[1];
-        CurrentData.currenPlat = this;
+        if (CurrentData.isHand && CurrentData.isPick)
+        {
+            var plat = CurrentData.currentPick[0].transform.parent.parent;
+            container.transform.position = plat.position;
+            CurrentData.currenPlat = this;
+        }
     }
 
     private void OnMouseExit()
     {
         meshRenderer.material = CurrentData.Instance.materials[0];
         CurrentData.currenPlat = null;
+        if (CurrentData.isHand && !currentPick)
+        {
+            container.transform.localPosition = Vector3.zero;
+        }
     }
 
     public void SetPos()
     {
         if (CurrentData.isPick)
         {
-            var t = CurrentData.currentPick.piecePros;
-            foreach(var temp in t)
+            var t = CurrentData.currentPick;
+            foreach (var temp in t)
             {
                 pieces.Add(temp);
                 var a = temp.transform;
@@ -60,7 +123,7 @@ public class PlatformPiece : MonoBehaviour
     public void GetAmount()
     {
         numOfColor.Clear();
-        for(int i=0;i<pieces.Count;i++)
+        for (int i = 0; i < pieces.Count; i++)
         {
             if (numOfColor.ContainsKey(pieces[i].id))
             {
@@ -91,17 +154,32 @@ public class PlatformPiece : MonoBehaviour
         int id = pieces[^1].id;
         GetAmount();
         int a = numOfColor[id];
-        for(int i = 0; i < a; i++)
+        for (int i = 0; i < a; i++)
         {
             var t = pieces[^1];
             pieces.RemoveAt(pieces.Count - 1);
-            CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.2f).setDestroyOnComplete(true).id;
+            CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
             yield return new WaitForSeconds(0.08f);
         }
         numOfColor[id] = 0;
         CurrentData.Instance.UpdateScore(a);
         CurrentData.numOfCheck--;
         CheckAround();
+        yield return null;
+    }
+
+
+    IEnumerator BreakPieceHammer()
+    {
+        int a = pieces.Count;
+        for(int i=0; i<a; i++)
+        {
+            var t = pieces[^1];
+            pieces.RemoveAt(pieces.Count -1);
+            CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
+            yield return new WaitForSeconds(0.08f);
+        }
+        numOfColor.Clear();
         yield return null;
     }
 
@@ -115,12 +193,15 @@ public class PlatformPiece : MonoBehaviour
             switch (nextPieces.Count)
             {
                 case 1:
+                    Debug.Log("Single");
                     MoveSingle(nextPieces);
                     break;
                 case 2:
+                    Debug.Log("Double");
                     MoveDouble(nextPieces);
                     break;
                 case 3:
+                    Debug.Log("Tripple");
                     MoveTripple(nextPieces);
                     break;
             }
@@ -130,21 +211,21 @@ public class PlatformPiece : MonoBehaviour
     List<PlatformPiece> LookAround(int id)
     {
         GetAmount();
-        var  platPieces = new List<PlatformPiece>();
-        foreach(var t in neighbor)
+        var platPieces = new List<PlatformPiece>();
+        foreach (var t in neighbor)
         {
-            if(t.pieces.Count == 0)
+            if (t.pieces.Count == 0)
             {
                 continue;
             }
-            if(t.pieces[^1].id == id)
+            if (t.pieces[^1].id == id)
             {
-                platPieces.Add(t); 
+                platPieces.Add(t);
             }
         }
         return platPieces;
     }
-    
+
     void MoveSingle(List<PlatformPiece> nextPieces)
     {
         var next = nextPieces[0];
@@ -152,97 +233,120 @@ public class PlatformPiece : MonoBehaviour
         if (numOfColor.Count > 1)
         {
             var nextHead = pieces[^numOfColor[head]];
-            if(LookAround(nextHead.id).Count > 0)
+            if (LookAround(nextHead.id).Count > 0)
             {
                 MovingPiece m = new()
                 {
                     from = this,
                     to = next,
-                    amount = numOfColor[head]
+                    amount = numOfColor[head],
+                    isCheck = true
                 };
                 CurrentData.movingStack.Push(m);
                 return;
             }
         }
-            if (numOfColor.Count > next.numOfColor.Count)
+        if (numOfColor.Count > next.numOfColor.Count)
+        {
+            MovingPiece m = new()
             {
-                MovingPiece m = new()
-                {
-                    from = this,
-                    to = next,
-                    amount = numOfColor[head]
-                };
-                CurrentData.movingStack.Push(m);
-                return;
-            }
-            else
+                from = this,
+                to = next,
+                amount = numOfColor[head],
+                isCheck = true
+            };
+            CurrentData.movingStack.Push(m);
+            return;
+        }
+        else
+        {
+            MovingPiece m = new()
             {
-                MovingPiece m = new()
-                {
-                    from = next,
-                    to = this,
-                    amount = next.numOfColor[next.pieces[^1].id]
-                };
-                CurrentData.movingStack.Push(m);
-                return;
-            }
+                from = next,
+                to = this,
+                amount = next.numOfColor[next.pieces[^1].id],
+                isCheck = true
+            };
+            CurrentData.movingStack.Push(m);
+            return;
+        }
     }
 
     void MoveDouble(List<PlatformPiece> nextPieces)
     {
         int min = Mathf.Min(numOfColor.Count, nextPieces[0].numOfColor.Count, nextPieces[1].numOfColor.Count);
-        if(min == numOfColor.Count)
+        int id = pieces[^1].id;
+        if (min == numOfColor.Count)
         {
-            foreach(PlatformPiece piece in nextPieces)
-            {
-                MovingPiece m = new()
-                {
-                    from = piece,
-                    to = this,
-                    amount = piece.numOfColor[piece.pieces[^1].id]
-                };
-                CurrentData.movingStack.Push(m);
-            }
-            return;
-        }
-
-        if(min == nextPieces[0].numOfColor.Count)
-        {
-            MovingPiece m = new()
-            {
-                from = nextPieces[1],
-                to = this,
-                amount = nextPieces[1].numOfColor[nextPieces[1].pieces[^1].id]
-            };
-            CurrentData.movingStack.Push(m);
-
-            m = new()
-            {
-                from = this,
-                to = nextPieces[0],
-                amount = nextPieces[0].numOfColor[nextPieces[0].pieces[^1].id]
-            };
-            CurrentData.movingStack.Push(m);
-            return;
-        }
-
-        if(min == nextPieces[1].numOfColor.Count)
-        {
+            //foreach (PlatformPiece piece in nextPieces)
+            //{
+            //    MovingPiece m = new()
+            //    {
+            //        from = piece,
+            //        to = this,
+            //        amount = piece.numOfColor[id]
+            //    };
+            //    CurrentData.movingStack.Push(m);
+            //}
+            //return;
+            //for (int i = 0; i < nextPieces.Count; i++)
+            //{
+            //    bool isCheck = false;
+            //    if (i == nextPieces.Count - 1)
+            //    {
+            //        isCheck = true;
+            //    }
             MovingPiece m = new()
             {
                 from = nextPieces[0],
                 to = this,
-                amount = nextPieces[0].numOfColor[nextPieces[0].pieces[^1].id]
+                amount = nextPieces[0].numOfColor[id],
+            };
+            CurrentData.movingStack.Push((m));
+            return;
+        }
+
+        if (min == nextPieces[0].numOfColor.Count)
+        {
+            int temp = nextPieces[1].numOfColor[id];
+            MovingPiece m = new()
+            {
+                from = nextPieces[1],
+                to = this,
+                amount = temp
             };
             CurrentData.movingStack.Push(m);
 
-            m = new()
+            //m = new()
+            //{
+            //    from = this,
+            //    to = nextPieces[0],
+            //    amount = numOfColor[id] + temp,
+            //    isCheck = true
+            //};
+            //CurrentData.movingStack.Push(m);
+            return;
+        }
+
+        if (min == nextPieces[1].numOfColor.Count)
+        {
+            int temp = nextPieces[0].numOfColor[id];
+            MovingPiece m = new()
             {
-                from = this,
-                to = nextPieces[1],
-                amount = nextPieces[1].numOfColor[nextPieces[1].pieces[^1].id]
+                from = nextPieces[0],
+                to = this,
+                amount = temp
             };
             CurrentData.movingStack.Push(m);
+
+            //m = new()
+            //{
+            //    from = this,
+            //    to = nextPieces[1],
+            //    amount = numOfColor[id] + temp,
+            //    isCheck = true
+            //};
+            //CurrentData.movingStack.Push(m);
             return;
         }
 
@@ -250,15 +354,33 @@ public class PlatformPiece : MonoBehaviour
 
     void MoveTripple(List<PlatformPiece> nextPieces)
     {
-        foreach(PlatformPiece piece in nextPieces)
+        int id = pieces[^1].id;
+        //foreach (PlatformPiece piece in nextPieces)
+        //{
+        //    MovingPiece m = new()
+        //    {
+        //        from = piece,
+        //        to = this,
+        //        amount = piece.numOfColor[id]
+        //    };
+        //    CurrentData.movingStack.Push(m);
+        //}
+        //for (int i = 0; i < nextPieces.Count; i++)
+        //{
+        //    bool isCheck = false;
+        //    if (i == nextPieces.Count - 1)
+        //    {
+        //        isCheck = true;
+        //    }
+
+        MovingPiece m = new()
         {
-            MovingPiece m = new()
-            {
-                from = piece,
-                to = this,
-                amount = piece.numOfColor[piece.pieces[^1].id]
-            };
-            CurrentData.movingStack.Push(m);
-        }
+            from = nextPieces[0],
+            to = this,
+            amount = nextPieces[0].numOfColor[id],
+        };
+        CurrentData.movingStack.Push((m));
+        //}
+        return;
     }
 }

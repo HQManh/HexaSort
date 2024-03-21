@@ -1,0 +1,284 @@
+fileFormatVersion: 2
+guid: e08176e2b0188b049a724bf4c822cffb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Atlas-Mini-Empty
+  - first:
+      213: 21300002
+    second: Atlas-Info-A
+  - first:
+      213: 21300004
+    second: Atlas-Mini-Add-A
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 48
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 50
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 48
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Atlas-Mini-Empty
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192.0267
+        width: 64
+        height: 63.97325
+      alignment: 9
+      pivot: {x: 0.5, y: 0.499791}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: -17.01337}
+        - {x: -32, y: 30.98663}
+        - {x: -18, y: -32.01337}
+      - - {x: -29, y: 31.98663}
+        - {x: -18, y: -32.01337}
+        - {x: -32, y: 30.98663}
+      - - {x: 29, y: 31.98663}
+        - {x: -18, y: -32.01337}
+        - {x: -29, y: 31.98663}
+      - - {x: 27, y: -32.01337}
+        - {x: -18, y: -32.01337}
+        - {x: 29, y: 31.98663}
+      - - {x: 32, y: -16.01337}
+        - {x: 27, y: -32.01337}
+        - {x: 29, y: 31.98663}
+      - - {x: 32, y: 23.98663}
+        - {x: 32, y: -16.01337}
+        - {x: 29, y: 31.98663}
+      physicsShape:
+      - - {x: 15, y: 31.98663}
+        - {x: -14, y: 31.98663}
+        - {x: -22, y: 28.98663}
+        - {x: -32, y: 11.98663}
+        - {x: -32, y: -13.01337}
+        - {x: -19, y: -27.01337}
+        - {x: -9, y: -31.01337}
+        - {x: 12, y: -31.01337}
+        - {x: 27, y: -20.01337}
+        - {x: 32, y: -6.013372}
+        - {x: 32, y: 16.98663}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Info-A
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192.0761
+        width: 64
+        height: 63.92388
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4994045}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: -28.03806}
+        - {x: -32, y: 19.96194}
+        - {x: -19, y: -32.03806}
+      - - {x: -17, y: 31.96194}
+        - {x: -19, y: -32.03806}
+        - {x: -32, y: 19.96194}
+      - - {x: 27, y: -32.03806}
+        - {x: -19, y: -32.03806}
+        - {x: -17, y: 31.96194}
+      - - {x: 24, y: 31.96194}
+        - {x: 27, y: -32.03806}
+        - {x: -17, y: 31.96194}
+      - - {x: 32, y: 19.96194}
+        - {x: 27, y: -32.03806}
+        - {x: 24, y: 31.96194}
+      - - {x: 32, y: -29.03806}
+        - {x: 27, y: -32.03806}
+        - {x: 32, y: 19.96194}
+      physicsShape:
+      - - {x: -17, y: 31.96194}
+        - {x: -32, y: 17.96194}
+        - {x: -32, y: -13.03806}
+        - {x: -18, y: -29.03806}
+        - {x: -13, y: -31.03806}
+        - {x: 9, y: -31.03806}
+        - {x: 21, y: -29.03806}
+        - {x: 32, y: -11.03806}
+        - {x: 32, y: 15.96194}
+        - {x: 15, y: 31.96194}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Atlas-Mini-Add-A
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -32, y: -13}
+        - {x: -32, y: 18}
+        - {x: -22, y: -32}
+      - - {x: -17, y: 32}
+        - {x: -22, y: -32}
+        - {x: -32, y: 18}
+      - - {x: 32, y: -32}
+        - {x: -22, y: -32}
+        - {x: -17, y: 32}
+      - - {x: 32, y: 32}
+        - {x: 32, y: -32}
+        - {x: -17, y: 32}
+      physicsShape:
+      - - {x: 30, y: 20}
+        - {x: 14, y: 32}
+        - {x: -9.999999, y: 32}
+        - {x: -18, y: 27}
+        - {x: -32, y: 12}
+        - {x: -32, y: -13}
+        - {x: -18, y: -28}
+        - {x: -6, y: -32}
+        - {x: 4, y: -32}
+        - {x: 12, y: -31}
+        - {x: 25, y: -23}
+        - {x: 32, y: -15}
+        - {x: 32, y: 12}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Atlas-Info-A: 21300002
+      Atlas-Mini-Add-A: 21300004
+      Atlas-Mini-Empty: 21300000
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

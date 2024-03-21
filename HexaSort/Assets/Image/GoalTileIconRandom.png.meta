@@ -1,0 +1,202 @@
+fileFormatVersion: 2
+guid: 75f973a33dad1e243977bc54cccad3cd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: GoalTileIconRandom_0
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 50
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GoalTileIconRandom_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 255.9487
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5001003, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -127.9743, y: -33}
+        - {x: -127.9743, y: 62}
+        - {x: -97.97434, y: -127}
+      - - {x: -77.97434, y: 128}
+        - {x: -97.97434, y: -127}
+        - {x: -127.9743, y: 62}
+      - - {x: -95.97434, y: -128}
+        - {x: -97.97434, y: -127}
+        - {x: -77.97434, y: 128}
+      - - {x: 99.02566, y: -128}
+        - {x: -95.97434, y: -128}
+        - {x: -77.97434, y: 128}
+      - - {x: 72.02566, y: 128}
+        - {x: 99.02566, y: -128}
+        - {x: -77.97434, y: 128}
+      - - {x: 93.02566, y: 125}
+        - {x: 99.02566, y: -128}
+        - {x: 72.02566, y: 128}
+      - - {x: 128.0257, y: 65}
+        - {x: 99.02566, y: -128}
+        - {x: 93.02566, y: 125}
+      - - {x: 128.0257, y: -36}
+        - {x: 99.02566, y: -128}
+        - {x: 128.0257, y: 65}
+      physicsShape:
+      - - {x: 119.0257, y: -40}
+        - {x: 126.0257, y: -26}
+        - {x: 128.0257, y: -21}
+        - {x: 128.0257, y: 20}
+        - {x: 126.0257, y: 26}
+        - {x: 122.0257, y: 35}
+        - {x: 90.02566, y: 91.99999}
+        - {x: 72.02566, y: 120}
+        - {x: 66.02566, y: 124}
+        - {x: 59.02565, y: 127}
+        - {x: 57.02566, y: 128}
+        - {x: -54.97434, y: 128}
+        - {x: -66.97433, y: 124}
+        - {x: -80.97434, y: 107}
+        - {x: -90.97434, y: 88}
+        - {x: -121.9743, y: 36}
+        - {x: -126.9743, y: 24}
+        - {x: -126.9743, y: -25}
+        - {x: -117.9743, y: -41}
+        - {x: -98.97433, y: -74}
+        - {x: -74.97434, y: -115}
+        - {x: -66.97433, y: -123}
+        - {x: -57.97434, y: -128}
+        - {x: 60.02565, y: -128}
+        - {x: 73.02565, y: -119}
+        - {x: 81.02566, y: -106}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      GoalTileIconRandom_0: 21300000
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -8,7 +8,8 @@ public enum PlatType
 {
     Open,
     Lock,
-    Ads
+    Ads,
+    None
 }
 
 public class PlatformGenerator : MonoBehaviour

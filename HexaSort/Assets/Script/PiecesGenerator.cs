@@ -21,14 +21,25 @@ public class PiecesGenerator : MonoBehaviour
 
     private void Start()
     {
-        GeneratePieces();
+        GeneratePieces(false);
     }
 
-    public void GeneratePieces()
+    public void GeneratePieces(bool isSingle)
     {
+        if(isSingle)
+        {
+            for(int i=0;i<3;i++)
+            {
+                var r =piecePos.GetChild(i);
+                for (int j = 0; j < r.childCount; j++){
+                    var c = r.GetChild(j);
+                    DestroyImmediate(c.gameObject);
+                }
+            }
+        }
         for( int i=0; i < 3; i++)
         {
-            var t = GetInfo();
+            var t = GetInfo(isSingle);
             var rootTemp = piecePos.GetChild(i);
             var a = rootTemp.GetComponent<Pieces>();
             a.piecePros.Clear();
@@ -53,35 +64,48 @@ public class PiecesGenerator : MonoBehaviour
     }
 
 
-    PieceDetail[] GetInfo()
+    PieceDetail[] GetInfo(bool isSingle)
     {
-        int numColors = Random.Range(1, 4);
-        amount = Random.Range(numColors, 7);
-        List<PieceDetail> info = new();
-        List<int> colors = new();
-        for (int i=0;i < numColors; i++)
+        if (!isSingle)
         {
-            PieceDetail piece = new();
-            int id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
-            while (colors.Contains(id))
+            int numColors = Random.Range(1, 4);
+            amount = Random.Range(numColors, 7);
+            List<PieceDetail> info = new();
+            List<int> colors = new();
+            for (int i = 0; i < numColors; i++)
             {
-                id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
-            }
-            if (numColors - i == 1)
-            {
-                piece.amount = amount;
+                PieceDetail piece = new();
+                int id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
+                while (colors.Contains(id))
+                {
+                    id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
+                }
+                if (numColors - i == 1)
+                {
+                    piece.amount = amount;
+                    piece.colorID = id;
+                    info.Add(piece);
+                    return info.ToArray();
+                }
+                int a = Random.Range(1, amount - 2);
+                piece.amount = a;
                 piece.colorID = id;
                 info.Add(piece);
-                return info.ToArray();
+                colors.Add(id);
+                amount -= a;
             }
-            int a = Random.Range(1, amount-2);
-            piece.amount = a;
-            piece.colorID = id;
-            info.Add(piece);
-            colors.Add(id);
-            amount -= a;
+            return info.ToArray();
         }
-        return info.ToArray();
+        else
+        {
+            List<PieceDetail> info = new();
+            amount = Random.Range(1, 7);
+            int id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
+            PieceDetail p = new() { amount = amount, colorID = id };
+            info.Add(p);
+            return info.ToArray();
+
+        }
     }
 
 }

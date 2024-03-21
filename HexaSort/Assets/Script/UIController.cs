@@ -19,7 +19,24 @@ public class UIController : MonoBehaviour
 
     public void SetProgress(float percen)
     {
-        progressPercen.fillAmount = percen;
+        LeanTween.value(progressPercen.fillAmount, progressPercen.fillAmount + percen, 0.2f).setOnUpdate((float value) =>
+        {
+            progressPercen.fillAmount = value;
+        });
+    }
 
+    public void HammerBooster()
+    {
+        CurrentData.isHammer = true;
+    }
+
+    public void HandBooster()
+    {
+        CurrentData.isHand = true;
+    }
+
+    public void SwapBooster()
+    {
+        CurrentData.Instance.SwapBooster();
     }
 }
