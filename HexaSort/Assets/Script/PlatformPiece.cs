@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlatformPiece : MonoBehaviour
@@ -8,7 +9,8 @@ public class PlatformPiece : MonoBehaviour
     GameObject lockState;
     [SerializeField]
     GameObject adsState;
-    public PlatType platType;
+    public PlatType platType = PlatType.Open;
+    public int lockNumber;
     public List<PiecePro> pieces = new();
     public Dictionary<int, int> numOfColor = new();
     public List<PlatformPiece> neighbor = new();
@@ -22,7 +24,9 @@ public class PlatformPiece : MonoBehaviour
         if (CurrentData.Instance != null)
         {
             CurrentData.freePieces++;
-            meshRenderer.material = CurrentData.Instance.materials[0];
+            if (platType == PlatType.Open)
+                meshRenderer.material = CurrentData.Instance.materialsPlat[0];
+            else meshRenderer.material = CurrentData.Instance.materialsPlat[2];
         }
     }
 
@@ -34,13 +38,18 @@ public class PlatformPiece : MonoBehaviour
             CurrentData.isHammer = false;
             StartCoroutine(BreakPieceHammer());
         }
-        Debug.Log(CurrentData.isHand);
         if(CurrentData.isHand)
         {
             if(pieces.Count == 0) return;
             CurrentData.isPick = true;
             CurrentData.currentPick = pieces;
             currentPick = true;
+        }
+        if(platType == PlatType.Ads)
+        {
+            adsState.SetActive(false);
+            platType = PlatType.Open;
+            meshRenderer.material = CurrentData.Instance.materialsPlat[0];
         }
     }
 
@@ -78,9 +87,13 @@ public class PlatformPiece : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (!platType.Equals(PlatType.Open))
+        {
+            return;
+        }
         if (pieces.Count == 0)
         {
-            meshRenderer.material = CurrentData.Instance.materials[1];
+            meshRenderer.material = CurrentData.Instance.materialsPlat[1];
             CurrentData.currenPlat = this;
         }
         if (CurrentData.isHand && CurrentData.isPick)
@@ -93,11 +106,36 @@ public class PlatformPiece : MonoBehaviour
 
     private void OnMouseExit()
     {
-        meshRenderer.material = CurrentData.Instance.materials[0];
+        if (!platType.Equals(PlatType.Open)) return;
+        meshRenderer.material = CurrentData.Instance.materialsPlat[0];
         CurrentData.currenPlat = null;
         if (CurrentData.isHand && !currentPick)
         {
             container.transform.localPosition = Vector3.zero;
+        }
+    }
+
+    public void Unlock()
+    {
+        platType = PlatType.Open;
+        lockState.SetActive(false);
+        meshRenderer.material = CurrentData.Instance.materialsPlat[0];
+    }
+
+    public void SetState(PlatType type,int lockNumber =0)
+    {
+        platType = type;
+        switch (type)
+        {
+            case PlatType.Ads:
+                adsState.SetActive(true);
+                break;
+            case PlatType.Lock:
+                lockState.SetActive(true);
+                this.lockNumber = lockNumber;
+                TextMeshPro text = GetComponentInChildren<TextMeshPro>();
+                text.text = lockNumber.ToString();
+                break;
         }
     }
 
@@ -278,24 +316,6 @@ public class PlatformPiece : MonoBehaviour
         int id = pieces[^1].id;
         if (min == numOfColor.Count)
         {
-            //foreach (PlatformPiece piece in nextPieces)
-            //{
-            //    MovingPiece m = new()
-            //    {
-            //        from = piece,
-            //        to = this,
-            //        amount = piece.numOfColor[id]
-            //    };
-            //    CurrentData.movingStack.Push(m);
-            //}
-            //return;
-            //for (int i = 0; i < nextPieces.Count; i++)
-            //{
-            //    bool isCheck = false;
-            //    if (i == nextPieces.Count - 1)
-            //    {
-            //        isCheck = true;
-            //    }
             MovingPiece m = new()
             {
                 from = nextPieces[0],
@@ -316,15 +336,6 @@ public class PlatformPiece : MonoBehaviour
                 amount = temp
             };
             CurrentData.movingStack.Push(m);
-
-            //m = new()
-            //{
-            //    from = this,
-            //    to = nextPieces[0],
-            //    amount = numOfColor[id] + temp,
-            //    isCheck = true
-            //};
-            //CurrentData.movingStack.Push(m);
             return;
         }
 
@@ -338,15 +349,6 @@ public class PlatformPiece : MonoBehaviour
                 amount = temp
             };
             CurrentData.movingStack.Push(m);
-
-            //m = new()
-            //{
-            //    from = this,
-            //    to = nextPieces[1],
-            //    amount = numOfColor[id] + temp,
-            //    isCheck = true
-            //};
-            //CurrentData.movingStack.Push(m);
             return;
         }
 
@@ -355,24 +357,6 @@ public class PlatformPiece : MonoBehaviour
     void MoveTripple(List<PlatformPiece> nextPieces)
     {
         int id = pieces[^1].id;
-        //foreach (PlatformPiece piece in nextPieces)
-        //{
-        //    MovingPiece m = new()
-        //    {
-        //        from = piece,
-        //        to = this,
-        //        amount = piece.numOfColor[id]
-        //    };
-        //    CurrentData.movingStack.Push(m);
-        //}
-        //for (int i = 0; i < nextPieces.Count; i++)
-        //{
-        //    bool isCheck = false;
-        //    if (i == nextPieces.Count - 1)
-        //    {
-        //        isCheck = true;
-        //    }
-
         MovingPiece m = new()
         {
             from = nextPieces[0],
@@ -380,7 +364,6 @@ public class PlatformPiece : MonoBehaviour
             amount = nextPieces[0].numOfColor[id],
         };
         CurrentData.movingStack.Push((m));
-        //}
         return;
     }
 }

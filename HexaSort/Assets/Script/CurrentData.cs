@@ -16,16 +16,16 @@ public class CurrentData : MonoBehaviour
 {
     public static CurrentData Instance;
     public int maxColorID = 0;
-    public List<Material> materials = new();
+    public List<Material> materialsColor = new();
+    public List<Material> materialsPlat = new();
     public static bool isPick = false;
     public static int numPiece;
     public static List<PiecePro> currentPick = new();
     public static PlatformPiece currenPlat;
     public static int freePieces =0;
     public static int lastTween;
-    public int goalScore;
+    public static LevelInfo levelInfo;
     public int currentProgress =0;
-    public GameObject currentLevel;
     public static List<PlatformPiece> canBreak = new();
     public static int numOfCheck =0;
     public static Stack<MovingPiece> movingStack = new();
@@ -35,35 +35,18 @@ public class CurrentData : MonoBehaviour
     bool isStart = false;
     List<PlatformPiece> needCheckPieces = new();
     [SerializeField]
-    Material defaultMaterial;
-    [SerializeField]
     PiecesGenerator piecesGenerator;
 
     private void Awake()
     {
-        Instance = this;
-        materials.Add(defaultMaterial);
-        SetMaterial();  
-    }
-
-    public void SetGoal(LevelInfo level)
-    {
-        goalScore = level.goalScore;
-        currentLevel = level.gameObject;
-    }
-
-
-    void SetMaterial()
-    {
-        var t = Instantiate(defaultMaterial);
-        t.color = Color.white;
-        materials.Add(t);
+        Instance = this;  
     }
 
     public void UpdateScore(int score)
     {
         currentProgress += score;
-        UIController.Instance.SetProgress((float)(currentProgress) / (float) goalScore);
+        UIController.Instance.SetProgress((float)(currentProgress) / (float) levelInfo.goalScore);
+        levelInfo.CheckUnlock(currentProgress);
     }
 
     public void CheckPiece()

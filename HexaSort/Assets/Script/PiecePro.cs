@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class PiecePro : MonoBehaviour
 {
-    public int id;
+    public int id = -1;
     [SerializeField]
     MeshRenderer meshRenderer;
 
+    private void Start()
+    {
+        if(id != -1)
+        {
+            SetColor();
+        }
+    }
+
     public void SetColor()
     {
-        meshRenderer.material = CurrentData.Instance.materials[id];
+        meshRenderer.material = CurrentData.Instance.materialsColor[id];
     }
 }

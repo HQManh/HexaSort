@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1802460346081411549}
   - component: {fileID: 5354777969049720191}
   - component: {fileID: 3228345241130727753}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 4918068338713326629}
   - component: {fileID: 2734243548916069066}
   - component: {fileID: 8506895439585593619}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,6 +689,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockState: {fileID: 8318490367302015068}
   adsState: {fileID: 5500650565084476248}
+  platType: 0
+  lockNumber: 0
   pieces: []
   neighbor: []
   container: {fileID: 0}

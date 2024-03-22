@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+public class PlatPro
+{
+    public PlatType type;
+    public int scoreOpen;
+    public string preList;
+}
+
 public class LevelEditor : MonoBehaviour
 {
-    public class PlatPro
-    {
-        public PlatType type;
-        public int scoreOpen;
-    }
-
     public Vector2 size;
     public List<List<PlatPro>> platList=new();
+    PlatformGenerator platform;
+
 
     public void CreateList()
     {
+        platform = GetComponent<PlatformGenerator>();
         platList.Clear();  
         for(int i=0; i < size.x; i++)
         {
@@ -27,12 +31,16 @@ public class LevelEditor : MonoBehaviour
             }
             platList.Add(platProList);
         }
-        Debug.Log("Created");
     }
    
     public void CreateGrid()
     {
+        platform.SetUp(size, platList);
+    }
 
+    public void DestroyChild()
+    {
+        platform.DestroyChild();
     }
 }
 
@@ -56,6 +64,11 @@ public class LevelEditorMain: Editor
         {
             levelEditor.CreateGrid();
         }
+
+        if (GUILayout.Button("Destroy Child"))
+        {
+            levelEditor.DestroyChild();
+        }
         srcollPosition = EditorGUILayout.BeginScrollView(srcollPosition);
 
         GUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
@@ -63,17 +76,28 @@ public class LevelEditorMain: Editor
 
         for(int i = 0; i < levelEditor.platList.Count; i++)
         {
+            float xOffset = i % 2 == 0 ? 0 : 400;
             GUILayout.BeginHorizontal("BOX");
             for(int j=0; j < levelEditor.platList[0].Count ; j++)
             {
-                GUILayout.BeginVertical("BOX", GUILayout.Width(250), GUILayout.ExpandHeight(true));
+                EditorGUILayout.BeginHorizontal();
+                GUILayout.Space(xOffset);
+                GUILayout.BeginHorizontal("BOX", GUILayout.Width(64));
+                GUILayout.BeginVertical("BOX", GUILayout.ExpandHeight(true));
+
                 levelEditor.platList[i][j].type =  (PlatType)EditorGUILayout.EnumPopup("Type",levelEditor.platList[i][j].type);
                 if (levelEditor.platList[i][j].type == PlatType.Lock)
                 {
                     EditorGUILayout.Space();
                     levelEditor.platList[i][j].scoreOpen = EditorGUILayout.IntField("Score to Open", levelEditor.platList[i][j].scoreOpen);
                 }
+                if (levelEditor.platList[i][j].type == PlatType.Open)
+                {
+                    levelEditor.platList[i][j].preList = EditorGUILayout.TextField("Pre List", levelEditor.platList[i][j].preList);
+                }
                 GUILayout.EndVertical();
+                GUILayout.EndHorizontal();
+                EditorGUILayout.EndHorizontal();
             }
             GUILayout.EndHorizontal();
         }

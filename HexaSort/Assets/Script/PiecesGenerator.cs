@@ -75,10 +75,10 @@ public class PiecesGenerator : MonoBehaviour
             for (int i = 0; i < numColors; i++)
             {
                 PieceDetail piece = new();
-                int id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
+                int id = Random.Range(0, CurrentData.Instance.maxColorID);
                 while (colors.Contains(id))
                 {
-                    id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
+                    id = Random.Range(0, CurrentData.Instance.maxColorID);
                 }
                 if (numColors - i == 1)
                 {
@@ -100,7 +100,7 @@ public class PiecesGenerator : MonoBehaviour
         {
             List<PieceDetail> info = new();
             amount = Random.Range(1, 7);
-            int id = Random.Range(2, CurrentData.Instance.maxColorID + 2);
+            int id = Random.Range(0, CurrentData.Instance.maxColorID);
             PieceDetail p = new() { amount = amount, colorID = id };
             info.Add(p);
             return info.ToArray();

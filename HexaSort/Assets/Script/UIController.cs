@@ -23,6 +23,10 @@ public class UIController : MonoBehaviour
         {
             progressPercen.fillAmount = value;
         });
+        if(progressPercen.fillAmount >= 1)
+        {
+
+        }
     }
 
     public void HammerBooster()
@@ -38,5 +42,14 @@ public class UIController : MonoBehaviour
     public void SwapBooster()
     {
         CurrentData.Instance.SwapBooster();
+    }
+
+    public void EndGameUI(bool isWin)
+    {
+        LeanTween.alphaCanvas(endGroup, 1f, 0.2f);
+        if (isWin)
+        {
+
+        }
     }
 }
