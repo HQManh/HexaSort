@@ -23,10 +23,16 @@ public class PlatformPiece : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         if (CurrentData.Instance != null)
         {
-            CurrentData.freePieces++;
+            CurrentData.Instance.CheckAvaiablePlat(false);
             if (platType == PlatType.Open)
+            {
                 meshRenderer.material = CurrentData.Instance.materialsPlat[0];
-            else meshRenderer.material = CurrentData.Instance.materialsPlat[2];
+            }
+            else
+            {
+                meshRenderer.material = CurrentData.Instance.materialsPlat[2];
+            }
+
         }
     }
 
@@ -117,6 +123,7 @@ public class PlatformPiece : MonoBehaviour
 
     public void Unlock()
     {
+        CurrentData.Instance.CheckAvaiablePlat(true);
         platType = PlatType.Open;
         lockState.SetActive(false);
         meshRenderer.material = CurrentData.Instance.materialsPlat[0];
@@ -143,6 +150,7 @@ public class PlatformPiece : MonoBehaviour
     {
         if (CurrentData.isPick)
         {
+            CurrentData.Instance.CheckAvaiablePlat(false);
             var t = CurrentData.currentPick;
             foreach (var temp in t)
             {
@@ -199,6 +207,10 @@ public class PlatformPiece : MonoBehaviour
             CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
             yield return new WaitForSeconds(0.08f);
         }
+        if(pieces.Count == numOfColor[id])
+        {
+            CurrentData.Instance.CheckAvaiablePlat(true);
+        }
         numOfColor[id] = 0;
         CurrentData.Instance.UpdateScore(a);
         CurrentData.numOfCheck--;
@@ -209,6 +221,7 @@ public class PlatformPiece : MonoBehaviour
 
     IEnumerator BreakPieceHammer()
     {
+        CurrentData.Instance.CheckAvaiablePlat(true);
         int a = pieces.Count;
         for(int i=0; i<a; i++)
         {
@@ -280,6 +293,10 @@ public class PlatformPiece : MonoBehaviour
                     amount = numOfColor[head],
                     isCheck = true
                 };
+                if (pieces.Count == numOfColor[head])
+                {
+                    CurrentData.Instance.CheckAvaiablePlat(true);
+                }
                 CurrentData.movingStack.Push(m);
                 return;
             }
@@ -293,6 +310,10 @@ public class PlatformPiece : MonoBehaviour
                 amount = numOfColor[head],
                 isCheck = true
             };
+            if (pieces.Count == numOfColor[head])
+            {
+                CurrentData.Instance.CheckAvaiablePlat(true);
+            }
             CurrentData.movingStack.Push(m);
             return;
         }

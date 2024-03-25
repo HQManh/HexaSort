@@ -11,7 +11,7 @@ public class SplashController : MonoBehaviour
     void Start()
     {
         SceneManager.LoadScene(sceneToLoad);
-        GlobalController.StartSceneName = "Splash";
+        GlobalController.StartSceneName = "Game";
     }
 
 }

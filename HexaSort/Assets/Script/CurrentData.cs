@@ -63,6 +63,18 @@ public class CurrentData : MonoBehaviour
         piecesGenerator.GeneratePieces(true);
     }
 
+    public void CheckAvaiablePlat(bool isIncrease)
+    {
+        if (isIncrease)
+        {
+            freePieces++;
+        }else freePieces--;
+        if (freePieces == 0)
+        {
+            GameUIController.Instance.ShowGameEnd(false);
+        }
+    }
+
     void CheckMoving()
     {
         isMove = false;
