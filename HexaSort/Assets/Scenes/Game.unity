@@ -2874,7 +2874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70196af7f74d0b6489786f6a98e3e610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxColorID: 3
+  maxColorID: 5
   materialsColor:
   - {fileID: 2100000, guid: 42abdf4abd9a9f940854d6c33b221efb, type: 2}
   - {fileID: 2100000, guid: 217b226c85e2abc44a818ca7a76b1249, type: 2}
@@ -4972,7 +4972,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5176,6 +5176,7 @@ MonoBehaviour:
   coinText: {fileID: 0}
   endGroup: {fileID: 1455646603}
   lostGroup: {fileID: 0}
+  winGroup: {fileID: 0}
 --- !u!1 &1078889896
 GameObject:
   m_ObjectHideFlags: 0

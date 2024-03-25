@@ -71,7 +71,7 @@ public class CurrentData : MonoBehaviour
         }else freePieces--;
         if (freePieces == 0)
         {
-            GameUIController.Instance.ShowGameEnd(false);
+            UIController.Instance.ShowEndGame(false);
         }
     }
 

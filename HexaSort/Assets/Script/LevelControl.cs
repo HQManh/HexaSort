@@ -31,6 +31,7 @@ public class LevelControl : Singleton<LevelControl>
 
     public void SetUpLevel()
     {
+        Debug.Log("?");
         if(loadedLevel != null && level == null)
         {
             level = Instantiate(loadedLevel, transform);
