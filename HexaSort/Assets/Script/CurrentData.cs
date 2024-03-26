@@ -8,7 +8,6 @@ public class MovingPiece
     public PlatformPiece from;
     public PlatformPiece to;
     public int amount;
-    public bool isCheck = false;
 }
 
 
@@ -19,7 +18,7 @@ public class CurrentData : MonoBehaviour
     public List<Material> materialsColor = new();
     public List<Material> materialsPlat = new();
     public static bool isPick = false;
-    public static int numPiece;
+    public static List<List<PiecePro>> numPiece = new();
     public static List<PiecePro> currentPick = new();
     public static PlatformPiece currenPlat;
     public static int freePieces =0;
@@ -51,12 +50,76 @@ public class CurrentData : MonoBehaviour
 
     public void CheckPiece()
     {
-        numPiece--;
-        if(numPiece == 0)
+        numPiece.Remove(currentPick);
+        if(numPiece.Count == 0)
         {
             piecesGenerator.GeneratePieces(false);
         }
     }
+
+    List<int> GetPiecesHead()
+    {
+        List<int> ids = new();
+        foreach(var t in numPiece)
+        {
+            if (ids.Contains(t[^1].id)) continue; 
+            ids.Add(t[^1].id);
+        }
+        return ids;
+    }
+
+    public void BreakPlat(int numOfBreak)
+    {
+        List<int> piecesHead = GetPiecesHead();
+        List<PlatformPiece> currentPieces = levelInfo.allPieces;
+        List<PlatformPiece> canBreakPieces = new();
+        for(int i=0; i<piecesHead.Count; i++)
+        {
+            for(int j=0;j<currentPieces.Count; j++)
+            {
+                if (currentPieces[j].pieces.Count == 0) continue;
+                if (currentPieces[j].pieces[^1].id == piecesHead[i])
+                {
+                    var temp = currentPieces[j];
+                    foreach(var t in temp.neighbor)
+                    {
+                        if (canBreakPieces.Contains(t) || t.pieces.Count ==0 || t.pieces[^1].id == piecesHead[i]) continue;
+                        canBreakPieces.Add(t);
+                    }
+                }
+            }
+        }
+
+        List<PlatformPiece> breakList = new();
+        if(canBreakPieces.Count > numOfBreak)
+        {
+            breakList = canBreakPieces;
+            for(int i=0;i<numOfBreak - breakList.Count; i++)
+            {
+                int t = UnityEngine.Random.Range(0,currentPieces.Count);
+                while (breakList.Contains(currentPieces[t]))
+                {
+                    t = UnityEngine.Random.Range(0, currentPieces.Count);
+                }
+                breakList.Add(currentPieces[t]);
+                currentPieces.RemoveAt(t);
+            }
+        }
+        else
+        {
+            for(int i=0; i < numOfBreak; i++)
+            {
+                int t = UnityEngine.Random.Range(0, canBreakPieces.Count);
+                breakList.Add(canBreakPieces[t]);
+                canBreakPieces.RemoveAt(t);
+            }
+        }
+        for(int i=0;i< numOfBreak; i++)
+        {
+            StartCoroutine(breakList[i].BreakPieceHammer());   
+        }
+    }
+
 
     public void SwapBooster()
     {
@@ -69,6 +132,7 @@ public class CurrentData : MonoBehaviour
         {
             freePieces++;
         }else freePieces--;
+        //Debug.Log(freePieces);
         if (freePieces == 0)
         {
             UIController.Instance.ShowEndGame(false);
@@ -136,7 +200,7 @@ public class CurrentData : MonoBehaviour
             {
                 canBreak.Add(t);
             }
-            //f.pieces[^1].transform.localPosition = t.pieces[^1].transform.localPosition - new Vector3(0f, 0f, 0.35f);
+            //f.canBreakPieces[^1].transform.localPosition = t.canBreakPieces[^1].transform.localPosition - new Vector3(0f, 0f, 0.35f);
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;

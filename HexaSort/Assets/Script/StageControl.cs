@@ -22,13 +22,13 @@ public class StageControl : MonoBehaviour
     {
         GlobalControll.CurrentStage = ScreenStage.Home;
         UIController.Instance.SwitchStageUI();
-        StartLevel();
     }
 
     public void StartGame()
     {
         GlobalControll.CurrentStage = ScreenStage.InGame;
         UIController.Instance.ShowLevelBreak(StartLevel);
+        CurrentData.Instance.CheckPiece();
     }
 
 

@@ -19,11 +19,6 @@ public class PiecesGenerator : MonoBehaviour
         public int amount;
     }
 
-    private void Start()
-    {
-        GeneratePieces(false);
-    }
-
     public void GeneratePieces(bool isSingle)
     {
         if(isSingle)
@@ -59,8 +54,8 @@ public class PiecesGenerator : MonoBehaviour
                 }
                 sum += t[j].amount;
             }
+            CurrentData.numPiece.Add(a.piecePros);
         }
-        CurrentData.numPiece = 3;
     }
 
 

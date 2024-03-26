@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,14 +17,17 @@ public class UIController : MonoBehaviour
     public static UIController Instance;
     [Header("StartUI")]
     public CanvasGroup startGroup;
+    public CanvasGroup settingGroup;
+    public GameObject setting;
     public TextMeshProUGUI levelText;
     public RectTransform beginCover;
     [Header("PlayUI")]
     public CanvasGroup playGroup;
     public Image progressPercen;
-    public Button settingButton;
+    public RectTransform settingContainer;
     public TextMeshProUGUI progressText;
     public TextMeshProUGUI coinText;
+    bool isSettingOn = false;
     [Header("EndUI")]
     public CanvasGroup endGroup;
     public CanvasGroup lostGroup;
@@ -55,7 +59,6 @@ public class UIController : MonoBehaviour
             default:
                 break;
         }
-
     }
 
     public void ShowInGameUI(int id)
@@ -90,6 +93,16 @@ public class UIController : MonoBehaviour
         });
     }
 
+    public void NextLevel()
+    {
+
+    }
+
+    public void NextLevelAdsGetCoin()
+    {
+        NextLevel();
+    }
+
     public void ShowLevelBreak(Action callback, float duration = 0.3f, float delay = 0f)
     {
         beginCover.GetComponent<Image>().raycastTarget = true;
@@ -121,16 +134,39 @@ public class UIController : MonoBehaviour
 
     public void ShowSettingMenu()
     {
-
-
+        settingGroup.alpha = 1f;
+        settingGroup.blocksRaycasts = true;
+        LeanTween.scale(setting, Vector3.one, 0.3f).setEaseOutBounce();
     }
+
+    public void OffSettingMenu()
+    {
+        settingGroup.alpha = 0f;
+        settingGroup.blocksRaycasts = false;
+        setting.transform.localScale = Vector3.zero;
+    }
+
+
+
 
     public void ShowSettingInGame()
     {
-        for(int i = 0; i < 3; i++)
+        isSettingOn = !isSettingOn;
+        if (isSettingOn)
         {
-            var t = settingButton.transform.GetChild(i).GetComponent<RectTransform>();
-            LeanTween.moveLocalX(t.gameObject, 140f, 0.25f);
+            for (int i = 0; i < 4; i++)
+            {
+                var t = settingContainer.transform.GetChild(i).GetComponent<RectTransform>();
+                LeanTween.moveLocalX(t.gameObject, -140f, 0.1f).setEaseInBounce();
+            }
+        }
+        else
+        {
+            for (int i=0; i < 4; i++)
+            {
+                var t = settingContainer.transform.GetChild(i).GetComponent<RectTransform>();
+                LeanTween.moveLocalX(t.gameObject, 250f, 0.1f).setEaseInBounce();
+            }
         }
     }
 

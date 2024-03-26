@@ -4193,7 +4193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe386d7514270840ab1dd864d6327e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goalScore: 300
+  goalScore: 10
   lockPieces:
   - {fileID: 8025063558895273324}
   - {fileID: 4133554449852144}

@@ -22,8 +22,7 @@ public class PlatformPiece : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         if (CurrentData.Instance != null)
-        {
-            CurrentData.Instance.CheckAvaiablePlat(false);
+        {        
             if (platType == PlatType.Open)
             {
                 meshRenderer.material = CurrentData.Instance.materialsPlat[0];
@@ -31,6 +30,7 @@ public class PlatformPiece : MonoBehaviour
             else
             {
                 meshRenderer.material = CurrentData.Instance.materialsPlat[2];
+                CurrentData.Instance.CheckAvaiablePlat(false);
             }
 
         }
@@ -207,10 +207,6 @@ public class PlatformPiece : MonoBehaviour
             CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
             yield return new WaitForSeconds(0.08f);
         }
-        if(pieces.Count == numOfColor[id])
-        {
-            CurrentData.Instance.CheckAvaiablePlat(true);
-        }
         numOfColor[id] = 0;
         CurrentData.Instance.UpdateScore(a);
         CurrentData.numOfCheck--;
@@ -219,7 +215,7 @@ public class PlatformPiece : MonoBehaviour
     }
 
 
-    IEnumerator BreakPieceHammer()
+    public IEnumerator BreakPieceHammer()
     {
         CurrentData.Instance.CheckAvaiablePlat(true);
         int a = pieces.Count;
@@ -237,22 +233,26 @@ public class PlatformPiece : MonoBehaviour
 
     public void CheckAround()
     {
-        if (pieces.Count == 0) return;
+        if (pieces.Count == 0)
+        {
+            CurrentData.Instance.CheckAvaiablePlat(true);
+            return;
+        }
         List<PlatformPiece> nextPieces = LookAround(pieces[^1].id);
         if (nextPieces.Count != 0)
         {
             switch (nextPieces.Count)
             {
                 case 1:
-                    Debug.Log("Single");
+                    //Debug.Log("Single");
                     MoveSingle(nextPieces);
                     break;
                 case 2:
-                    Debug.Log("Double");
+                    //Debug.Log("Double");
                     MoveDouble(nextPieces);
                     break;
                 case 3:
-                    Debug.Log("Tripple");
+                    //Debug.Log("Tripple");
                     MoveTripple(nextPieces);
                     break;
             }
@@ -291,12 +291,7 @@ public class PlatformPiece : MonoBehaviour
                     from = this,
                     to = next,
                     amount = numOfColor[head],
-                    isCheck = true
                 };
-                if (pieces.Count == numOfColor[head])
-                {
-                    CurrentData.Instance.CheckAvaiablePlat(true);
-                }
                 CurrentData.movingStack.Push(m);
                 return;
             }
@@ -308,12 +303,7 @@ public class PlatformPiece : MonoBehaviour
                 from = this,
                 to = next,
                 amount = numOfColor[head],
-                isCheck = true
             };
-            if (pieces.Count == numOfColor[head])
-            {
-                CurrentData.Instance.CheckAvaiablePlat(true);
-            }
             CurrentData.movingStack.Push(m);
             return;
         }
@@ -324,7 +314,6 @@ public class PlatformPiece : MonoBehaviour
                 from = next,
                 to = this,
                 amount = next.numOfColor[next.pieces[^1].id],
-                isCheck = true
             };
             CurrentData.movingStack.Push(m);
             return;

@@ -7,14 +7,23 @@ public class LevelInfo : MonoBehaviour
 {
     public int goalScore;
     public List<PlatformPiece> lockPieces = new();
+    public List<PlatformPiece> allPieces = new();
     int currentIndex = 0;
 
     private void Start()
     {
         if(CurrentData.Instance != null)
         {
-            CurrentData.freePieces = transform.GetChild(0).childCount;
+            CurrentData.freePieces = transform.childCount;
             CurrentData.levelInfo = this;
+        }
+        if(allPieces.Count == 0)
+        {
+            var t = transform.GetComponentsInChildren<PlatformPiece>();
+            for(int i=0;i< t.Length;i++)
+            {
+                allPieces.Add(t[i]);
+            }
         }
     }
 
