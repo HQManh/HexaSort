@@ -25,6 +25,7 @@ public class LevelInfo : MonoBehaviour
                 allPieces.Add(t[i]);
             }
         }
+        FindCenter();
     }
 
     public void GetLockPieces()
@@ -48,10 +49,15 @@ public class LevelInfo : MonoBehaviour
 
     public void CheckUnlock(int currentScore)
     {
+        if (lockPieces.Count == 0) return;
         if(currentScore > lockPieces[currentIndex].lockNumber)
         {
             lockPieces[currentIndex].Unlock();
             currentIndex++;
         }
+    }
+
+    public void FindCenter()
+    {
     }
 }

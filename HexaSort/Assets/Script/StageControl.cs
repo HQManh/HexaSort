@@ -20,15 +20,23 @@ public class StageControl : MonoBehaviour
 
     private void Start()
     {
-        GlobalControll.CurrentStage = ScreenStage.Home;
-        UIController.Instance.SwitchStageUI();
+        if(GlobalControll.CurrentStage == ScreenStage.InGame)
+        {
+            UIController.Instance.SwitchStageUI();
+            StartGame();
+        }
+        else
+        {
+            GlobalControll.CurrentStage = ScreenStage.Home;
+            UIController.Instance.SwitchStageUI();
+        }
     }
 
     public void StartGame()
     {
         GlobalControll.CurrentStage = ScreenStage.InGame;
-        UIController.Instance.ShowLevelBreak(StartLevel);
-        CurrentData.Instance.CheckPiece();
+        UIController.Instance.ShowLevelBreak(StartLevel);     
+        CurrentData.Instance.StartGame();
     }
 
 
@@ -38,7 +46,7 @@ public class StageControl : MonoBehaviour
         {
 
         }
-        int currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
+        int currentLevel = GlobalControll.CurrentLevelIndex;
         LevelControl.Instance.LoadLevel(currentLevel);
         StartCoroutine(CoStartLevel());
     }
@@ -52,5 +60,61 @@ public class StageControl : MonoBehaviour
             UIController.Instance.SetProgress(0);
             UIController.Instance.ShowInGameUI(GlobalControll.CurrentLevelIndex);
         }
+    }
+
+    public void End(bool isWin)
+    {
+        StartCoroutine(CoEnd(isWin));
+    }
+
+    IEnumerator CoEnd(bool isWin)
+    {
+        if (isWin)
+        {
+            yield return new WaitForSeconds(2f);
+            GlobalControll.CurrentLevelIndex++;
+            //PlayerPrefs.SetInt("CurrentLevelIndex", GlobalControll.CurrentLevelIndex);
+            StartCoroutine(CoEndUI(isWin));
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(CoEndUI(isWin));
+        }
+    }
+
+    IEnumerator CoEndUI(bool  isWin)
+    {
+        if (isWin)
+        {
+            UIController.Instance.ShowConfetti();
+            yield return new WaitForSeconds(0.5f);
+            UIController.Instance.ShowEndGame(true);
+        }else
+        {
+            yield return new WaitForSeconds(0.5f);
+            UIController.Instance.ShowEndGame(false);
+        }
+    }
+
+
+    public void NextLevel()
+    {
+        UIController.Instance.ShowLevelBreak(ReloadScence);
+    }
+
+    public void NextLevelAdsCoin()
+    {
+        NextLevel();
+    }
+
+    public void ReStart()
+    {
+        ReloadScence();
+    }
+
+    void ReloadScence()
+    {
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }

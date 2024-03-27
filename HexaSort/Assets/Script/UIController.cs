@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -25,6 +26,7 @@ public class UIController : MonoBehaviour
     public CanvasGroup playGroup;
     public Image progressPercen;
     public RectTransform settingContainer;
+    public RectTransform settingCover;
     public TextMeshProUGUI progressText;
     public TextMeshProUGUI coinText;
     bool isSettingOn = false;
@@ -32,6 +34,8 @@ public class UIController : MonoBehaviour
     public CanvasGroup endGroup;
     public CanvasGroup lostGroup;
     public CanvasGroup winGroup;
+    public TextMeshProUGUI textLevel;
+    public TextMeshProUGUI textEarn;
 
     private void Awake()
     {
@@ -40,7 +44,7 @@ public class UIController : MonoBehaviour
 
     public void SwitchStageUI()
     {
-        switch(GlobalControll.CurrentStage)
+        switch (GlobalControll.CurrentStage)
         {
             case ScreenStage.None:
                 break;
@@ -72,11 +76,13 @@ public class UIController : MonoBehaviour
         LeanTween.value(progressPercen.fillAmount, progressPercen.fillAmount + percen, 0.2f).setOnUpdate((float value) =>
         {
             progressPercen.fillAmount = value;
-        });
-        if(progressPercen.fillAmount >= 1)
+        }).setOnComplete(() =>
         {
-            ShowEndGame(true);
-        }
+            if (progressPercen.fillAmount >= 1)
+            {
+                StageControl.Instance.End(true);
+            }
+        });
     }
 
     public void UpdateCoin(int previousValue, int value, float duration = 1f)
@@ -93,16 +99,6 @@ public class UIController : MonoBehaviour
         });
     }
 
-    public void NextLevel()
-    {
-
-    }
-
-    public void NextLevelAdsGetCoin()
-    {
-        NextLevel();
-    }
-
     public void ShowLevelBreak(Action callback, float duration = 0.3f, float delay = 0f)
     {
         beginCover.GetComponent<Image>().raycastTarget = true;
@@ -116,6 +112,11 @@ public class UIController : MonoBehaviour
         callback?.Invoke();
     }
 
+    public void ShowConfetti()
+    {
+
+    }
+
     public void ShowEndGame(bool isWin)
     {
         endGroup.alpha = 1f;
@@ -124,11 +125,13 @@ public class UIController : MonoBehaviour
         {
             winGroup.alpha = 1f;
             winGroup.blocksRaycasts = true;
+            SetEndGameText(true);
         }
         else
         {
             endGroup.alpha = 1f;
             endGroup.blocksRaycasts = true;
+            SetEndGameText(false);
         }
     }
 
@@ -146,31 +149,52 @@ public class UIController : MonoBehaviour
         setting.transform.localScale = Vector3.zero;
     }
 
+    public void ReStartLevel()
+    {
 
+    }
 
+    public void BackMainMenu()
+    {
+
+    }
 
     public void ShowSettingInGame()
     {
-        isSettingOn = !isSettingOn;
+        StartCoroutine(ShowSettingInGameAnim());    
+    }
+
+    IEnumerator ShowSettingInGameAnim()
+    {
+        isSettingOn = !isSettingOn;      
+        float pos = settingContainer.transform.GetChild(0).localPosition.x;
         if (isSettingOn)
         {
-            for (int i = 0; i < 4; i++)
+            Time.timeScale = 0f;
+            LeanTween.alpha(settingCover, .4f, 0.3f).setIgnoreTimeScale(true);
+            settingCover.GetComponent<Image>().raycastTarget = true;
+            for (int i = 1; i < 5; i++)
             {
-                var t = settingContainer.transform.GetChild(i).GetComponent<RectTransform>();
-                LeanTween.moveLocalX(t.gameObject, -140f, 0.1f).setEaseInBounce();
+                var t = settingContainer.transform.GetChild(i);
+                LeanTween.moveLocalX(t.gameObject, pos, 0.2f).setEaseOutBack().setIgnoreTimeScale(true);
+                yield return new WaitForSecondsRealtime(0.04f);
             }
         }
         else
         {
-            for (int i=0; i < 4; i++)
+            Time.timeScale = 1f;
+            LeanTween.alpha(settingCover, 0f, 0.3f).setIgnoreTimeScale(true);
+            settingCover.GetComponent<Image>().raycastTarget = false;
+            for (int i=4; i > 0; i--)
             {
-                var t = settingContainer.transform.GetChild(i).GetComponent<RectTransform>();
-                LeanTween.moveLocalX(t.gameObject, 250f, 0.1f).setEaseInBounce();
-            }
+                var t = settingContainer.transform.GetChild(i);
+                LeanTween.moveLocalX(t.gameObject, 250f, 0.2f).setIgnoreTimeScale(true);
+                yield return new WaitForSecondsRealtime(0.04f);
+            }           
         }
     }
 
-    public void OffSettingInGame()
+    public void SetEndGameText(bool isWin)
     {
 
     }

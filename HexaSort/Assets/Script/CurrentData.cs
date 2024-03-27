@@ -48,6 +48,12 @@ public class CurrentData : MonoBehaviour
         levelInfo.CheckUnlock(currentProgress);
     }
 
+    public void StartGame()
+    {
+        numPiece.Clear();
+        piecesGenerator.GeneratePieces(false);
+    }
+
     public void CheckPiece()
     {
         numPiece.Remove(currentPick);
@@ -135,7 +141,7 @@ public class CurrentData : MonoBehaviour
         //Debug.Log(freePieces);
         if (freePieces == 0)
         {
-            UIController.Instance.ShowEndGame(false);
+            StageControl.Instance.End(false);
         }
     }
 

@@ -50,7 +50,7 @@ public class PlatformGenerator : MonoBehaviour
                 }
                 var temp = Instantiate(platPiece, rootPlat);
                 t = temp.GetComponentInChildren<PlatformPiece>();
-                temp.transform.position = new Vector3(j * (1.7f * 2) + (1.7f) * (i % 2), i * (width / 2), 0f);
+                temp.transform.position = new Vector3(j * (1.7f * 2) + (1.7f) * (i % 2),- i * (width / 2), 0f);
                 listTemp.Add(t);
 
                 switch (platList[i][j].type)
@@ -80,7 +80,7 @@ public class PlatformGenerator : MonoBehaviour
                 }
             }
             pieceList.Add(listTemp);
-
+            Vector2 offset = new Vector2();
         }
         GetNeighbor();
         var a = FindAnyObjectByType<LevelInfo>();

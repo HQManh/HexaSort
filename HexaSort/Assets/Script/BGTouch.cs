@@ -19,7 +19,7 @@ public class BGTouch : MonoBehaviour, IPointerClickHandler, IBeginDragHandler,ID
     {
         if(type == BGType.SettingInGame)
         {
-            UIController.Instance.OffSettingInGame();
+            UIController.Instance.ShowSettingInGame();
         }
         if(type == BGType.SettingMenu)
         {
