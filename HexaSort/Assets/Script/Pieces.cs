@@ -19,13 +19,14 @@ public class Pieces : MonoBehaviour
             p.gameObject.layer = 2;
         }
         CurrentData.isPick = true;
-        CurrentData.currentPick = piecePros;
+        CurrentData.currentPick = piecePros;       
     }
 
     private void OnMouseDrag()
     {
-        var t = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = (Vector2)t;
+        var mousePos = Input.mousePosition;
+        var t = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y,10f));
+        transform.position = t;
     }
 
     private void OnMouseUp()

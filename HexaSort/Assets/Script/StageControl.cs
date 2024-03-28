@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class StageControl : MonoBehaviour
@@ -100,12 +99,14 @@ public class StageControl : MonoBehaviour
 
     public void NextLevel()
     {
+        UIController.Instance.UpdateCoin(GlobalControll.Coin, 5);
         UIController.Instance.ShowLevelBreak(ReloadScence);
     }
 
     public void NextLevelAdsCoin()
     {
-        NextLevel();
+        UIController.Instance.UpdateCoin(GlobalControll.Coin, 10);
+        UIController.Instance.ShowLevelBreak(ReloadScence);
     }
 
     public void ReStart()

@@ -19,15 +19,15 @@ public class LevelControl : Singleton<LevelControl>
 
     public void LoadLevel(int id)
     {
-        Debug.Log(id);
         level = transform.GetComponentInChildren<LevelInfo>();
         if(level != null)
         {
             Destroy(level.gameObject);
         }
-        if(id > GetLevelCounts())
+        if(id == GetLevelCounts())
         {
-            id= GetLevelCounts() -1; 
+            id= 0;
+            GlobalControll.CurrentLevelIndex = 0;
         }
         var t = Resources.Load<GameObject>(levelPath + levelPrefix + (id + 1));
         PlayerPrefs.SetInt("CurrentLevelIndex", GlobalControll.CurrentLevelIndex);

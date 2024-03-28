@@ -37,6 +37,11 @@ public class PlatformGenerator : MonoBehaviour
     {
         height = platPiece.GetComponentInChildren<MeshRenderer>().bounds.size.x;
         width = platPiece.GetComponentInChildren<MeshRenderer>().bounds.size.y;
+        Vector3 offset = new();
+        int num = 0;
+        var a = FindAnyObjectByType<LevelInfo>();
+        a.allPieces.Clear();
+        a.lockPieces.Clear();
         for (int i = 0; i < size.x; i++)
         {
             List<PlatformPiece> listTemp = new();
@@ -50,9 +55,11 @@ public class PlatformGenerator : MonoBehaviour
                 }
                 var temp = Instantiate(platPiece, rootPlat);
                 t = temp.GetComponentInChildren<PlatformPiece>();
-                temp.transform.position = new Vector3(j * (1.7f * 2) + (1.7f) * (i % 2),- i * (width / 2), 0f);
+                Vector3 pos = new(j * (1.7f * 2) + (1.7f) * (i % 2), -i * (width / 2), 0f);
+                temp.transform.position = pos;
+                offset += pos;
                 listTemp.Add(t);
-
+                num++;
                 switch (platList[i][j].type)
                 {
                     case PlatType.Open:
@@ -64,6 +71,7 @@ public class PlatformGenerator : MonoBehaviour
                                 if(int.TryParse(numString, out int id))
                                 {
                                     var p = Instantiate(piece,t.container);
+                                    p.gameObject.layer = 2;
                                     p.transform.localPosition = new Vector3(0f, 0f, -0.35f* (t.pieces.Count + 1));
                                     p.id = id;
                                     t.pieces.Add(p);
@@ -78,13 +86,14 @@ public class PlatformGenerator : MonoBehaviour
                         t.SetState(PlatType.Lock, platList[i][j].scoreOpen);
                         break;
                 }
+                a.allPieces.Add(t);
             }
             pieceList.Add(listTemp);
-            Vector2 offset = new Vector2();
         }
         GetNeighbor();
-        var a = FindAnyObjectByType<LevelInfo>();
+        offset /= num;
         a.GetLockPieces();
+        a.SetPos(offset);
     }
 
     public void DestroyChild()

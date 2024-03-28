@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,12 +21,17 @@ public class UIController : MonoBehaviour
     public CanvasGroup settingGroup;
     public GameObject setting;
     public TextMeshProUGUI levelText;
+    public TextMeshProUGUI coinTextMenu;
     public RectTransform beginCover;
     [Header("PlayUI")]
     public CanvasGroup playGroup;
     public Image progressPercen;
     public RectTransform settingContainer;
     public RectTransform settingCover;
+    public RectTransform header;
+    public RectTransform booster;
+    public GameObject hammer;
+    public GameObject swap;
     public TextMeshProUGUI progressText;
     public TextMeshProUGUI coinText;
     bool isSettingOn = false;
@@ -40,6 +45,11 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        SetUpMenu();
     }
 
     public void SwitchStageUI()
@@ -65,10 +75,18 @@ public class UIController : MonoBehaviour
         }
     }
 
+    void SetUpMenu()
+    {
+        levelText.text = "Level " + (GlobalControll.CurrentLevelIndex + 1).ToString();
+        coinTextMenu.text = GlobalControll.Coin.ToString(); 
+    }
+
+
     public void ShowInGameUI(int id)
     {
         SwitchStageUI();
         levelText.text = "Level " + id.ToString();
+        coinText.text = GlobalControll.Coin.ToString();
     }
 
     public void SetProgress(float percen)
@@ -93,10 +111,13 @@ public class UIController : MonoBehaviour
             LeanTween.scale(coinText.gameObject, Vector3.one, 0.25f);
         });
 
-        LeanTween.value(previousValue, value, duration).setOnUpdate((float value) =>
+        LeanTween.value(previousValue, previousValue + value, duration).setOnUpdate((float value) =>
         {
             coinText.text = value.ToString();
         });
+
+        GlobalControll.Coin = previousValue + value;
+        PlayerPrefs.SetInt("Coin", GlobalControll.Coin);
     }
 
     public void ShowLevelBreak(Action callback, float duration = 0.3f, float delay = 0f)
@@ -151,7 +172,7 @@ public class UIController : MonoBehaviour
 
     public void ReStartLevel()
     {
-
+        StageControl.Instance.ReStart();
     }
 
     public void BackMainMenu()
@@ -214,17 +235,40 @@ public class UIController : MonoBehaviour
     public void HammerBooster()
     {
         CurrentData.isHammer = true;
+        hammer.SetActive(true);
+        HideUIIngame(true);
     }
 
     public void HandBooster()
     {
         CurrentData.isHand = true;
+        swap.SetActive(true);
+        HideUIIngame(true);
     }
 
     public void SwapBooster()
     {
         CurrentData.Instance.SwapBooster();
     }
+
+    public void HideUIIngame(bool isHide)
+    {
+        if (isHide)
+        {
+            LeanTween.move(header.gameObject, header.position +new Vector3(0f,2f,0f), 0.2f);
+            LeanTween.move(booster.gameObject, booster.position - new Vector3(0f, 2f, 0f), 0.2f);
+        }
+        else
+        {
+            LeanTween.move(header.gameObject, header.position - new Vector3(0f, 2f, 0f), 0.2f);
+            LeanTween.move(booster.gameObject, booster.position + new Vector3(0f, 2f, 0f), 0.2f);
+            swap.SetActive(false);
+            hammer.SetActive(false);
+            CurrentData.isHammer = false;
+            CurrentData.isHand = false;
+        }
+    }
+
 
     public void EndGameUI(bool isWin)
     {

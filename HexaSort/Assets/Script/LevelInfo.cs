@@ -17,15 +17,7 @@ public class LevelInfo : MonoBehaviour
             CurrentData.freePieces = transform.childCount;
             CurrentData.levelInfo = this;
         }
-        if(allPieces.Count == 0)
-        {
-            var t = transform.GetComponentsInChildren<PlatformPiece>();
-            for(int i=0;i< t.Length;i++)
-            {
-                allPieces.Add(t[i]);
-            }
-        }
-        FindCenter();
+        GetAllPieces();
     }
 
     public void GetLockPieces()
@@ -56,8 +48,24 @@ public class LevelInfo : MonoBehaviour
             currentIndex++;
         }
     }
-
-    public void FindCenter()
+    
+    public void SetPos(Vector3 offset)
     {
+        foreach(PlatformPiece piece in allPieces)
+        {
+            piece.transform.parent.localPosition -= offset;
+        }
+    }
+
+    void GetAllPieces()
+    {
+        if (allPieces.Count == 0)
+        {
+            var t = transform.GetComponentsInChildren<PlatformPiece>();
+            for (int i = 0; i < t.Length; i++)
+            {
+                allPieces.Add(t[i]);
+            }
+        }
     }
 }

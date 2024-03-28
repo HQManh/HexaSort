@@ -83,7 +83,7 @@ public class Shop : MonoBehaviour
     public void OnNotEnoughCoin()
     {
         //OnTabSelect(1); // Show diamond tab
-        Debug.LogError("Not enough coin");
+        Debug.LogError("Not enough Coin");
     }
 
     public void OnTabSelect(int index)
