@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,14 +34,16 @@ public class UIController : MonoBehaviour
     public GameObject hammer;
     public GameObject swap;
     public TextMeshProUGUI progressText;
+    public TextMeshProUGUI levelIngame;
+    public BoosterControl boosterControl;
     public TextMeshProUGUI coinText;
     bool isSettingOn = false;
     [Header("EndUI")]
     public CanvasGroup endGroup;
     public CanvasGroup lostGroup;
     public CanvasGroup winGroup;
-    public TextMeshProUGUI textLevel;
-    public TextMeshProUGUI textEarn;
+    public TextMeshProUGUI textLevelEndGame;
+    public TextMeshProUGUI pieceGet;
 
     private void Awake()
     {
@@ -85,13 +88,14 @@ public class UIController : MonoBehaviour
     public void ShowInGameUI(int id)
     {
         SwitchStageUI();
-        levelText.text = "Level " + id.ToString();
+        boosterControl.SetUpBooster();
+        levelIngame.text = "Level " + (id+1).ToString();
         coinText.text = GlobalControll.Coin.ToString();
     }
 
     public void SetProgress(float percen)
     {
-        LeanTween.value(progressPercen.fillAmount, progressPercen.fillAmount + percen, 0.2f).setOnUpdate((float value) =>
+        LeanTween.value(progressPercen.fillAmount,percen, 0.2f).setOnUpdate((float value) =>
         {
             progressPercen.fillAmount = value;
         }).setOnComplete(() =>
@@ -217,7 +221,15 @@ public class UIController : MonoBehaviour
 
     public void SetEndGameText(bool isWin)
     {
+        if (isWin)
+        {
+            textLevelEndGame.text = "LEVEL " + (GlobalControll.CurrentLevelIndex + 1).ToString() + " COMPLETED";
+            pieceGet.text = CurrentData.Instance.currentProgress.ToString();
+        }
+        else
+        {
 
+        }
     }
 
     public void FadeHoldCover(bool isFade)
@@ -234,21 +246,42 @@ public class UIController : MonoBehaviour
 
     public void HammerBooster()
     {
-        CurrentData.isHammer = true;
-        hammer.SetActive(true);
-        HideUIIngame(true);
+        if(GlobalControll.Hammer == 0)
+        {
+
+        }
+        else
+        {
+            CurrentData.isHammer = true;
+            hammer.SetActive(true);
+            HideUIIngame(true);
+        }
     }
 
     public void HandBooster()
     {
-        CurrentData.isHand = true;
-        swap.SetActive(true);
-        HideUIIngame(true);
+        if(GlobalControll.Hand == 0)
+        {
+
+        }
+        else
+        {
+            CurrentData.isHand = true;
+            swap.SetActive(true);
+            HideUIIngame(true);
+        }
     }
 
     public void SwapBooster()
     {
-        CurrentData.Instance.SwapBooster();
+        if(GlobalControll.Swap ==0)
+        {
+
+        }
+        else
+        {
+            CurrentData.Instance.SwapBooster();
+        }
     }
 
     public void HideUIIngame(bool isHide)

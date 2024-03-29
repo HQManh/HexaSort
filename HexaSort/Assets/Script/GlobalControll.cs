@@ -22,6 +22,7 @@ public class GlobalControll : MonoBehaviour
         Hammer = PlayerPrefs.GetInt("Hammer", 0);
         Hand = PlayerPrefs.GetInt("Hand", 0);
         Swap = PlayerPrefs.GetInt("Swap", 0);
+        
         Instance = this;
         LeanTween.init(1000);
         Application.targetFrameRate = 60;

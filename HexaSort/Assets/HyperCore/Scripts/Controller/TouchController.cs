@@ -27,15 +27,7 @@ public class TouchController : Singleton<TouchController>,
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        switch (GlobalController.CurrentStage)
-        {
-            case StageScreen.Home:
-                break;
-            case StageScreen.InGame:
-                break;
-            default:
-                break;
-        }
+        Debug.Log("Click");
     }
 
     public void OnPointerDown(PointerEventData eventData)

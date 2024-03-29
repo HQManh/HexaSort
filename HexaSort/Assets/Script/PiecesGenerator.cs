@@ -19,7 +19,7 @@ public class PiecesGenerator : MonoBehaviour
         public int amount;
     }
 
-    public void GeneratePieces(bool isSingle)
+    public IEnumerator GeneratePieces(bool isSingle)
     {
         if(isSingle)
         {
@@ -32,6 +32,7 @@ public class PiecesGenerator : MonoBehaviour
                 }
             }
         }
+        yield return null;
         for( int i=0; i < 3; i++)
         {
             var t = GetInfo(isSingle);
@@ -40,13 +41,13 @@ public class PiecesGenerator : MonoBehaviour
             a.piecePros.Clear();
             int sum = 0;
             var root = Instantiate(rootPieces, rootTemp);
-            root.transform.localPosition = Vector3.zero;
+            root.transform.localPosition = new Vector3(10f, 0f, 0f);
             for (int j =0;j< t.Length ; j++)
             {
                 for (int k=0; k< t[j].amount ; k++)
                 {
                     var newObject = Instantiate(piecePre, root.transform);
-                    newObject.transform.localPosition = new Vector3(0f,0f, -0.35f * (k+sum));
+                    newObject.transform.localPosition = new Vector3(0f,0f, -0.2f * (k+sum));
                     var b = newObject.GetComponentInChildren<PiecePro>();
                     b.id= t[j].colorID;
                     b.SetColor();
@@ -55,6 +56,14 @@ public class PiecesGenerator : MonoBehaviour
                 sum += t[j].amount;
             }
             CurrentData.numPiece.Add(a.piecePros);
+            LeanTween.moveLocalX(root, 0f, 0.2f).setOnComplete(() =>
+            {
+                LeanTween.scale(root, Vector3.one * 1.05f, 0.05f).setOnComplete(() =>
+                {
+                    LeanTween.scale(root, Vector3.one, 0.05f).setEaseInBack();
+                });
+            });
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

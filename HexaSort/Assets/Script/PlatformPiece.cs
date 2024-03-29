@@ -9,12 +9,15 @@ public class PlatformPiece : MonoBehaviour
     GameObject lockState;
     [SerializeField]
     GameObject adsState;
+    [SerializeField]
+    BreakPieceSfx breakPieceSfx;
     public PlatType platType = PlatType.Open;
     public int lockNumber;
     public List<PiecePro> pieces = new();
     public Dictionary<int, int> numOfColor = new();
     public List<PlatformPiece> neighbor = new();
     public Transform container;
+    public int id;
     bool currentPick = false;
     MeshRenderer meshRenderer;
 
@@ -32,7 +35,6 @@ public class PlatformPiece : MonoBehaviour
                 meshRenderer.material = CurrentData.Instance.materialsPlat[2];
                 CurrentData.Instance.CheckAvaiablePlat(false);
             }
-
         }
     }
 
@@ -158,12 +160,17 @@ public class PlatformPiece : MonoBehaviour
                 var a = temp.transform;
                 a.parent = container;
                 //LeanTween.moveLocal(a.gameObject, transform.localPosition - new Vector3(0f, 0f, 0.15f * (1 + pieces.Count +stt)), 0.25f);
-                a.transform.localPosition = transform.localPosition - new Vector3(0f, 0f, 0.35f * (pieces.Count));
+                a.transform.localPosition = transform.localPosition - new Vector3(0f, 0f, 0.2f * (pieces.Count));
             }
             GetAmount();
             CheckAround();
         }
+    }
 
+    IEnumerator FirstCheck()
+    {
+        yield return new WaitUntil(() => CurrentData.numOfCheck ==0 && CurrentData.movingStack.Count ==0);
+        CheckAround();
     }
 
     public void GetAmount()
@@ -210,6 +217,7 @@ public class PlatformPiece : MonoBehaviour
         numOfColor[id] = 0;
         CurrentData.Instance.UpdateScore(a);
         CurrentData.numOfCheck--;
+        breakPieceSfx.SetColor(id);
         CheckAround();
         yield return null;
     }
@@ -244,15 +252,15 @@ public class PlatformPiece : MonoBehaviour
             switch (nextPieces.Count)
             {
                 case 1:
-                    //Debug.Log("Single");
+                    Debug.Log("Single");
                     MoveSingle(nextPieces);
                     break;
                 case 2:
-                    //Debug.Log("Double");
+                    Debug.Log("Double");
                     MoveDouble(nextPieces);
                     break;
                 case 3:
-                    //Debug.Log("Tripple");
+                    Debug.Log("Tripple");
                     MoveTripple(nextPieces);
                     break;
             }

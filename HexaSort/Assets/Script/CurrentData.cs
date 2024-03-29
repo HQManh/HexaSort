@@ -32,9 +32,11 @@ public class CurrentData : MonoBehaviour
     public static bool isHammer = false;
     public static bool isHand = false;
     bool isStart = false;
-    List<PlatformPiece> needCheckPieces = new();
+    public static List<PlatformPiece> needCheckPieces = new();
     [SerializeField]
     PiecesGenerator piecesGenerator;
+    [SerializeField]
+    public Transform progressBar;
 
     private void Awake()
     {
@@ -51,7 +53,7 @@ public class CurrentData : MonoBehaviour
     public void StartGame()
     {
         numPiece.Clear();
-        piecesGenerator.GeneratePieces(false);
+        StartCoroutine(piecesGenerator.GeneratePieces(false));
     }
 
     public void CheckPiece()
@@ -59,7 +61,7 @@ public class CurrentData : MonoBehaviour
         numPiece.Remove(currentPick);
         if(numPiece.Count == 0)
         {
-            piecesGenerator.GeneratePieces(false);
+            StartCoroutine(piecesGenerator.GeneratePieces(false));
         }
     }
 
@@ -129,7 +131,7 @@ public class CurrentData : MonoBehaviour
 
     public void SwapBooster()
     {
-        piecesGenerator.GeneratePieces(true);
+        StartCoroutine(piecesGenerator.GeneratePieces(true));
     }
 
     public void CheckAvaiablePlat(bool isIncrease)
@@ -161,8 +163,14 @@ public class CurrentData : MonoBehaviour
         isStart = true;
         isMove = true;
         MovingPiece piece = movingStack.Pop();
+        Debug.Log(piece.from.id + " " + piece.to.id + " " + piece.amount);
         var f = piece.from;
+        Debug.Log(f.pieces.Count);
         var t = piece.to;
+        if(f.pieces.Count == 0)
+        {
+            yield break;
+        }
         Vector3 pos2 = t.pieces[^1].transform.localPosition;
         for (int i=0; i < piece.amount; i++)
         {
@@ -171,13 +179,14 @@ public class CurrentData : MonoBehaviour
             fPiece.transform.parent = t.container;
             Vector3 pos1 = fPiece.transform.localPosition;
             t.pieces.Add(fPiece);
-            f.pieces.RemoveAt(f.pieces.Count - 1);  
-            Vector3 midPos = new((pos1.x + pos2.x) / 2, (pos1.y + pos2.y) / 2,Mathf.Min(pos1.z,pos2.z -0.35f*(i+1)) - 1f);
+            f.pieces.RemoveAt(f.pieces.Count - 1);
+            var posTemp = pos2 - new Vector3(0f, 0f, 0.2f) * (i + 1);
+            Vector3 midPos = new((pos1.x + posTemp.x) / 2, (pos1.y + posTemp.y) / 2,Mathf.Min(pos1.z, posTemp.z -0.2f*(i+1)) - 1f);
             list.Add(pos1);
             list.Add(midPos);
             list.Add(midPos);
-            list.Add(pos2 - new Vector3(0f, 0f, 0.35f) * (i+1));
-            lastTween = LeanTween.moveLocal(fPiece.gameObject,list.ToArray(), 0.2f).id;
+            list.Add(posTemp);
+            lastTween = LeanTween.moveLocal(fPiece.gameObject,list.ToArray(), 0.3f).id;
             midPos = Vector3.zero;
             if(pos1.x == pos2.x)
             {
@@ -201,7 +210,7 @@ public class CurrentData : MonoBehaviour
                     midPos.y = -180f;
                 }
             }
-            LeanTween.rotateLocal(fPiece.gameObject,f.transform.localEulerAngles + midPos, 0.2f);
+            LeanTween.rotateLocal(fPiece.gameObject,f.transform.localEulerAngles + midPos, 0.3f);
             if (!canBreak.Contains(t))
             {
                 canBreak.Add(t);
@@ -213,7 +222,9 @@ public class CurrentData : MonoBehaviour
         //needCheckPieces.Add(t);
         //needCheckPieces.Add(f);
         t.CheckAround();
+        Debug.Log(t.id+ " "+ t.pieces.Count);
         f.CheckAround();
+        Debug.Log(f.id + " " + f.pieces.Count);
         //if (piece.isCheck)
         //{
         //    CheckMovingPiece();
@@ -227,6 +238,18 @@ public class CurrentData : MonoBehaviour
         {
             t.CheckAround();
         }
+    }
+
+
+    void SaveCurrentData()
+    {
+        var t = levelInfo.GetPiecesData();
+        Dictionary<int, List<PiecePro>> pieces = new();
+        foreach (var piece in numPiece)
+        {
+
+        }
+
     }
 
 

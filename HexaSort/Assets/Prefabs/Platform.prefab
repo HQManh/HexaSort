@@ -689,11 +689,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockState: {fileID: 8318490367302015068}
   adsState: {fileID: 5500650565084476248}
+  breakPieceSfx: {fileID: 0}
   platType: 0
   lockNumber: 0
   pieces: []
   neighbor: []
   container: {fileID: 0}
+  id: 0
 --- !u!1 &8318490367302015068
 GameObject:
   m_ObjectHideFlags: 0

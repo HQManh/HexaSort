@@ -10,6 +10,11 @@ public class LevelInfo : MonoBehaviour
     public List<PlatformPiece> allPieces = new();
     int currentIndex = 0;
 
+    private void Awake()
+    {
+        SetID();
+    }
+
     private void Start()
     {
         if(CurrentData.Instance != null)
@@ -67,5 +72,23 @@ public class LevelInfo : MonoBehaviour
                 allPieces.Add(t[i]);
             }
         }
+    }
+
+    void SetID()
+    {
+        for(int i=0;i< allPieces.Count; i++)
+        {
+            allPieces[i].id = i;
+        }
+    }
+    
+    public List<List<PiecePro>> GetPiecesData()
+    {
+        List<List<PiecePro>> platinfo = new();
+        foreach(PlatformPiece piece in allPieces)
+        {
+            platinfo.Add(piece.pieces);
+        }
+        return platinfo;
     }
 }

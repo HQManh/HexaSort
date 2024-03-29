@@ -8,6 +8,9 @@ public class BoosterControl : MonoBehaviour
     public GameObject hammer;
     public GameObject hand;
     public GameObject swap;
+    public GameObject priceHammer;
+    public GameObject priceHand;
+    public GameObject priceSwap;
     public TextMeshProUGUI hammerText;
     public TextMeshProUGUI handText;
     public TextMeshProUGUI swapText;
@@ -15,15 +18,60 @@ public class BoosterControl : MonoBehaviour
     public void SetUpBooster()
     {
         int i = GlobalControll.Hammer;
-        if(i == 0)
+        if(GlobalControll.CurrentLevelIndex <3)
         {
             hammer.transform.GetChild(1).gameObject.SetActive(true);
         }
         else
         {
             hammer.transform.GetChild(0).gameObject.SetActive(true);
-        }
+            if (i == 0)
+            {
+                priceHammer.SetActive(true);
+            }
+            else
+            {
+                hammerText.text = i.ToString();
+                hammerText.transform.parent.gameObject.SetActive(true);
 
+            }
+        }
+        i = GlobalControll.Swap;
+        if (GlobalControll.CurrentLevelIndex < 5)
+        {
+            swap.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            swap.transform.GetChild(0).gameObject.SetActive(true);
+            if (i == 0)
+            {
+                priceSwap.SetActive(true);
+            }
+            else
+            {
+                swapText.text = i.ToString();
+                swapText.transform.parent.gameObject.SetActive(true);
+            }
+        }
+        i = GlobalControll.Hand;
+        if (GlobalControll.CurrentLevelIndex < 8)
+        {
+            hand.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            hand.transform.GetChild(0).gameObject.SetActive(true);
+            if (i == 0)
+            {
+                priceHand.SetActive(true);
+            }
+            else
+            {
+                handText.text = i.ToString();
+                handText.transform.parent.gameObject.SetActive(true);
+            }
+        }
     }
 
 }
