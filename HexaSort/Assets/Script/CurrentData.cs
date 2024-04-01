@@ -216,7 +216,8 @@ public class CurrentData : MonoBehaviour
                 canBreak.Add(t);
             }
             //f.canBreakPieces[^1].transform.localPosition = t.canBreakPieces[^1].transform.localPosition - new Vector3(0f, 0f, 0.35f);
-            yield return new WaitForSeconds(0.1f);
+            //yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
         yield return null;
         //needCheckPieces.Add(t);

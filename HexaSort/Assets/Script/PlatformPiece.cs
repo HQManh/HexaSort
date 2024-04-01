@@ -10,7 +10,7 @@ public class PlatformPiece : MonoBehaviour
     [SerializeField]
     GameObject adsState;
     [SerializeField]
-    BreakPieceSfx breakPieceSfx;
+    ParticleSystem breakPieceParticle;
     public PlatType platType = PlatType.Open;
     public int lockNumber;
     public List<PiecePro> pieces = new();
@@ -167,12 +167,6 @@ public class PlatformPiece : MonoBehaviour
         }
     }
 
-    IEnumerator FirstCheck()
-    {
-        yield return new WaitUntil(() => CurrentData.numOfCheck ==0 && CurrentData.movingStack.Count ==0);
-        CheckAround();
-    }
-
     public void GetAmount()
     {
         numOfColor.Clear();
@@ -207,6 +201,7 @@ public class PlatformPiece : MonoBehaviour
         int id = pieces[^1].id;
         GetAmount();
         int a = numOfColor[id];
+        breakPieceParticle.Play();
         for (int i = 0; i < a; i++)
         {
             var t = pieces[^1];
@@ -215,9 +210,11 @@ public class PlatformPiece : MonoBehaviour
             yield return new WaitForSeconds(0.08f);
         }
         numOfColor[id] = 0;
-        CurrentData.Instance.UpdateScore(a);
         CurrentData.numOfCheck--;
-        breakPieceSfx.SetColor(id);
+        Vector3 pos = transform.position;
+        pos.z = 0;
+        pos = Camera.main.WorldToScreenPoint(pos);
+        StartCoroutine(UIController.Instance.BreakPieces(id, pos,a));
         CheckAround();
         yield return null;
     }
@@ -227,7 +224,8 @@ public class PlatformPiece : MonoBehaviour
     {
         CurrentData.Instance.CheckAvaiablePlat(true);
         int a = pieces.Count;
-        for(int i=0; i<a; i++)
+        breakPieceParticle.Play();
+        for (int i=0; i<a; i++)
         {
             var t = pieces[^1];
             pieces.RemoveAt(pieces.Count -1);

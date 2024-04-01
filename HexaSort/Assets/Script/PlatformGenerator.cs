@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public enum PlatType
@@ -53,10 +55,10 @@ public class PlatformGenerator : MonoBehaviour
                     listTemp.Add(t);
                     continue;
                 }
-                var temp = Instantiate(platPiece, rootPlat);
+                var temp = PrefabUtility.InstantiatePrefab(platPiece, rootPlat);
                 t = temp.GetComponentInChildren<PlatformPiece>();
                 Vector3 pos = new(j * (1.7f * 2) + (1.7f) * (i % 2), -i * (width / 2), 0f);
-                temp.transform.position = pos;
+                t.transform.position = pos;
                 offset += pos;
                 listTemp.Add(t);
                 num++;
@@ -70,11 +72,13 @@ public class PlatformGenerator : MonoBehaviour
                             {
                                 if(int.TryParse(numString, out int id))
                                 {
-                                    var p = Instantiate(piece,t.container);
-                                    p.gameObject.layer = 2;
-                                    p.transform.localPosition = new Vector3(0f, 0f, -0.35f* (t.pieces.Count + 1));
-                                    p.id = id;
-                                    t.pieces.Add(p);
+                                    var p = PrefabUtility.InstantiatePrefab(piece) as GameObject;
+                                    var te = p.GetComponent<PiecePro>();
+                                    te.transform.parent = t.container;
+                                    te.gameObject.layer = 2;
+                                    te.transform.localPosition = new Vector3(0f, 0f, -0.2f* (t.pieces.Count + 1));
+                                    te.id = id;
+                                    t.pieces.Add(te);
                                 }
                             }
                         }

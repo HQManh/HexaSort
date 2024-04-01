@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +16,7 @@ public enum ScreenStage
 public class UIController : MonoBehaviour
 {
     public static UIController Instance;
+    public Camera cameraUI;
     [Header("StartUI")]
     public CanvasGroup startGroup;
     public CanvasGroup settingGroup;
@@ -27,6 +27,10 @@ public class UIController : MonoBehaviour
     [Header("PlayUI")]
     public CanvasGroup playGroup;
     public Image progressPercen;
+    public Image breakImage;
+    public Image startBanner;
+    public RectTransform imageScore;
+    public RectTransform progressBar;
     public RectTransform settingContainer;
     public RectTransform settingCover;
     public RectTransform header;
@@ -84,13 +88,42 @@ public class UIController : MonoBehaviour
         coinTextMenu.text = GlobalControll.Coin.ToString(); 
     }
 
-
     public void ShowInGameUI(int id)
     {
         SwitchStageUI();
         boosterControl.SetUpBooster();
+        StartGameAnim();
         levelIngame.text = "Level " + (id+1).ToString();
         coinText.text = GlobalControll.Coin.ToString();
+    }
+
+    void StartGameAnim()
+    {
+        LeanTween.alpha(settingCover, 0.4f, 0f);
+        LeanTween.alpha(progressBar, 0f,0f);
+        LeanTween.alpha(imageScore,1f,0f);  
+        var t = progressBar.sizeDelta.y;
+        LeanTween.scale(imageScore, Vector3.one, 0.3f);
+        LeanTween.scale(startBanner.gameObject, Vector3.one, 0.3f).setOnComplete(() =>
+        {
+            LeanTween.alpha(settingCover, 0f, 0.25f).setDelay(0.2f);
+            LeanTween.move(startBanner.gameObject, progressText.transform.position + new Vector3(0f,1f), 0.5f).setDelay(0.45f);
+            LeanTween.move(imageScore.gameObject, progressText.transform.position, 0.5f).setDelay(0.45f).setOnComplete(() =>
+            {
+                LeanTween.alpha(progressBar, 1f, 0.3f);
+                var t2 = imageScore.position.y;
+                LeanTween.value(0f, -250f, 0.3f).setOnUpdate((float f) =>
+                {
+                    imageScore.localPosition = new Vector2(f, t2);
+                });
+                LeanTween.value(0f, 500f, 0.3f).setOnUpdate((float f) =>
+                {
+                    progressBar.sizeDelta = new Vector2(f, t);
+                });
+            });
+            LeanTween.alpha(startBanner.rectTransform, 0f, 0.1f).setDelay(0.75f);
+        });
+        
     }
 
     public void SetProgress(float percen)
@@ -219,6 +252,32 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public IEnumerator BreakPieces(int id, Vector3 des, int score)
+    {
+        des = cameraUI.ScreenToWorldPoint(des);
+        var imageTemp = Instantiate(breakImage,des, Quaternion.identity,transform);
+        yield return null;
+        imageTemp.color = CurrentData.Instance.materialsColor[id].color;
+        imageTemp.GetComponent<TrailRenderer>().material.color = CurrentData.Instance.materialsColor[id].color;
+        List<Vector3> points = new();
+        var t = des;
+        points.Add(t);
+        int r = UnityEngine.Random.Range(0, 2);
+        if (r == 0)
+        {
+            r = -1;
+        } else r = 1;
+        t += new Vector3(1f * r , 0f, 0f);
+        points.Add(t);
+        t += new Vector3(0f, 1f, 0f);
+        points.Add(t);
+        points.Add(progressText.transform.position);
+        yield return null;
+        LeanTween.move(imageTemp.gameObject, points.ToArray(), .5f).setOnComplete(() =>
+        {
+            CurrentData.Instance.UpdateScore(score);
+        }).setDestroyOnComplete(true);
+    }
     public void SetEndGameText(bool isWin)
     {
         if (isWin)
