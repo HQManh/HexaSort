@@ -24,7 +24,7 @@ public class LevelControl : Singleton<LevelControl>
         {
             Destroy(level.gameObject);
         }
-        if(id == GetLevelCounts())
+        if(id >= GetLevelCounts())
         {
             id= 0;
             GlobalControll.CurrentLevelIndex = 0;
