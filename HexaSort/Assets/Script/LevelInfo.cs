@@ -6,8 +6,10 @@ using UnityEngine;
 public class LevelInfo : MonoBehaviour
 {
     public int goalScore;
+    public int maxcolorStart =3;
     public List<PlatformPiece> lockPieces = new();
     public List<PlatformPiece> allPieces = new();
+    public List<int> processes = new();
     int currentIndex = 0;
 
     private void Awake()
@@ -17,6 +19,7 @@ public class LevelInfo : MonoBehaviour
 
     private void Start()
     {
+        CurrentData.Instance.maxColorID = maxcolorStart;
         if(CurrentData.Instance != null)
         {
             CurrentData.freePieces = transform.childCount;
@@ -51,6 +54,15 @@ public class LevelInfo : MonoBehaviour
         {
             lockPieces[currentIndex].Unlock();
             currentIndex++;
+        }
+    }
+
+    public void CheckProcess(int currentScore)
+    {
+        if (currentScore > processes[0])
+        {
+            CurrentData.Instance.maxColorID++;
+            processes.RemoveAt(0); 
         }
     }
     

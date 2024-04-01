@@ -48,6 +48,7 @@ public class CurrentData : MonoBehaviour
         currentProgress += score;
         UIController.Instance.SetProgress((float)(currentProgress) / (float) levelInfo.goalScore);
         levelInfo.CheckUnlock(currentProgress);
+        levelInfo.CheckProcess(currentProgress);
     }
 
     public void StartGame()
