@@ -127,6 +127,7 @@ public class CurrentData : MonoBehaviour
         {
             StartCoroutine(breakList[i].BreakPieceHammer());   
         }
+        UIController.Instance.BacktoGame();
     }
 
 
@@ -136,17 +137,29 @@ public class CurrentData : MonoBehaviour
         StartCoroutine(piecesGenerator.GeneratePieces(true));
     }
 
-    public void CheckAvaiablePlat(bool isIncrease)
+    public void CheckBreak()
     {
-        if (isIncrease)
+        numOfCheck--;
+        //if(numOfCheck == 0)
+        //{
+        //    CheckAvaiablePlat();
+        //}
+    }
+
+
+    public IEnumerator CheckAvaiablePlat()
+    {
+        Debug.Log(numOfCheck);
+        yield return new WaitUntil(() => numOfCheck ==0 && movingStack.Count == 0);
+        int c = 0;
+        foreach(var piece in levelInfo.allPieces)
         {
-            freePieces++;
-        }else freePieces--;
-        //Debug.Log(freePieces);
-        if (freePieces == 0)
-        {
-            StageControl.Instance.End(false);
+            if (piece.pieces.Count == 0)
+                yield break;
+            c++;
         }
+        if (c == levelInfo.allPieces.Count)
+            StageControl.Instance.End(false);
     }
 
     void CheckMoving()
@@ -165,11 +178,9 @@ public class CurrentData : MonoBehaviour
         isStart = true;
         isMove = true;
         MovingPiece piece = movingStack.Pop();
-        Debug.Log(piece.from.id + " " + piece.to.id + " " + piece.amount);
         var f = piece.from;
-        Debug.Log(f.pieces.Count);
         var t = piece.to;
-        if(f.pieces.Count == 0)
+        if(f.pieces.Count < piece.amount)
         {
             yield break;
         }
@@ -225,9 +236,7 @@ public class CurrentData : MonoBehaviour
         //needCheckPieces.Add(t);
         //needCheckPieces.Add(f);
         t.CheckAround();
-        Debug.Log(t.id+ " "+ t.pieces.Count);
         f.CheckAround();
-        Debug.Log(f.id + " " + f.pieces.Count);
         //if (piece.isCheck)
         //{
         //    CheckMovingPiece();
@@ -254,7 +263,6 @@ public class CurrentData : MonoBehaviour
         }
 
     }
-
 
     private void Update()
     {

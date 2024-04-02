@@ -187,8 +187,8 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            endGroup.alpha = 1f;
-            endGroup.blocksRaycasts = true;
+            lostGroup.alpha = 1f;
+            lostGroup.blocksRaycasts = true;
             SetEndGameText(false);
         }
     }
@@ -220,6 +220,14 @@ public class UIController : MonoBehaviour
     public void ShowSettingInGame()
     {
         StartCoroutine(ShowSettingInGameAnim());    
+    }
+
+    public void BacktoGame()
+    {
+        lostGroup.alpha = 0;
+        lostGroup.blocksRaycasts = false;
+        endGroup.alpha = 0;
+        endGroup.blocksRaycasts = false;
     }
 
     IEnumerator ShowSettingInGameAnim()
@@ -278,6 +286,7 @@ public class UIController : MonoBehaviour
             CurrentData.Instance.UpdateScore(score);
         }).setDestroyOnComplete(true);
     }
+
     public void SetEndGameText(bool isWin)
     {
         if (isWin)

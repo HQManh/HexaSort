@@ -19,6 +19,7 @@ public class PlatformPiece : MonoBehaviour
     public Transform container;
     public int id;
     bool currentPick = false;
+    bool isFirst = true;
     MeshRenderer meshRenderer;
 
     private void Start()
@@ -33,7 +34,6 @@ public class PlatformPiece : MonoBehaviour
             else
             {
                 meshRenderer.material = CurrentData.Instance.materialsPlat[2];
-                CurrentData.Instance.CheckAvaiablePlat(false);
             }
         }
     }
@@ -63,7 +63,7 @@ public class PlatformPiece : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (!CurrentData.isHand) return;
+        if (!CurrentData.isHand || !currentPick ) return;
         //if(CurrentData.currenPlat == this) return;
         var mousePos = Input.mousePosition;
         mousePos.z = 10f;
@@ -75,7 +75,7 @@ public class PlatformPiece : MonoBehaviour
     {
         if (CurrentData.isHand)
         {
-            if(CurrentData.currenPlat == null)
+            if (CurrentData.currenPlat == null)
             {
                 container.localPosition = Vector3.zero;
             }
@@ -86,7 +86,7 @@ public class PlatformPiece : MonoBehaviour
                 container.localPosition = Vector3.zero;
                 t.container.parent = transform.parent;
                 t.container.localPosition = Vector3.zero;
-                (container,t.container) = (t.container,container);
+                (container, t.container) = (t.container, container);
                 (pieces, t.pieces) = (t.pieces, pieces);
                 CheckAround();
                 t.CheckAround();
@@ -127,7 +127,6 @@ public class PlatformPiece : MonoBehaviour
 
     public void Unlock()
     {
-        CurrentData.Instance.CheckAvaiablePlat(true);
         platType = PlatType.Open;
         lockState.SetActive(false);
         meshRenderer.material = CurrentData.Instance.materialsPlat[0];
@@ -154,7 +153,6 @@ public class PlatformPiece : MonoBehaviour
     {
         if (CurrentData.isPick)
         {
-            CurrentData.Instance.CheckAvaiablePlat(false);
             var t = CurrentData.currentPick;
             foreach (var temp in t)
             {
@@ -168,6 +166,7 @@ public class PlatformPiece : MonoBehaviour
             CheckAround();
         }
     }
+
 
     public void GetAmount()
     {
@@ -191,7 +190,7 @@ public class PlatformPiece : MonoBehaviour
         GetAmount();
         if (pieces.Count == 0 || numOfColor[pieces[^1].id] < 10)
         {
-            CurrentData.numOfCheck--;
+            CurrentData.Instance.CheckBreak();
             return;
         }
         StartCoroutine(BreakPiece());
@@ -212,7 +211,7 @@ public class PlatformPiece : MonoBehaviour
             yield return new WaitForSeconds(0.08f);
         }
         numOfColor[id] = 0;
-        CurrentData.numOfCheck--;
+        CurrentData.Instance.CheckBreak();
         Vector3 pos = transform.position;
         pos.z = 0;
         pos = Camera.main.WorldToScreenPoint(pos);
@@ -224,7 +223,6 @@ public class PlatformPiece : MonoBehaviour
 
     public IEnumerator BreakPieceHammer()
     {
-        CurrentData.Instance.CheckAvaiablePlat(true);
         int a = pieces.Count;
         breakPieceParticle.Play();
         for (int i=0; i<a; i++)
@@ -241,11 +239,7 @@ public class PlatformPiece : MonoBehaviour
 
     public void CheckAround()
     {
-        if (pieces.Count == 0)
-        {
-            CurrentData.Instance.CheckAvaiablePlat(true);
-            return;
-        }
+        if (pieces.Count == 0) return;
         List<PlatformPiece> nextPieces = LookAround(pieces[^1].id);
         if (nextPieces.Count != 0)
         {
@@ -264,6 +258,10 @@ public class PlatformPiece : MonoBehaviour
                     MoveTripple(nextPieces);
                     break;
             }
+        }
+        else
+        {
+            StartCoroutine(CurrentData.Instance.CheckAvaiablePlat());
         }
     }
 
