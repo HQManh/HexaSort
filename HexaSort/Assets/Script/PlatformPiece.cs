@@ -43,8 +43,8 @@ public class PlatformPiece : MonoBehaviour
         if (CurrentData.isHammer)
         {
             if (pieces.Count == 0) return;
-            CurrentData.isHammer = false;
             StartCoroutine(BreakPieceHammer());
+            UIController.Instance.HideUIIngame(false);
         }
         if(CurrentData.isHand)
         {
@@ -65,8 +65,10 @@ public class PlatformPiece : MonoBehaviour
     {
         if (!CurrentData.isHand) return;
         //if(CurrentData.currenPlat == this) return;
-        var t = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        container.position = (Vector2)t;
+        var mousePos = Input.mousePosition;
+        mousePos.z = 10f;
+        var t = Camera.main.ScreenToWorldPoint(mousePos);
+        container.position = t;
     }
 
     private void OnMouseUp()
@@ -86,10 +88,10 @@ public class PlatformPiece : MonoBehaviour
                 t.container.localPosition = Vector3.zero;
                 (container,t.container) = (t.container,container);
                 (pieces, t.pieces) = (t.pieces, pieces);
-                CurrentData.isHand = false;
                 CheckAround();
                 t.CheckAround();
             }
+            UIController.Instance.HideUIIngame(false);
         }
     }
 

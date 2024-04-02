@@ -33,7 +33,7 @@ Copyright (c)2001 Robert Penner
 All rights reserved.
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materialsColor provided with the distribution.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 Neither the name of the author nor the names of contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
@@ -197,7 +197,7 @@ public enum TweenAction{
     CANVAS_SCALE,
     CANVAS_SIZEDELTA,
     FOLLOW,
-    NONE
+
 }
 
 public enum LeanTweenType{
@@ -339,7 +339,6 @@ public class LeanTween : MonoBehaviour {
             #endif
             for(int i = 0; i < maxTweens; i++){
                 tweens[i] = new LTDescr();
-                tweens[i].reset();
             }
 
             #if UNITY_5_4_OR_NEWER
@@ -358,7 +357,7 @@ public class LeanTween : MonoBehaviour {
         if(tweens!=null){
             for (int i = 0; i <= tweenMaxSearch; i++){
                 if(tweens[i]!=null)
-                    tweens[i].reset();
+                    tweens[i].toggle = false;
             }
         }
         tweens = null;
@@ -428,34 +427,9 @@ public class LeanTween : MonoBehaviour {
 
                 if (tween.id == tweensFinishedIds[i]){
                     //              Debug.Log("removing tween:"+tween);
-
-                    if (tween.hasExtraOnCompletes && tween.trans != null)
-                    {
-                        var onComplete = tween._optional.onComplete;
-                        var param = tween._optional.onCompleteParam;
-                        var onCompletObject = tween._optional.onCompleteObject;
-
-                        removeTween(j);
-                        if (onComplete != null){
-                            onComplete();
-                        } else if (onCompletObject != null) {
-                            onCompletObject(param);
-                        }
-                    } else if (tween.type == TweenAction.GUI_ROTATE || tween.type == TweenAction.GUI_ROTATE) {
-                        var ltRect = tween._optional.ltRect;
-                        var onCompleteParam = (AudioClip)tween._optional.onCompleteParam;
-                        var to = tween.to;
-                        var vol = tween.from.x;
-
-                        removeTween(j);
-                        if (tween.type == TweenAction.GUI_ROTATE)
-                            ltRect.rotateFinished = true;
-                        if (tween.type == TweenAction.DELAYED_SOUND)
-                            AudioSource.PlayClipAtPoint(onCompleteParam, to, vol);
-                    }else {
-                        removeTween(j);
-                    }
-                        
+                    removeTween(j);
+                    if(tween.hasExtraOnCompletes && tween.trans!=null)
+                        tween.callOnCompletes();
                 }
             }
 
@@ -471,25 +445,22 @@ public class LeanTween : MonoBehaviour {
     }
 
     // This method is only used internally! Do not call this from your scripts. To cancel a tween use LeanTween.cancel
-    public static void removeTween( int i, bool shouldReset = true ){
+    public static void removeTween( int i ){
         if(tweens[i].toggle){
-            tween = tweens[i];
-            tween.counter = uint.MaxValue;
+            tweens[i].toggle = false;
+            tweens[i].counter = uint.MaxValue;
             //logError("Removing tween["+i+"]:"+tweens[i]);
-            if(tween.destroyOnComplete){
+            if(tweens[i].destroyOnComplete){
 //              Debug.Log("destroying tween.type:"+tween.type+" ltRect"+(tweens[i]._optional.ltRect==null));
-                if(tween._optional.ltRect!=null){
+                if(tweens[i]._optional.ltRect!=null){
                     //  Debug.Log("destroy i:"+i+" id:"+tweens[i].ltRect.id);
-                    LTGUI.destroy( tween._optional.ltRect.id );
+                    LTGUI.destroy( tweens[i]._optional.ltRect.id );
                 }else{ // check if equal to tweenEmpty
-                    if(tween.trans!=null && tween.trans.gameObject!=_tweenEmpty){
-                        Destroy(tween.trans.gameObject);
+                    if(tweens[i].trans!=null && tweens[i].trans.gameObject!=_tweenEmpty){
+                        Destroy(tweens[i].trans.gameObject);
                     }
                 }
             }
-            if(shouldReset)
-                tween.reset();
-
             //tweens[i].optional = null;
             startSearch = i;
             //Debug.Log("start search reset:"+startSearch + " i:"+i+" tweenMaxSearch:"+tweenMaxSearch);
@@ -561,19 +532,15 @@ public class LeanTween : MonoBehaviour {
     public static void cancel( GameObject gameObject ){
         cancel( gameObject, false);
     }
-    public static void cancel( GameObject gameObject, bool callOnComplete, TweenAction matchType = TweenAction.NONE ){
+    public static void cancel( GameObject gameObject, bool callOnComplete ){
         init();
         Transform trans = gameObject.transform;
         for(int i = 0; i <= tweenMaxSearch; i++){
             LTDescr tween = tweens[i];
-            if (matchType == TweenAction.NONE || matchType == tween.type) // only match the type if it is specified to a value other than none
-            {
-                if (tween != null && tween.toggle && tween.trans == trans)
-                {
-                    if (callOnComplete && tween.optional.onComplete != null)
-                        tween.optional.onComplete();
-                    removeTween(i);
-                }
+            if(tween!=null && tween.toggle && tween.trans==trans){
+                if (callOnComplete && tween.optional.onComplete != null)
+                    tween.optional.onComplete();
+                removeTween(i);
             }
         }
     }
@@ -581,6 +548,17 @@ public class LeanTween : MonoBehaviour {
     public static void cancel( RectTransform rect ){
         cancel( rect.gameObject, false);
     }
+
+//  public static void cancel( GameObject gameObject, int uniqueId ){
+//      if(uniqueId>=0){
+//          init();
+//          int backId = uniqueId & 0xFFFF;
+//          int backCounter = uniqueId >> 16;
+//          // Debug.Log("uniqueId:"+uniqueId+ " id:"+backId +" counter:"+backCounter + " setCounter:"+ tweens[backId].counter + " tweens[id].type:"+tweens[backId].type);
+//          if(tweens[backId].trans==null || (tweens[backId].trans.gameObject == gameObject && tweens[backId].counter==backCounter))
+//              removeTween((int)backId);
+//      }
+//  }
 
     public static void cancel( GameObject gameObject, int uniqueId, bool callOnComplete = false ){
         if(uniqueId>=0){
@@ -1003,6 +981,7 @@ public class LeanTween : MonoBehaviour {
             logError("no available tween found!");
 
         // Debug.Log("new tween with i:"+i+" counter:"+tweens[i].counter+" tweenMaxSearch:"+tweenMaxSearch+" tween:"+tweens[i]);
+        tweens[i].reset();
 
         global_counter++;
         if(global_counter>0x8000)
@@ -1029,7 +1008,6 @@ public class LeanTween : MonoBehaviour {
         if(gameObject==null || tween==null)
             return null;
 
-        tween.toggle = true;
         tween.trans = gameObject.transform;
         tween.to = to;
         tween.time = time;
@@ -1259,8 +1237,7 @@ public class LeanTween : MonoBehaviour {
     }
 
     public static LTDescr delayedCall( GameObject gameObject, float delayTime, Action callback){
-        var opt = options().setCallback().setOnComplete(callback);
-        return pushNewTween( gameObject, Vector3.zero, delayTime, opt );
+        return pushNewTween( gameObject, Vector3.zero, delayTime, options().setCallback().setOnComplete(callback) );
     }
 
     public static LTDescr delayedCall( GameObject gameObject, float delayTime, Action<object> callback){
@@ -1287,8 +1264,7 @@ public class LeanTween : MonoBehaviour {
     * @example LeanTween.move(gameObject, new Vector3(0f,-3f,5f), 2.0f) .setEase( LeanTweenType.easeOutQuad );
     */
     public static LTDescr move(GameObject gameObject, Vector3 to, float time){
-        var opt = options().setMove();
-        return pushNewTween( gameObject, to, time, opt);
+        return pushNewTween( gameObject, to, time, options().setMove() );
     }
     public static LTDescr move(GameObject gameObject, Vector2 to, float time){
         return pushNewTween( gameObject, new Vector3(to.x, to.y, gameObject.transform.position.z), time, options().setMove() );
@@ -1462,8 +1438,7 @@ public class LeanTween : MonoBehaviour {
     * @return {LTDescr} LTDescr an object that distinguishes the tween
     */
     public static LTDescr moveLocal(GameObject gameObject, Vector3 to, float time){
-        var opt = options().setMoveLocal();
-        return pushNewTween( gameObject, to, time, opt);
+        return pushNewTween( gameObject, to, time, options().setMoveLocal() );
     }
 
     /**

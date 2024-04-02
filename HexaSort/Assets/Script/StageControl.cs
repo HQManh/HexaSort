@@ -70,14 +70,14 @@ public class StageControl : MonoBehaviour
     {
         if (isWin)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(.1f);
             GlobalControll.CurrentLevelIndex++;
             //PlayerPrefs.SetInt("CurrentLevelIndex", GlobalControll.CurrentLevelIndex);
             StartCoroutine(CoEndUI(isWin));
         }
         else
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.1f);
             StartCoroutine(CoEndUI(isWin));
         }
     }

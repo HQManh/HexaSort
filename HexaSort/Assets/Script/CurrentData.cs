@@ -132,6 +132,7 @@ public class CurrentData : MonoBehaviour
 
     public void SwapBooster()
     {
+        numPiece.Clear();
         StartCoroutine(piecesGenerator.GeneratePieces(true));
     }
 

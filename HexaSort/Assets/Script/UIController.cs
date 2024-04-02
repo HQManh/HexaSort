@@ -305,42 +305,49 @@ public class UIController : MonoBehaviour
 
     public void HammerBooster()
     {
-        if(GlobalControll.Hammer == 0)
-        {
+        //if(GlobalControll.Hammer == 0)
+        //{
 
-        }
-        else
-        {
-            CurrentData.isHammer = true;
-            hammer.SetActive(true);
-            HideUIIngame(true);
-        }
+        //}
+        //else
+        //{
+        //    CurrentData.isHammer = true;
+        //    hammer.SetActive(true);
+        //    HideUIIngame(true);
+        //}
+        CurrentData.isHammer = true;
+        hammer.SetActive(true);
+        HideUIIngame(true);
     }
 
     public void HandBooster()
     {
-        if(GlobalControll.Hand == 0)
-        {
+        //if(GlobalControll.Hand == 0)
+        //{
 
-        }
-        else
-        {
-            CurrentData.isHand = true;
-            swap.SetActive(true);
-            HideUIIngame(true);
-        }
+        //}
+        //else
+        //{
+        //    CurrentData.isHand = true;
+        //    swap.SetActive(true);
+        //    HideUIIngame(true);
+        //}
+        CurrentData.isHand = true;
+        swap.SetActive(true);
+        HideUIIngame(true);
     }
 
     public void SwapBooster()
     {
-        if(GlobalControll.Swap ==0)
-        {
+        //if(GlobalControll.Swap ==0)
+        //{
 
-        }
-        else
-        {
-            CurrentData.Instance.SwapBooster();
-        }
+        //}
+        //else
+        //{
+        //    CurrentData.Instance.SwapBooster();
+        //}
+        CurrentData.Instance.SwapBooster();
     }
 
     public void HideUIIngame(bool isHide)

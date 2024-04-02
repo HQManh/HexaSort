@@ -25,7 +25,8 @@ public class Pieces : MonoBehaviour
     private void OnMouseDrag()
     {
         var mousePos = Input.mousePosition;
-        var t = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y,10f));
+        mousePos.z = 10f;
+        var t = Camera.main.ScreenToWorldPoint(mousePos);
         transform.position = t;
     }
 

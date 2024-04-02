@@ -18,7 +18,7 @@ public class BoosterControl : MonoBehaviour
     public void SetUpBooster()
     {
         int i = GlobalControll.Hammer;
-        if(GlobalControll.CurrentLevelIndex <3)
+        if (GlobalControll.CurrentLevelIndex < -1)
         {
             hammer.transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -27,7 +27,9 @@ public class BoosterControl : MonoBehaviour
             hammer.transform.GetChild(0).gameObject.SetActive(true);
             if (i == 0)
             {
-                priceHammer.SetActive(true);
+                hammerText.text = i.ToString();
+                hammerText.transform.parent.gameObject.SetActive(true);
+                //priceHammer.SetActive(true);
             }
             else
             {
@@ -37,7 +39,7 @@ public class BoosterControl : MonoBehaviour
             }
         }
         i = GlobalControll.Swap;
-        if (GlobalControll.CurrentLevelIndex < 5)
+        if (GlobalControll.CurrentLevelIndex < -1)
         {
             swap.transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -46,7 +48,9 @@ public class BoosterControl : MonoBehaviour
             swap.transform.GetChild(0).gameObject.SetActive(true);
             if (i == 0)
             {
-                priceSwap.SetActive(true);
+                swapText.text = i.ToString();
+                swapText.transform.parent.gameObject.SetActive(true);
+                //priceSwap.SetActive(true);
             }
             else
             {
@@ -55,7 +59,7 @@ public class BoosterControl : MonoBehaviour
             }
         }
         i = GlobalControll.Hand;
-        if (GlobalControll.CurrentLevelIndex < 8)
+        if (GlobalControll.CurrentLevelIndex < -1)
         {
             hand.transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -64,7 +68,9 @@ public class BoosterControl : MonoBehaviour
             hand.transform.GetChild(0).gameObject.SetActive(true);
             if (i == 0)
             {
-                priceHand.SetActive(true);
+                handText.text = i.ToString();
+                handText.transform.parent.gameObject.SetActive(true);
+                //priceHand.SetActive(true);
             }
             else
             {

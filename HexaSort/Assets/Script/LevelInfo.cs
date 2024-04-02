@@ -59,6 +59,7 @@ public class LevelInfo : MonoBehaviour
 
     public void CheckProcess(int currentScore)
     {
+        if(processes.Count ==0) return;
         if (currentScore > processes[0])
         {
             CurrentData.Instance.maxColorID++;

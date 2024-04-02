@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goalScore: 200
+  maxcolorStart: 3
   lockPieces: []
   allPieces:
   - {fileID: 4882028095409708375}
@@ -117,6 +118,7 @@ MonoBehaviour:
   - {fileID: 2378786126073777227}
   - {fileID: 6415351835404039637}
   - {fileID: 7725109113219175670}
+  processes: 46000000
 --- !u!1001 &432047618925060046
 PrefabInstance:
   m_ObjectHideFlags: 0
