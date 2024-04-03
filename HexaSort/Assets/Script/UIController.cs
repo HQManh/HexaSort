@@ -43,11 +43,14 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI coinText;
     bool isSettingOn = false;
     [Header("EndUI")]
+    public ParticleSystem confetti;
     public CanvasGroup endGroup;
     public CanvasGroup lostGroup;
     public CanvasGroup winGroup;
     public TextMeshProUGUI textLevelEndGame;
     public TextMeshProUGUI pieceGet;
+    public TextMeshProUGUI coinGet;
+    public TextMeshProUGUI pigGet;
 
     private void Awake()
     {
@@ -172,7 +175,7 @@ public class UIController : MonoBehaviour
 
     public void ShowConfetti()
     {
-
+        confetti.Play();
     }
 
     public void ShowEndGame(bool isWin)
@@ -183,6 +186,7 @@ public class UIController : MonoBehaviour
         {
             winGroup.alpha = 1f;
             winGroup.blocksRaycasts = true;
+            LeanTween.scale(winGroup.gameObject, Vector3.one, 0.2f).setEaseOutBounce();
             SetEndGameText(true);
         }
         else
@@ -292,13 +296,35 @@ public class UIController : MonoBehaviour
         if (isWin)
         {
             textLevelEndGame.text = "LEVEL " + (GlobalControll.CurrentLevelIndex + 1).ToString() + " COMPLETED";
-            pieceGet.text = CurrentData.Instance.currentProgress.ToString();
+            AnimateText(coinGet, 5f);
+            AnimateText(pigGet, 15f);
+            AnimateText(pieceGet, CurrentData.Instance.currentProgress);
         }
         else
         {
 
         }
     }
+
+    void AnimateText(TextMeshProUGUI text, float value)
+    {
+        LeanTween.value(0f, value, .5f).setOnUpdate((float f) =>
+        {
+            int t = (int)f;
+            text.text = t.ToString();
+        }).setOnComplete(() =>
+        {
+            LeanTween.scale(text.gameObject, Vector3.one * 1.2f, 0.2f).setOnComplete(() =>
+            {
+                LeanTween.scale(text.gameObject, Vector3.one, 0.2f).setOnComplete(() =>
+                {
+                    var t = text.gameObject.GetComponentInChildren<ParticleSystem>();
+                    t.Play();
+                });
+            });
+        });
+    }
+
 
     public void FadeHoldCover(bool isFade)
     {
@@ -374,16 +400,6 @@ public class UIController : MonoBehaviour
             hammer.SetActive(false);
             CurrentData.isHammer = false;
             CurrentData.isHand = false;
-        }
-    }
-
-
-    public void EndGameUI(bool isWin)
-    {
-        LeanTween.alphaCanvas(endGroup, 1f, 0.2f);
-        if (isWin)
-        {
-
         }
     }
 }

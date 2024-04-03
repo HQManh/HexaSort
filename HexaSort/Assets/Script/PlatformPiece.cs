@@ -19,7 +19,6 @@ public class PlatformPiece : MonoBehaviour
     public Transform container;
     public int id;
     bool currentPick = false;
-    bool isFirst = true;
     MeshRenderer meshRenderer;
 
     private void Start()
@@ -83,8 +82,8 @@ public class PlatformPiece : MonoBehaviour
             {
                 var t = CurrentData.currenPlat;
                 container.parent = t.transform.parent;
-                container.localPosition = Vector3.zero;
                 t.container.parent = transform.parent;
+                container.localPosition = Vector3.zero;
                 t.container.localPosition = Vector3.zero;
                 (container, t.container) = (t.container, container);
                 (pieces, t.pieces) = (t.pieces, pieces);

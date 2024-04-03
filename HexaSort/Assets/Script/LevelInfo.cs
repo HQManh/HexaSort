@@ -104,4 +104,17 @@ public class LevelInfo : MonoBehaviour
         }
         return platinfo;
     }
+
+    public void EndGameAnim()
+    {
+        LeanTween.rotateAroundLocal(gameObject, Vector3.forward, 40f, 10f);
+        LeanTween.scale(gameObject, Vector3.one * 0.8f, 1.5f);
+        foreach(PlatformPiece piece in allPieces)
+        {
+            if(piece.pieces.Count != 0)
+            {
+                StartCoroutine(piece.BreakPieceHammer());
+            }
+        }
+    }
 }

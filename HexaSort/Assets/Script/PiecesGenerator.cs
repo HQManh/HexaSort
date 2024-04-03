@@ -11,7 +11,7 @@ public class PiecesGenerator : MonoBehaviour
     [SerializeField]
     GameObject piecePre;
     [SerializeField]
-    Transform piecePos;
+    public Transform piecePos;
 
     public class PieceDetail
     {

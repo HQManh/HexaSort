@@ -64,13 +64,15 @@ public class StageControl : MonoBehaviour
     public void End(bool isWin)
     {
         StartCoroutine(CoEnd(isWin));
+
     }
 
     IEnumerator CoEnd(bool isWin)
     {
         if (isWin)
         {
-            yield return new WaitForSeconds(.1f);
+            CurrentData.Instance.EndGameAnim();
+            yield return new WaitForSeconds(1f);
             GlobalControll.CurrentLevelIndex++;
             //PlayerPrefs.SetInt("CurrentLevelIndex", GlobalControll.CurrentLevelIndex);
             StartCoroutine(CoEndUI(isWin));
@@ -87,7 +89,7 @@ public class StageControl : MonoBehaviour
         if (isWin)
         {
             UIController.Instance.ShowConfetti();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(2f);
             UIController.Instance.ShowEndGame(true);
         }else
         {

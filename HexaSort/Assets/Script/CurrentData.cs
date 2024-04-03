@@ -51,6 +51,14 @@ public class CurrentData : MonoBehaviour
         levelInfo.CheckProcess(currentProgress);
     }
 
+    
+    public void EndGameAnim()
+    {
+        levelInfo.EndGameAnim();
+        piecesGenerator.piecePos.gameObject.SetActive(false);
+        UIController.Instance.HideUIIngame(true);
+    }
+
     public void StartGame()
     {
         numPiece.Clear();
@@ -159,7 +167,11 @@ public class CurrentData : MonoBehaviour
             c++;
         }
         if (c == levelInfo.allPieces.Count)
+        {
             StageControl.Instance.End(false);
+            yield return null;
+        }
+
     }
 
     void CheckMoving()
