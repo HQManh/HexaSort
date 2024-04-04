@@ -107,7 +107,7 @@ public class LevelInfo : MonoBehaviour
 
     public void EndGameAnim()
     {
-        LeanTween.rotateAroundLocal(gameObject, Vector3.forward, 40f, 10f);
+        LeanTween.rotateAroundLocal(gameObject, Vector3.forward, 100f, 5f);
         LeanTween.scale(gameObject, Vector3.one * 0.8f, 1.5f);
         foreach(PlatformPiece piece in allPieces)
         {

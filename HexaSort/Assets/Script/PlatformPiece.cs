@@ -207,7 +207,7 @@ public class PlatformPiece : MonoBehaviour
             var t = pieces[^1];
             pieces.RemoveAt(pieces.Count - 1);
             CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
-            yield return new WaitForSeconds(0.08f);
+            yield return new WaitForSeconds(0.04f);
         }
         numOfColor[id] = 0;
         CurrentData.Instance.CheckBreak();
@@ -223,13 +223,14 @@ public class PlatformPiece : MonoBehaviour
     public IEnumerator BreakPieceHammer()
     {
         int a = pieces.Count;
+        if (a == 0) yield break;
         breakPieceParticle.Play();
         for (int i=0; i<a; i++)
         {
             var t = pieces[^1];
             pieces.RemoveAt(pieces.Count -1);
             CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
-            yield return new WaitForSeconds(0.08f);
+            yield return new WaitForSeconds(0.04f);
         }
         numOfColor.Clear();
         yield return null;
@@ -257,10 +258,6 @@ public class PlatformPiece : MonoBehaviour
                     MoveTripple(nextPieces);
                     break;
             }
-        }
-        else
-        {
-            StartCoroutine(CurrentData.Instance.CheckAvaiablePlat());
         }
     }
 

@@ -33,10 +33,14 @@ public class CurrentData : MonoBehaviour
     public static bool isHand = false;
     bool isStart = false;
     public static List<PlatformPiece> needCheckPieces = new();
+    int timeReive = 0;
     [SerializeField]
     PiecesGenerator piecesGenerator;
     [SerializeField]
     public Transform progressBar;
+    [SerializeField]
+    public GameObject breakObject;
+    bool isEnd = false;
 
     private void Awake()
     {
@@ -62,6 +66,7 @@ public class CurrentData : MonoBehaviour
     public void StartGame()
     {
         numPiece.Clear();
+        isEnd = false;
         StartCoroutine(piecesGenerator.GeneratePieces(false));
     }
 
@@ -85,7 +90,9 @@ public class CurrentData : MonoBehaviour
         return ids;
     }
 
-    public void BreakPlat(int numOfBreak)
+
+
+    public IEnumerator BreakPlat(int numOfBreak)
     {
         List<int> piecesHead = GetPiecesHead();
         List<PlatformPiece> currentPieces = levelInfo.allPieces;
@@ -133,9 +140,14 @@ public class CurrentData : MonoBehaviour
         }
         for(int i=0;i< numOfBreak; i++)
         {
-            StartCoroutine(breakList[i].BreakPieceHammer());   
+            var t = Instantiate(breakObject);
+            LeanTween.move(t, breakList[i].transform.position, .8f).setOnComplete(() =>
+            {
+                StartCoroutine(breakList[i].BreakPieceHammer());
+            });
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f,0.5f));
         }
-        UIController.Instance.BacktoGame();
+        yield return null;
     }
 
 
@@ -157,17 +169,19 @@ public class CurrentData : MonoBehaviour
 
     public IEnumerator CheckAvaiablePlat()
     {
-        Debug.Log(numOfCheck);
+        if(isEnd)  yield break;
         yield return new WaitUntil(() => numOfCheck ==0 && movingStack.Count == 0);
         int c = 0;
         foreach(var piece in levelInfo.allPieces)
         {
-            if (piece.pieces.Count == 0)
+            if (piece.pieces.Count == 0 || piece.platType != PlatType.Open)
                 yield break;
             c++;
         }
         if (c == levelInfo.allPieces.Count)
         {
+            Debug.Log("End");
+            isEnd = true;
             StageControl.Instance.End(false);
             yield return null;
         }

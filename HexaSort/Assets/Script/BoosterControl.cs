@@ -18,7 +18,7 @@ public class BoosterControl : MonoBehaviour
     public void SetUpBooster()
     {
         int i = GlobalControll.Hammer;
-        if (GlobalControll.CurrentLevelIndex < -1)
+        if (GlobalControll.CurrentLevelIndex < 3)
         {
             hammer.transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -28,8 +28,8 @@ public class BoosterControl : MonoBehaviour
             if (i == 0)
             {
                 hammerText.text = i.ToString();
-                hammerText.transform.parent.gameObject.SetActive(true);
-                //priceHammer.SetActive(true);
+                //hammerText.transform.parent.gameObject.SetActive(true);
+                priceHammer.SetActive(true);
             }
             else
             {
@@ -39,7 +39,7 @@ public class BoosterControl : MonoBehaviour
             }
         }
         i = GlobalControll.Swap;
-        if (GlobalControll.CurrentLevelIndex < -1)
+        if (GlobalControll.CurrentLevelIndex < 5)
         {
             swap.transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -49,8 +49,8 @@ public class BoosterControl : MonoBehaviour
             if (i == 0)
             {
                 swapText.text = i.ToString();
-                swapText.transform.parent.gameObject.SetActive(true);
-                //priceSwap.SetActive(true);
+                //swapText.transform.parent.gameObject.SetActive(true);
+                priceSwap.SetActive(true);
             }
             else
             {
@@ -59,7 +59,7 @@ public class BoosterControl : MonoBehaviour
             }
         }
         i = GlobalControll.Hand;
-        if (GlobalControll.CurrentLevelIndex < -1)
+        if (GlobalControll.CurrentLevelIndex < 8)
         {
             hand.transform.GetChild(1).gameObject.SetActive(true);
         }
@@ -69,8 +69,8 @@ public class BoosterControl : MonoBehaviour
             if (i == 0)
             {
                 handText.text = i.ToString();
-                handText.transform.parent.gameObject.SetActive(true);
-                //priceHand.SetActive(true);
+                //handText.transform.parent.gameObject.SetActive(true);
+                priceHand.SetActive(true);
             }
             else
             {

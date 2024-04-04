@@ -18,6 +18,7 @@ public class GlobalControll : MonoBehaviour
 
     private void Awake()
     {
+        PlayerPrefs.SetInt("Coin", 1000);
         Coin = PlayerPrefs.GetInt("Coin", 0);
         Hammer = PlayerPrefs.GetInt("Hammer", 0);
         Hand = PlayerPrefs.GetInt("Hand", 0);

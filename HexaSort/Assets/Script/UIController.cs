@@ -51,6 +51,10 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI pieceGet;
     public TextMeshProUGUI coinGet;
     public TextMeshProUGUI pigGet;
+    public TextMeshProUGUI needPieceText;
+    public TextMeshProUGUI reviveCoinText;
+    bool isWatchRevive = false;
+    int numRevive = 0;
 
     private void Awake()
     {
@@ -145,15 +149,27 @@ public class UIController : MonoBehaviour
 
     public void UpdateCoin(int previousValue, int value, float duration = 1f)
     {
-        LeanTween.cancel(coinText.gameObject);
-        LeanTween.scale(coinText.gameObject, Vector3.one * 1.5f, 0.05f).setOnComplete(() =>
+        TextMeshProUGUI t = new();
+        switch (GlobalControll.CurrentStage)
         {
-            LeanTween.scale(coinText.gameObject, Vector3.one, 0.25f);
+            case ScreenStage.Home:
+                t = coinTextMenu;
+                break;
+            case ScreenStage.InGame:
+                t = coinText;
+                break;
+        }
+
+        LeanTween.cancel(t.gameObject);
+        LeanTween.scale(t.gameObject, Vector3.one * 1.5f, 0.05f).setOnComplete(() =>
+        {
+            LeanTween.scale(t.gameObject, Vector3.one, 0.25f);
         });
 
         LeanTween.value(previousValue, previousValue + value, duration).setOnUpdate((float value) =>
         {
-            coinText.text = value.ToString();
+            int v = (int)value;
+            t.text = v.ToString();
         });
 
         GlobalControll.Coin = previousValue + value;
@@ -302,7 +318,48 @@ public class UIController : MonoBehaviour
         }
         else
         {
+            numRevive++;
+            if (numRevive >= 4)
+            {
+                reviveCoinText.text = "400";
+            }
+            else
+            {
+                reviveCoinText.text = (numRevive * 100).ToString();
+            }
+            needPieceText.text = (CurrentData.levelInfo.goalScore - CurrentData.Instance.currentProgress).ToString();
+        }
+    }
 
+
+    public void Revive(bool isCoin)
+    {
+        if (isCoin)
+        {
+            int coinNeed;
+            if (numRevive >= 4)
+            {
+                coinNeed = 400;
+            }
+            else
+            {
+                coinNeed = numRevive * 100;
+            }
+            if(GlobalControll.Coin < coinNeed)
+            {
+
+            }
+            else
+            {
+                UpdateCoin(GlobalControll.Coin, - coinNeed);
+                StartCoroutine(CurrentData.Instance.BreakPlat(4));
+                BacktoGame();
+            }
+        }
+        else
+        {
+            StartCoroutine(CurrentData.Instance.BreakPlat(2));
+            BacktoGame();
         }
     }
 
@@ -340,49 +397,70 @@ public class UIController : MonoBehaviour
 
     public void HammerBooster()
     {
-        //if(GlobalControll.Hammer == 0)
-        //{
-
-        //}
-        //else
-        //{
-        //    CurrentData.isHammer = true;
-        //    hammer.SetActive(true);
-        //    HideUIIngame(true);
-        //}
-        CurrentData.isHammer = true;
-        hammer.SetActive(true);
-        HideUIIngame(true);
+        if (GlobalControll.Hammer == 0)
+        {
+            if(GlobalControll.Coin >= 25)
+            {
+                UpdateCoin(GlobalControll.Coin, -25);
+                CurrentData.isHammer = true;
+                hammer.SetActive(true);
+                HideUIIngame(true);
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            CurrentData.isHammer = true;
+            hammer.SetActive(true);
+            HideUIIngame(true);
+        }
     }
 
     public void HandBooster()
     {
-        //if(GlobalControll.Hand == 0)
-        //{
-
-        //}
-        //else
-        //{
-        //    CurrentData.isHand = true;
-        //    swap.SetActive(true);
-        //    HideUIIngame(true);
-        //}
-        CurrentData.isHand = true;
-        swap.SetActive(true);
-        HideUIIngame(true);
+        if (GlobalControll.Hand == 0)
+        {
+            if (GlobalControll.Coin >= 50)
+            {
+                UpdateCoin(GlobalControll.Coin, -50);
+                CurrentData.isHand = true;
+                swap.SetActive(true);
+                HideUIIngame(true);
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            CurrentData.isHand = true;
+            swap.SetActive(true);
+            HideUIIngame(true);
+        }
     }
 
     public void SwapBooster()
     {
-        //if(GlobalControll.Swap ==0)
-        //{
-
-        //}
-        //else
-        //{
-        //    CurrentData.Instance.SwapBooster();
-        //}
-        CurrentData.Instance.SwapBooster();
+        if (GlobalControll.Swap == 0)
+        {
+            if(GlobalControll.Coin >= 10)
+            {
+                UpdateCoin(GlobalControll.Coin, -10);
+                CurrentData.Instance.SwapBooster();
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            CurrentData.Instance.SwapBooster();
+        }
     }
 
     public void HideUIIngame(bool isHide)
