@@ -1,0 +1,959 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>SaveIsEasyDLL</name>
+  </assembly>
+  <members>
+    <member name="T:SaveIsEasy.SaveIsEasyException">
+      <summary>
+            To handle all internals errors
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyException.#ctor">
+      <summary>
+            Exception derived constructor
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyException.#ctor(System.String,System.Exception)">
+      <summary>
+            Exception derived constructor
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyException.#ctor(System.String)">
+      <summary>
+            Exception derived constructor
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SaveIsEasyDebug">
+      <summary>
+            Class designed to handle the save is easy debug
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SaveIsEasyDebug.EnableDebug">
+      <summary>
+            To turn on and off the debug from save is easy to Unity3D
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.Adapter.AdapterAttribute">
+      <summary>
+            Some unity components are very complicated for SaveIsEasy to save them and load them correctly,
+            so the asset has adapters, it allows you to save more complicated components, such as animations,
+            it is designed so that the user can create adapters according to their needs.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.Adapter.AdapterAttribute.AdapterFor">
+      <summary>
+            To know what component it modifies and allows it to be saved and loaded
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.Adapter.AdapterAttribute.ShowInnerFields">
+      <summary>
+            The SaveIsEasyComponent should allow the fields of the component being adapted to be displayed
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.Adapter.AdapterAttribute.#ctor(System.Type,System.Boolean)">
+      <summary>
+            The component that has this attribute will work as an adapter for another component
+            </summary>
+      <param name="adapterFor">To know what component it modifies and allows it to be saved and loaded</param>
+      <param name="showInnerFields">The SaveIsEasyComponent should allow the fields of the component being adapted to be displayed</param>
+    </member>
+    <member name="T:SaveIsEasy.SaveIsEasyAPI">
+      <summary>
+        <b>This is the main asset class</b>, with this class you can Save/Load the game, along with a variety of options.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.GetSaveIsEasyManagerByScene(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            Is going to look for the 'SaveIsEasyManager' in charge of managing the scene, the scene has to be loaded.
+            </summary>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+      <returns>The corresponding manager of the scene or null if there is no valid one.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.GetEncryptionConfigByScene(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            Returns the current configuration of the encryption system in the specified scene.
+            </summary>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+      <returns>The encryption configuration.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.GetSceneConfigByScene(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            Get the object in charge of managing the configuration for the level in the specified scene
+            </summary>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+      <returns>The object that is in charge of managing the configuration for the level</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.GetSceneFileNameByScene(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To get the name of the file to save in the specified scene
+            </summary>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+      <returns>The filename as absolute path or relative, examples: 'level1', 'test/level3', 'C:/Test/level4', On error return null</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SetSceneFileNameByScene(System.String,UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To set the name of the file to save in the specified scene
+            </summary>
+      <param name="value">The file, Supports absolute and relative formats, examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.IsSaveIsEasyManagerValidByScene(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            In the scene is there a 'SaveIsEasyManager' and is it enabled and active?
+            </summary>
+      <param name="scene">In the scene where it is going to check.</param>
+      <returns>True is valid and enabled, False it is not valid</returns>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.MinimumVersionSupportedOfUnity">
+      <summary>
+            The minimum supported version of unity for the asset to work correctly.
+            In the Asset Store you can download a distribution for older versions of unity.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.SaveIsEasyManager">
+      <summary>
+            Get the actual SaveIsEasyManager
+            </summary>
+      <returns>SaveIsEasyComponent or null</returns>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.IsSaveIsEasyManagerValid">
+      <summary>
+            In the scene is there a 'SaveIsEasyManager' and is it enabled?
+            </summary>
+      <returns>True is valid and enabled, False it is not valid</returns>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.SaveFolderPath">
+      <summary>
+            To get the default save folder path
+            </summary>
+      <returns>The default save folder path</returns>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.EncryptionConfig">
+      <summary>
+            Returns the current configuration of the encryption system.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.SceneConfig">
+      <summary>
+            Get the object in charge of managing the configuration for the level
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.SceneFileName">
+      <summary>
+            The name of the file to save, 
+            On set: Only numbers and letters, example: 'level1' and cannot be empty
+            On get: The filename only, example: 'level1', On error return null
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.IsLoaded">
+      <summary>
+            To see if the level is loaded
+            </summary>
+      <returns>If the level is loaded</returns>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.IsSaved">
+      <summary>
+            To see if the level is saved
+            </summary>
+      <returns>If the level is saved</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.PrefabInstantiate(UnityEngine.GameObject)">
+      <summary>
+            Obsolete, You don't need to use this anymore, you can instance directly using unity API, UnityEngine.Object.Instantiate(Object original)
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.PrefabInstantiate(UnityEngine.GameObject,UnityEngine.Vector3,UnityEngine.Quaternion)">
+      <summary>
+            Obsolete, You don't need to use this anymore, you can instance directly using unity API, UnityEngine.Object.Instantiate(Object original)
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.PrefabInstantiate(UnityEngine.GameObject,UnityEngine.Transform)">
+      <summary>
+            Obsolete, "You don't need to use this anymore, you can instance directly using unity API, UnityEngine.Object.Instantiate(Object original)
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyAPI.IsSaveEncrypted">
+      <summary>
+            Is the encryption on?
+            </summary>
+      <returns>True = encryption on, False = encryption off</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll">
+      <summary>
+            To save the game, with the actual SceneFileName
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To save the game, with the actual SceneFileName in the specified scene.
+            </summary>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll(System.Boolean)">
+      <summary>
+            To save the game, with the actual SceneFileName
+            </summary>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll(System.Boolean,UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To save the game, with the actual SceneFileName in the specified scene.
+            </summary>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll(System.String,System.Boolean)">
+      <summary>
+            To save the game
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll(System.String)">
+      <summary>
+            To save the game
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll(System.String,UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To save the game in the specified scene.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SaveAll(System.String,System.Boolean,UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To save the game in the specified scene.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true.</param>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll">
+      <summary>
+            To load the game, with the actual SceneFileName, not running in thread, and erasing invalids gameObjects
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To load the game in the specified scene.
+            </summary>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll(System.Boolean,System.Boolean)">
+      <summary>
+            To load the game, with the actual SceneFileName
+            </summary>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll(System.Boolean,System.Boolean,UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To load the game in the specified scene, with the actual SceneFileName.
+            </summary>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll(System.String,System.Boolean,System.Boolean)">
+      <summary>
+            To load the game
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll(System.String)">
+      <summary>
+            To load the game.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll(System.String,UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To load the game in the specified scene.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadAll(System.String,System.Boolean,System.Boolean,UnityEngine.SceneManagement.Scene)">
+      <summary>
+            To load the game in the specified scene.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadSceneAndGame">
+      <summary>
+            Load the corresponding scene of SaveIsEasyAPI.SceneFileName and then load the game.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadSceneAndGame(System.String)">
+      <summary>
+            Load the corresponding scene and then load the game.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadSceneAndGame(System.String,SaveIsEasy.SceneFile.LoadSceneBy,System.Boolean,System.Boolean)">
+      <summary>
+            Load the corresponding scene and then load the game.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="loadSceneBy">How to look for the scene</param>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.LoadSceneAndGame(System.String,SaveIsEasy.SceneFile.LoadSceneBy,System.Boolean,System.Boolean,UnityEngine.SceneManagement.LoadSceneMode)">
+      <summary>
+            Load the corresponding scene and then load the game.
+            </summary>
+      <param name="fileName">The file name, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <param name="loadSceneBy">How to look for the scene</param>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true</param>
+      <param name="mode">In the mode that is going to load the scene.</param>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.FileExists(System.String)">
+      <summary>
+            To see if the game file already exists.
+            If the route is relative, it is verified from Folder Path.
+            <see cref="P:SaveIsEasy.SaveIsEasyAPI.SaveFolderPath" /></summary>
+      <param name="fileName">Only allows '.game' of '.gamecopy' extensions, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <returns>Status if the file exists</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.ListOfValidSaves(System.String)">
+      <summary>
+            This will list all the valid files in the Folder Path
+            </summary>
+      <param name="folderPath">The absolute or relative path to the Folder</param>
+      <returns>A list of all the valid files in the folder</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.ListOfValidSaves">
+      <summary>
+            This will list all the valid files in the Folder Path
+            </summary>
+      <returns>A list of all the valid files in the folder</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.GetOfValidSaves(System.String)">
+      <summary>
+            This will return if the file exists and is valid in the Folder Path
+            </summary>
+      <param name="fileName">The filename, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <returns>SceneFile or null</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.GetSceneFile(System.String)">
+      <summary>
+            This will return if the file exists and is valid in the Folder Path
+            </summary>
+      <param name="fileName">The filename, Supports absolute and relative formats examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'</param>
+      <returns>SceneFile or null</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyAPI.SetSaveFolderPath(System.String)">
+      <summary>
+            To set the default save folder path
+            </summary>
+      <param name="folderPath">An absolute path of a folder, Example: 'C:/Test/', 'C:/Test/Levels/'</param>
+    </member>
+    <member name="T:SaveIsEasy.SaveIsEasyStatistics">
+      <summary>
+            Record statistics of all kinds to save and use them later.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyStatistics.TotalTimeInSeconds">
+      <summary>
+            The total time he spent playing at this save, in seconds.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyStatistics.Loads">
+      <summary>
+            The amount of times the game was load.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyStatistics.CreationDate">
+      <summary>
+            The time in which the game was created, in UTC format.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyStatistics.SaveScreenshot">
+      <summary>
+            To save a screenshot when the game is saved
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.IUpgradeable">
+      <summary>
+            To mark that the class requires an Upgrade
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.IUpgradeable.Upgrade">
+      <summary>
+            To Upgrate the object
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SaveIsEasyComponent">
+      <summary>
+            To save a GameObject you need this component
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SaveIsEasyComponent.OnLoadEvent">
+      <summary>
+            In which way the asset has to handle the events in this gameobject.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SaveIsEasyComponent.OnLoadEvent.CallStartAfterLoading">
+      <summary>
+            This will first load the GameObject information and then call the Start().
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SaveIsEasyComponent.OnLoadEvent.CallStartBeforeLoading">
+      <summary>
+            This will cause the Start() to be called first and then the GameObject information will be loaded.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SaveIsEasyComponent.OnLoadEvent.CallStartBeforeAndAfterLoading">
+      <summary>
+            This will cause the Start() to be called before and after the information is loaded.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SaveIsEasyComponent.OnLoadEvent.Off">
+      <summary>
+            The asset is not going to call Start()
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyComponent.OnLoad">
+      <summary>
+            When a game is loaded the asset has to call Start() of all the scripts of this GameObject, this is slow, if it is not used it is recommended to turn off.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyComponent.Identifier">
+      <summary>
+            Returns the Identifier(ID) assigned to this SaveIsEasyComponent, is used to track this GameObject during its life.
+            The ID may not correspond to the ID of the prefab, if the object is created in RunTime in the scene the ID will be the same as that of the prefab.
+            </summary>
+      <returns>A number in the range of int.MinValue to int.MaxValue</returns>
+    </member>
+    <member name="M:SaveIsEasy.SaveIsEasyComponent.IsRuntimeObject">
+      <summary>
+            If this object was create at runtime
+            </summary>
+      <returns>true is RunTime, false is BuildTime</returns>
+    </member>
+    <member name="T:SaveIsEasy.SaveIsEasyManager">
+      <summary>
+            To Manager the save system, file name, auto save, save on exit, encrypt, ect..
+            You only need one 'SaveIsEasyManager' per scene.
+            
+            
+            WARNINGS:
+            - You can only have one "SaveIsEasyManager" per scene.
+            - You should not create or Instantiate "SaveIsEasyManager" in a scene that is already loaded.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyManager.IsSaved">
+      <summary>
+            To see if the level is saved
+            </summary>
+      <returns>If the level is saved</returns>
+    </member>
+    <member name="P:SaveIsEasy.SaveIsEasyManager.IsLoaded">
+      <summary>
+            To see if the level is loaded
+            </summary>
+      <returns>If the level is loaded</returns>
+    </member>
+    <member name="T:SaveIsEasy.ISaveIsEasyEvents">
+      <summary>
+            Use this interface to subscribe to asset events
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.ISaveIsEasyEvents.OnLoad">
+      <summary>
+            The event is sent to an script when the GameObject have been completely loaded.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.ISaveIsEasyEvents.OnSave">
+      <summary>
+            The event is sent to an script when the GameObject has start to be saved.
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.QuickAccessAttribute">
+      <summary>
+            This allows you to save certain attributes separately from the game,
+            so that they are available without having to load the entire file.
+            It is used for the menu that lists the saved games.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.QuickAccessAttribute.Name">
+      <summary>
+            The name with which the field will be saved.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.QuickAccessAttribute.#ctor(System.String)">
+      <summary>
+            So the field is available with quick access.
+            </summary>
+      <param name="name">The name with which the field will be saved.</param>
+    </member>
+    <member name="M:SaveIsEasy.QuickAccessAttribute.#ctor">
+      <summary>
+            So the field is available with quick access.
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SerializableComponent">
+      <summary>
+        <b>Obsolete -&gt; Use SaveIsEasyComponent</b>
+      </summary>
+    </member>
+    <member name="M:SaveIsEasy.SerializableComponent.Upgrade">
+      <summary>
+            To Upgrate from SerializableComponent to SaveIsEasyComponent
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SerializableManager">
+      <summary>
+        <b>Obsolete -&gt; Use SaveIsEasyManager</b>
+      </summary>
+    </member>
+    <member name="M:SaveIsEasy.SerializableManager.Upgrade">
+      <summary>
+            To Upgrate SerializableManager to SaveIsEasyManager
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SceneConfig">
+      <summary>
+            It is the object in charge of managing the configuration for the level
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneConfig.DefaultSaveName">
+      <summary>
+            The default save name for the file
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.SceneFileName">
+      <summary>
+            The default name of the file to save and load
+            On set: The file, Supports absolute and relative formats, examples: 'level1.game', 'level2', 'test/level3', 'C:/Test/level4', 'C:/Test/level5.game'
+            On get: The file in a absolute path, examples: 'C:/Test/level4', 'C:/Test/level5.game'
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SceneConfig.EncryptionConfig">
+      <summary>
+            The encryption configuration.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneConfig.EncryptionConfig.SaveAndLoad">
+      <summary>
+            It encrypts the information that is saved with this manager (this does not include QuickAccess information),
+            and allows the loading of encrypted information with the same password or unencrypted information.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneConfig.EncryptionConfig.OnlyLoad">
+      <summary>
+            Load encrypted or unencrypted games, Does not encrypt the information when it is saved(For conversion from encrypted system to normal).
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneConfig.EncryptionConfig.Off">
+      <summary>
+             Turn off the encryption system.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.AutoSaving">
+      <summary>
+            To active AutoSaving by time
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.AutoLoadOnPlay">
+      <summary>
+            To automatically load the game on play
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.OnExitSave">
+      <summary>
+            To automatically save at game exit
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.DuplicateSaveFile">
+      <summary>
+            This is to create a copy of the saved file, In case there is any problem, do not lose the saved (all this is handled automatically by the asset)
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.ExclusiveFiles">
+      <summary>
+            It only allows loading the game when it was saved in the same scene as where it is trying to load.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.AutoSavingRunInThread">
+      <summary>
+            To set that AutoSaving run In separate thread
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.TimeBetweenSavesInSeconds">
+      <summary>
+            Time Between saves in Seconds
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.AutoSavingInterval">
+      <summary>
+            Time Between saves in Seconds
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneConfig.CurrentTimeToSave">
+      <summary>
+            When this number is greater than or equal to "Auto Saving Interval" it will be placed in sero and an auto-save will be made. Every second in the game adds 1.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SceneConfig.SetEncrypt(System.Boolean)">
+      <summary>
+            To activate or deactivate the encryption tool
+            </summary>
+      <param name="active">true = files are encrypted, false = files are not encrypted</param>
+      <returns>The operation was successful, true = yes, false = error</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneConfig.SetEncrypt(System.Boolean,System.String)">
+      <summary>
+            To activate or deactivate the encryption tool
+            </summary>
+      <param name="active">true = files are encrypted, false = files are not encrypted</param>
+      <param name="password">The password to encrypt the files</param>
+      <returns>The operation was successful, true = yes, false = error</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneConfig.SetEncryptionConfig(SaveIsEasy.SceneConfig.EncryptionConfig)">
+      <summary>
+            To activate or deactivate the encryption tool
+            </summary>
+      <param name="newEncryptionConfig">The encryption configuration.</param>
+      <returns>The operation was successful, true = yes, false = error</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneConfig.SetEncryptionConfig(SaveIsEasy.SceneConfig.EncryptionConfig,System.String)">
+      <summary>
+            To activate or deactivate the encryption tool
+            </summary>
+      <param name="newEncryptionConfig">The encryption configuration.</param>
+      <param name="password">The password to encrypt the files</param>
+      <returns>The operation was successful, true = yes, false = error</returns>
+    </member>
+    <member name="T:SaveIsEasy.AlwaysSaveAttribute">
+      <summary>
+            To force the save of this variable, it can not be turned off from the editor.
+            <para>It will always be saved.</para></summary>
+    </member>
+    <member name="T:SaveIsEasy.AvoidSavingAttribute">
+      <summary>
+            If you want this field can not be saved, it does not appear in the editor
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SceneFile">
+      <summary>
+            An object that allows managing the properties of a saved
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SceneFile.LoadSceneBy">
+      <summary>
+            How to look for the scene.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneFile.LoadSceneBy.SceneName">
+      <summary>
+            I look for the scene by its Name.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneFile.LoadSceneBy.ScenePath">
+      <summary>
+            I look for the scene by Path.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneFile.LoadSceneBy.SceneBuildIndex">
+      <summary>
+            I look for the scene by its Build Index.
+            </summary>
+    </member>
+    <member name="T:SaveIsEasy.SceneFile.IntegrityResult">
+      <summary>
+            Indicates the result of an integrity test of a saved file.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneFile.IntegrityResult.Error">
+      <summary>
+            The integrity check could not be started due to an error.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneFile.IntegrityResult.Corrupted">
+      <summary>
+            The file is invalid or has been corrupted.
+            </summary>
+    </member>
+    <member name="F:SaveIsEasy.SceneFile.IntegrityResult.Valid">
+      <summary>
+            Is a valid file.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.QuickAccess">
+      <summary>
+            All the quick access values that were loaded from the file. key(string) the name of the field -&gt; object
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.StatisticsLoads">
+      <summary>
+            The amount of times the game was load.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.StatisticsTotalTimeInSeconds">
+      <summary>
+            The time he spent playing at this save, in seconds.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.StatisticsTotalTimeInSecondsAsTimeSpan">
+      <summary>
+            The time he spent playing at this save.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.StatisticsCreationDate">
+      <summary>
+            The time in which the game was created, in UTC format.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.StatisticsCreationDateAsDateTime">
+      <summary>
+            The time in which the game was created.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.StatisticsScreenshotAsTexture2D">
+      <summary>
+            To get the screenshot when the game was saved.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.StatisticsScreenshotAsSprite">
+      <summary>
+            To get the screenshot when the game was saved.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.LastModifiedDate">
+      <summary>
+            Returns the date and time, in coordinated universal time (UTC), of the last saved.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.HasSaveIsEasyStatistics">
+      <summary>
+            If the game was saved with a SaveIsEasyStatistics enable.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.SceneName">
+      <summary>
+            The Name of the scene that was loaded when the game was saved.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.ScenePath">
+      <summary>
+            The Path of the scene that was loaded when the game was saved.
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.SceneBuildIndex">
+      <summary>
+            The BuildIndex of the scene that was loaded when the game was saved.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.IsEncrypted">
+      <summary>
+            If this file encrypted?
+            </summary>
+      <returns>True = it is encrypted, False = it is not encrypted</returns>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.FormatVersion">
+      <summary>
+            Gets the build version of the asset
+            </summary>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.Name">
+      <summary>
+            Returns the file name of save without the extension.
+            </summary>
+      <returns>This only returns the name of the file, example: 'level1'</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.IsCopy">
+      <summary>
+            Is this object a copy of a saved file?
+            </summary>
+      <returns>False = it is not a copy, True = It is a copy file</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.HaveCopy">
+      <summary>
+            This file has a copy or is a copy?
+            </summary>
+      <returns>True = has a copy, False = not has a copy</returns>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.Copy">
+      <summary>
+            To get the copy file
+            </summary>
+      <returns>This will return null if the copy file not exists</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.Delete">
+      <summary>
+            Delete this save file and if have a copy that too.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.Rename(System.String)">
+      <summary>
+            To rename this file name and if have a copy that too
+            </summary>
+      <param name="newName">
+      </param>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.Duplicate(System.String)">
+      <summary>
+            To create a copy of this save file
+            </summary>
+      <param name="newName">The new name, Supports absolute and relative formats examples: 'level2', 'test/level3', 'C:/Test/level4'</param>
+      <returns>The new file that was created</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.CheckIntegrity">
+      <summary>
+            This will try to read all file data to verify the integrity
+            </summary>
+      <returns>An enum with the result of whether the file is valid or not.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.CheckIntegrity(UnityEngine.SceneManagement.Scene)">
+      <summary>
+            This will try to read all file data to verify the integrity
+            </summary>
+      <param name="scene">In the scene where it is going to do the requested, it requires that a 'SaveIsEasyManager' is valid and active in that scene.</param>
+      <returns>An enum with the result of whether the file is valid or not.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetQuickAccessObject(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>The value, if it is not found, the function returns null.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetAccessObjectAsType``1(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved, Case sensitive.</param>
+      <returns>The value, if it is not found, the function returns default(T).</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetQuickAccessInt32(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>The value, if it is not found, the function returns 0.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetQuickAccessBoolean(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>The value, if it is not found, the function returns false.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetQuickAccessSingle(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>The value, if it is not found, the function returns 0.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetQuickAccessString(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>The value, if it is not found, the function returns "".</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetQuickAccessInt64(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>The value, if it is not found, the function returns 0.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.GetQuickAccessDouble(System.String)">
+      <summary>
+            Get a value that was saved with <see cref="T:SaveIsEasy.QuickAccessAttribute" />.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>The value, if it is not found, the function returns 0.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.HasKeyQuickAccess(System.String)">
+      <summary>
+            To know if there is a field in quick access.
+            </summary>
+      <param name="name">The name of the field that was saved.</param>
+      <returns>True = the field exists, False = the field does not exist.</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.LoadSceneAndGame">
+      <summary>
+            Load the corresponding scene and then load the game.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.LoadSceneAndGame(SaveIsEasy.SceneFile.LoadSceneBy,System.Boolean,System.Boolean)">
+      <summary>
+            Load the corresponding scene and then load the game.
+            </summary>
+      <param name="loadSceneBy">How to look for the scene.</param>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true.</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true.</param>
+    </member>
+    <member name="M:SaveIsEasy.SceneFile.LoadSceneAndGame(SaveIsEasy.SceneFile.LoadSceneBy,System.Boolean,System.Boolean,UnityEngine.SceneManagement.LoadSceneMode)">
+      <summary>
+            Load the corresponding scene and then load the game.
+            </summary>
+      <param name="loadSceneBy">How to look for the scene.</param>
+      <param name="eraseInvalidsGameObject">To erase old or invalids GameObjects with SaveIsEasyComponent, recommended true.</param>
+      <param name="runInThread">This needs to run in a thread?, recommended true.</param>
+      <param name="mode">In the mode that is going to load the scene.</param>
+    </member>
+    <member name="P:SaveIsEasy.SceneFile.ErrorMessage">
+      <summary>
+            This is to get the error message that has been produced in the load of the object.
+            </summary>
+      <returns>Empty string for not error, Or the error message.</returns>
+    </member>
+    <member name="T:SaveIsEasy.SceneFileCopy">
+      <summary>
+            An object that allows to handle the properties of the copy of a saved
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SceneFileCopy.Rename(System.String)">
+      <summary>
+            To rename this file name and if have a copy that too
+            </summary>
+      <param name="newName">
+      </param>
+    </member>
+    <member name="M:SaveIsEasy.SceneFileCopy.Delete">
+      <summary>
+            Delete this save file and if have a copy that too.
+            </summary>
+    </member>
+    <member name="M:SaveIsEasy.SceneFileCopy.Duplicate(System.String)">
+      <summary>
+            To create a copy of this save file
+            </summary>
+      <param name="newName">The new name</param>
+      <returns>The new file that was created</returns>
+    </member>
+    <member name="P:SaveIsEasy.SceneFileCopy.Original">
+      <summary>
+            To get the original save file
+            </summary>
+      <returns>The original save file</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFileCopy.IsCopy">
+      <summary>
+            Is this object a copy of a saved file?
+            </summary>
+      <returns>False = it is not a copy, True = It is a copy file</returns>
+    </member>
+    <member name="M:SaveIsEasy.SceneFileCopy.HaveCopy">
+      <summary>
+            This file has a copy or is a copy?
+            </summary>
+      <returns>True = has a copy, False = not has a copy</returns>
+    </member>
+  </members>
+</doc>

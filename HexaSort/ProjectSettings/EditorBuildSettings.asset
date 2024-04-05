@@ -5,6 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/HyperCore/Scenes/Splash.unity
+    guid: 24cd55959de345e4da94471f7a7540e1
+  - enabled: 0
+    path: Assets/HyperCore/Scenes/Game.unity
+    guid: 29d0f061684742e43b6bc06ade0a54d1
   - enabled: 1
     path: Assets/Scenes/Splash.unity
     guid: a761c1c936ce8b445ba92f45f41efcbb

@@ -95,12 +95,17 @@ public class LevelInfo : MonoBehaviour
         }
     }
     
-    public List<List<PiecePro>> GetPiecesData()
+    public List<string> GetPiecesData()
     {
-        List<List<PiecePro>> platinfo = new();
+        List<string> platinfo = new();
         foreach(PlatformPiece piece in allPieces)
         {
-            platinfo.Add(piece.pieces);
+            string list ="";
+            foreach(PiecePro p in piece.pieces)
+            {
+               list += " "+ (p.id).ToString();
+            }
+            platinfo.Add(list);
         }
         return platinfo;
     }
@@ -115,6 +120,14 @@ public class LevelInfo : MonoBehaviour
             {
                 StartCoroutine(piece.BreakPieceHammer());
             }
+        }
+    }
+
+    public void LoadDataPlat(List<List<int>> platData)
+    {
+        for(int i=0;i< allPieces.Count; i++)
+        {
+            allPieces[i].slots = platData[i];
         }
     }
 }

@@ -18,7 +18,7 @@ public class QuickAnimPlayer : MonoBehaviour
         {
             anim.Play(animName, 0, 0);
             anim.SetTrigger(triggerName);
-            anim.keepAnimatorControllerStateOnDisable = true;
+            anim.keepAnimatorStateOnDisable = true;
         }
     }
 }

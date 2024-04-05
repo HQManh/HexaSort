@@ -14,6 +14,7 @@ public class PlatformPiece : MonoBehaviour
     public PlatType platType = PlatType.Open;
     public int lockNumber;
     public List<PiecePro> pieces = new();
+    public List<int> slots = new();
     public Dictionary<int, int> numOfColor = new();
     public List<PlatformPiece> neighbor = new();
     public Transform container;
@@ -33,6 +34,10 @@ public class PlatformPiece : MonoBehaviour
             else
             {
                 meshRenderer.material = CurrentData.Instance.materialsPlat[2];
+            }
+            if(slots.Count > 0)
+            {
+                LoadData();
             }
         }
     }
@@ -236,6 +241,29 @@ public class PlatformPiece : MonoBehaviour
         yield return null;
     }
 
+    public void LoadData()
+    { 
+        DestroyChild();
+        for (int i=0;i< slots.Count; i++)
+        {
+            var t = Instantiate(CurrentData.Instance.piecePre);
+            t.transform.parent = container;
+            t.transform.localPosition = new Vector3(0f,0f,-0.2f*(i+1));
+            t.id = slots[i];
+            t.SetColor();
+            t.gameObject.SetActive(true);
+            pieces.Add(t);
+        }
+        GetAmount();
+    }
+
+    void DestroyChild()
+    {
+        for(int i=0;i< container.childCount; i++)
+        {
+            DestroyImmediate(container.GetChild(0).gameObject,true);
+        }
+    }
 
     public void CheckAround()
     {

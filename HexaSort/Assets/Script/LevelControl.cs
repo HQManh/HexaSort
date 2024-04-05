@@ -1,6 +1,5 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelControl : Singleton<LevelControl>
@@ -19,20 +18,26 @@ public class LevelControl : Singleton<LevelControl>
 
     public void LoadLevel(int id)
     {
-        level = transform.GetComponentInChildren<LevelInfo>();
-        if(level != null)
+        if (level != null)
         {
             Destroy(level.gameObject);
         }
-        if(id >= GetLevelCounts())
+        if (id >= GetLevelCounts())
         {
-            id= 0;
+            id = 0;
             GlobalControll.CurrentLevelIndex = 0;
         }
         var t = Resources.Load<GameObject>(levelPath + levelPrefix + (id + 1));
         PlayerPrefs.SetInt("CurrentLevelIndex", GlobalControll.CurrentLevelIndex);
         loadedLevel = t.GetComponentInChildren<LevelInfo>();
         currentLevel = id;
+        level = transform.GetComponentInChildren<LevelInfo>();
+        LevelData data = DataControl.Instance.LoadData();
+        if (data == null) return;
+        if (data.level == GlobalControll.CurrentLevelIndex)
+        {
+            CurrentData.Instance.LoadDataLevel(data);
+        }
     }
 
     public void SetUpLevel()

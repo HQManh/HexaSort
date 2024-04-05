@@ -36,10 +36,9 @@ public class CurrentData : MonoBehaviour
     int timeReive = 0;
     [SerializeField]
     PiecesGenerator piecesGenerator;
-    [SerializeField]
     public Transform progressBar;
-    [SerializeField]
     public GameObject breakObject;
+    public PiecePro piecePre;
     bool isEnd = false;
 
     private void Awake()
@@ -282,11 +281,78 @@ public class CurrentData : MonoBehaviour
     void SaveCurrentData()
     {
         var t = levelInfo.GetPiecesData();
-        Dictionary<int, List<PiecePro>> pieces = new();
+        List<string> pieces = new();
         foreach (var piece in numPiece)
         {
-
+            string list = "";
+            switch (piece[0].transform.parent.parent.name)
+            {
+                case "Pos1":
+                    list += "1";
+                    foreach(var p in piece)
+                    {
+                        list += " " + (p.id).ToString();
+                    }
+                    pieces.Add(list);
+                    break;
+                case "Pos2":
+                    list += "2";
+                    foreach (var p in piece)
+                    {
+                        list += " " + (p.id).ToString();
+                    }
+                    pieces.Add(list);
+                    break;
+                case "Pos3":
+                    list += "3";
+                    foreach (var p in piece)
+                    {
+                        list += " " + (p.id).ToString();
+                    }
+                    pieces.Add(list);
+                    break;
+            }
         }
+
+        LevelData data = new()
+        {
+            level = GlobalControll.CurrentLevelIndex,
+            currentProcess = currentProgress,
+            platInfo = t,
+            pieces = pieces
+        };
+
+        DataControl.Instance.SaveData(data);
+    }
+
+
+    public void LoadDataLevel(LevelData data)
+    {
+        currentProgress = data.currentProcess;
+        LoadPlatInfo(data.platInfo);
+    }
+
+    void LoadPlatInfo(List<string> info)
+    {
+        List<List<int>> platInfo = new();
+        foreach(var s in info)
+        {
+            string[] t = s.Split(' ');
+            List<int> list = new();
+            for(int i=0;i< t.Length; i++)
+            {
+                if (int.TryParse(t[i], out int j))
+                {
+                    list.Add(j);
+                }          
+            }
+            platInfo.Add(list);
+        }
+        LevelControl.Instance.loadedLevel.LoadDataPlat(platInfo);
+    }
+
+    void LoadPieceData()
+    {
 
     }
 
@@ -307,5 +373,10 @@ public class CurrentData : MonoBehaviour
         {
             CheckMoving();
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveCurrentData();
     }
 }
