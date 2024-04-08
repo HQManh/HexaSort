@@ -7,7 +7,9 @@ public enum PlatType
     Open,
     Lock,
     Ads,
-    None
+    None,
+    Ice,
+    Plank
 }
 
 public class PlatPro
@@ -20,6 +22,6 @@ public class PlatPro
 
 public class ClassPiece : MonoBehaviour
 {
-
+ 
 
 }

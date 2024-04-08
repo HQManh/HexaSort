@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
     public RectTransform beginCover;
     [Header("PlayUI")]
     public CanvasGroup playGroup;
+    public CanvasGroup boosterGroups;
     public Image progressPercen;
     public Image breakImage;
     public Image startBanner;
@@ -469,6 +470,8 @@ public class UIController : MonoBehaviour
         {
             LeanTween.move(header.gameObject, header.position +new Vector3(0f,2f,0f), 0.2f);
             LeanTween.move(booster.gameObject, booster.position - new Vector3(0f, 2f, 0f), 0.2f);
+            boosterGroups.alpha = 1;
+            boosterGroups.blocksRaycasts = true;
         }
         else
         {
@@ -476,6 +479,8 @@ public class UIController : MonoBehaviour
             LeanTween.move(booster.gameObject, booster.position + new Vector3(0f, 2f, 0f), 0.2f);
             swap.SetActive(false);
             hammer.SetActive(false);
+            boosterGroups.alpha = 0;
+            boosterGroups.blocksRaycasts = false;
             CurrentData.isHammer = false;
             CurrentData.isHand = false;
         }

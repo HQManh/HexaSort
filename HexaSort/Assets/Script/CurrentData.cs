@@ -59,7 +59,7 @@ public class CurrentData : MonoBehaviour
     {
         levelInfo.EndGameAnim();
         piecesGenerator.piecePos.gameObject.SetActive(false);
-        UIController.Instance.HideUIIngame(true);
+        //UIController.Instance.HideUIIngame(true);
     }
 
     public void StartGame()
