@@ -19,18 +19,12 @@ public class PiecesGenerator : MonoBehaviour
         public int amount;
     }
 
-    public IEnumerator GeneratePieces(bool isSingle)
+    public IEnumerator GeneratePieces(bool isSingle, bool isLoad = false)
     {
-        if(isSingle)
+        if(isLoad) yield break; 
+        if (isSingle)
         {
-            for(int i=0;i<3;i++)
-            {
-                var r =piecePos.GetChild(i);
-                for (int j = 0; j < r.childCount; j++){
-                    var c = r.GetChild(j);
-                    DestroyImmediate(c.gameObject);
-                }
-            }
+            DestroyPieces();
         }
         yield return null;
         for( int i=0; i < 3; i++)
@@ -66,7 +60,50 @@ public class PiecesGenerator : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+    
+    public IEnumerator LoadPiece(List<List<int>> piecesInfo)
+    {
+        DestroyPieces();
+        foreach(var piece in piecesInfo)
+        {
+            var rootTemp = piecePos.GetChild(piece[0]-1);
+            var a = rootTemp.GetComponent<Pieces>();
+            a.piecePros.Clear();
+            var root = Instantiate(rootPieces, rootTemp);
+            root.transform.localPosition = new Vector3(10f, 0f, 0f);
+            for (int i=1;i< piece.Count; i++)
+            {
+                var newObject = Instantiate(piecePre, root.transform);
+                newObject.transform.localPosition = new Vector3(0f, 0f, -0.2f * (i-1));
+                var b = newObject.GetComponentInChildren<PiecePro>();
+                b.id = piece[i];
+                b.SetColor();
+                a.piecePros.Add(b);
+            }
+            CurrentData.numPiece.Add(a.piecePros);
+            LeanTween.moveLocalX(root, 0f, 0.2f).setOnComplete(() =>
+            {
+                LeanTween.scale(root, Vector3.one * 1.05f, 0.05f).setOnComplete(() =>
+                {
+                    LeanTween.scale(root, Vector3.one, 0.05f).setEaseInBack();
+                });
+            });
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 
+    void DestroyPieces()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            var r = piecePos.GetChild(i);
+            for (int j = 0; j < r.childCount; j++)
+            {
+                var c = r.GetChild(j);
+                DestroyImmediate(c.gameObject);
+            }
+        }
+    }
 
     PieceDetail[] GetInfo(bool isSingle)
     {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum ScreenStage
 {
@@ -134,9 +135,9 @@ public class UIController : MonoBehaviour
         
     }
 
-    public void SetProgress(float percen)
+    public void SetProgress(float percen, float time =0.2f)
     {
-        LeanTween.value(progressPercen.fillAmount,percen, 0.2f).setOnUpdate((float value) =>
+        LeanTween.value(progressPercen.fillAmount,percen, time).setOnUpdate((float value) =>
         {
             progressPercen.fillAmount = value;
         }).setOnComplete(() =>

@@ -33,7 +33,7 @@ public class CurrentData : MonoBehaviour
     public static bool isHand = false;
     bool isStart = false;
     public static List<PlatformPiece> needCheckPieces = new();
-    int timeReive = 0;
+    bool isLoad = false;
     [SerializeField]
     PiecesGenerator piecesGenerator;
     public Transform progressBar;
@@ -66,7 +66,7 @@ public class CurrentData : MonoBehaviour
     {
         numPiece.Clear();
         isEnd = false;
-        StartCoroutine(piecesGenerator.GeneratePieces(false));
+        StartCoroutine(piecesGenerator.GeneratePieces(false,isLoad));
     }
 
     public void CheckPiece()
@@ -225,29 +225,7 @@ public class CurrentData : MonoBehaviour
             list.Add(midPos);
             list.Add(posTemp);
             lastTween = LeanTween.moveLocal(fPiece.gameObject,list.ToArray(), 0.3f).id;
-            midPos = Vector3.zero;
-            if(pos1.x == pos2.x)
-            {
-                if (pos1.y < pos2.y)
-                {
-                    midPos.x = -180f;
-                }
-                else
-                {
-                    midPos.x = 180f;
-                }
-            }
-            else
-            {
-                if (pos1.x < pos2.x)
-                {
-                    midPos.y = 180f;
-                }
-                else
-                {
-                    midPos.y = -180f;
-                }
-            }
+            midPos = RotateDirection(pos1,pos2);
             LeanTween.rotateLocal(fPiece.gameObject,f.transform.localEulerAngles + midPos, 0.3f);
             if (!canBreak.Contains(t))
             {
@@ -276,6 +254,36 @@ public class CurrentData : MonoBehaviour
             t.CheckAround();
         }
     }
+
+    Vector2 RotateDirection( Vector2 pos1, Vector2 pos2)
+    {
+        Debug.Log(pos1 + "  " + pos2);
+        Vector2 direc = Vector2.one;
+        if (pos1.x == pos2.x)
+        {
+            if (pos1.y < pos2.y)
+            {
+                direc.x = -180f;
+            }
+            else
+            {
+                direc.x = 180f;
+            }
+        }
+        else
+        {
+            if (pos1.x < pos2.x)
+            {
+                direc.y = 180f;
+            }
+            else
+            {
+                direc.y = -180f;
+            }
+        }
+        return direc; 
+    }
+
 
 
     void SaveCurrentData()
@@ -330,6 +338,8 @@ public class CurrentData : MonoBehaviour
     {
         currentProgress = data.currentProcess;
         LoadPlatInfo(data.platInfo);
+        LoadPieceData(data.pieces);
+        LoadProgress(data.currentProcess);
     }
 
     void LoadPlatInfo(List<string> info)
@@ -351,9 +361,31 @@ public class CurrentData : MonoBehaviour
         LevelControl.Instance.loadedLevel.LoadDataPlat(platInfo);
     }
 
-    void LoadPieceData()
+    void LoadPieceData(List<string> info)
     {
+        List<List<int>> pieceInfo = new();
+        foreach(var s in info)
+        {
+            string[] t= s.Split(" ");
+            List<int> list = new();
+            for(int i=0;i< t.Length ; i++)
+            {
+                if (int.TryParse(t[i],out int j))
+                {
+                    list.Add(j);
+                }
+            }
+            pieceInfo.Add(list);
+        }
+        isLoad = true;
+        StartCoroutine(piecesGenerator.LoadPiece(pieceInfo));
+    }
 
+
+    void LoadProgress(int progress)
+    {
+        currentProgress = progress;
+        UIController.Instance.SetProgress( (float)progress/ (float)LevelControl.Instance.loadedLevel.goalScore, 0f);
     }
 
     private void Update()

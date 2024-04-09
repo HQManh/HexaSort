@@ -56,7 +56,7 @@ public class StageControl : MonoBehaviour
         yield return null;
         if(LevelControl.Instance.level != null)
         {
-            UIController.Instance.SetProgress(0);
+            //UIController.Instance.SetProgress(0);
             UIController.Instance.ShowInGameUI(GlobalControll.CurrentLevelIndex);
         }
     }
@@ -64,7 +64,6 @@ public class StageControl : MonoBehaviour
     public void End(bool isWin)
     {
         StartCoroutine(CoEnd(isWin));
-
     }
 
     IEnumerator CoEnd(bool isWin)
