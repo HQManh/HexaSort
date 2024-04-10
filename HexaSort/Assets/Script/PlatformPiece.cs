@@ -163,6 +163,7 @@ public class PlatformPiece : MonoBehaviour
                 pieces.Add(temp);
                 var a = temp.transform;
                 a.parent = container;
+                a.gameObject.layer = 2;
                 //LeanTween.moveLocal(a.gameObject, transform.localPosition - new Vector3(0f, 0f, 0.15f * (1 + pieces.Count +stt)), 0.25f);
                 a.transform.localPosition = transform.localPosition - new Vector3(0f, 0f, 0.2f * (pieces.Count));
             }
@@ -248,6 +249,7 @@ public class PlatformPiece : MonoBehaviour
         {
             var t = Instantiate(CurrentData.Instance.piecePre);
             t.transform.parent = container;
+            t.gameObject.layer = 2;
             t.transform.localPosition = new Vector3(0f,0f,-0.2f*(i+1));
             t.id = slots[i];
             t.SetColor();

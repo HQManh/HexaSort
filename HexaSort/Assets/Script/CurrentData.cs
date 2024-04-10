@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovingPiece
 {
@@ -33,7 +34,6 @@ public class CurrentData : MonoBehaviour
     public static bool isHand = false;
     bool isStart = false;
     public static List<PlatformPiece> needCheckPieces = new();
-    bool isLoad = false;
     [SerializeField]
     PiecesGenerator piecesGenerator;
     public Transform progressBar;
@@ -62,11 +62,19 @@ public class CurrentData : MonoBehaviour
         //UIController.Instance.HideUIIngame(true);
     }
 
-    public void StartGame()
+    public void StartGame(LevelData data = null)
     {
-        numPiece.Clear();
+        if (data != null)
+        {
+            LoadDataLevel(data);
+        }
+        else
+        {
+            Debug.Log("?");
+            numPiece.Clear();
+            StartCoroutine(piecesGenerator.GeneratePieces(false));
+        }
         isEnd = false;
-        StartCoroutine(piecesGenerator.GeneratePieces(false,isLoad));
     }
 
     public void CheckPiece()
@@ -210,30 +218,33 @@ public class CurrentData : MonoBehaviour
             yield break;
         }
         Vector3 pos2 = t.pieces[^1].transform.localPosition;
+        Vector3 pos1 = f.pieces[^1].transform.localPosition;
+        Vector3 axis = Vector3.right;
+        //axis = Vector3.Cross(axis, Vector3.up);
+        float amount = RotateAdd(pos1, pos2);
         for (int i=0; i < piece.amount; i++)
         {
             var fPiece = f.pieces[^1];
             List<Vector3> list = new ();
             fPiece.transform.parent = t.container;
-            Vector3 pos1 = fPiece.transform.localPosition;
+            pos1 = fPiece.transform.localPosition;
             t.pieces.Add(fPiece);
             f.pieces.RemoveAt(f.pieces.Count - 1);
             var posTemp = pos2 - new Vector3(0f, 0f, 0.2f) * (i + 1);
-            Vector3 midPos = new((pos1.x + posTemp.x) / 2, (pos1.y + posTemp.y) / 2,Mathf.Min(pos1.z, posTemp.z -0.2f*(i+1)) - 1f);
+            Vector3 midPos = new((pos1.x + posTemp.x) / 2, (pos1.y + posTemp.y) / 2,Mathf.Min(pos1.z-.5f, posTemp.z -0.2f*(i+1)) - 1.5f);
             list.Add(pos1);
             list.Add(midPos);
             list.Add(midPos);
             list.Add(posTemp);
-            lastTween = LeanTween.moveLocal(fPiece.gameObject,list.ToArray(), 0.3f).id;
-            midPos = RotateDirection(pos1,pos2);
-            LeanTween.rotateLocal(fPiece.gameObject,f.transform.localEulerAngles + midPos, 0.3f);
+            lastTween = LeanTween.moveLocal(fPiece.gameObject,list.ToArray(), 0.4f).setEaseInOutSine().id;
+            LeanTween.rotateAroundLocal(fPiece.gameObject, axis, amount, 0.4f);
             if (!canBreak.Contains(t))
             {
                 canBreak.Add(t);
             }
             //f.canBreakPieces[^1].transform.localPosition = t.canBreakPieces[^1].transform.localPosition - new Vector3(0f, 0f, 0.35f);
-            //yield return new WaitForSeconds(0.1f);
-            yield return null;
+            yield return new WaitForSeconds(0.025f);
+            //yield return null;
         }
         yield return null;
         //needCheckPieces.Add(t);
@@ -247,41 +258,49 @@ public class CurrentData : MonoBehaviour
         yield return null;
     }
 
-    void CheckMovingPiece()
-    {
-        foreach(var t in needCheckPieces)
-        {
-            t.CheckAround();
-        }
-    }
-
-    Vector2 RotateDirection( Vector2 pos1, Vector2 pos2)
+    float RotateAdd( Vector2 pos1, Vector2 pos2)
     {
         Debug.Log(pos1 + "  " + pos2);
-        Vector2 direc = Vector2.one;
+        float amount = 0;
         if (pos1.x == pos2.x)
         {
             if (pos1.y < pos2.y)
             {
-                direc.x = -180f;
+                amount = 180f;
             }
             else
             {
-                direc.x = 180f;
+                amount = -180f;
             }
         }
         else
         {
-            if (pos1.x < pos2.x)
+            //if (pos1.x < pos2.x)
             {
-                direc.y = 180f;
+                //if(pos1.y < pos2.y)
+                {
+                    amount =180f;
+                }
+                //else
+                {
+                    amount = -180f;
+                }
             }
-            else
+            //else
             {
-                direc.y = -180f;
+                //if (pos1.y < pos2.y)
+                //{
+                //    Debug.Log("3");
+                //    direc = new Vector3(-120f, -90f, 90f);
+                //}
+                //else
+                //{
+                //    Debug.Log("4");
+                //    direc = new Vector3(-120, -90f, 90);
+                //}
             }
         }
-        return direc; 
+        return amount; 
     }
 
 
@@ -377,7 +396,10 @@ public class CurrentData : MonoBehaviour
             }
             pieceInfo.Add(list);
         }
-        isLoad = true;
+        if(info.Count == 0)
+        {
+            StartCoroutine(piecesGenerator.GeneratePieces(false)); 
+        }else
         StartCoroutine(piecesGenerator.LoadPiece(pieceInfo));
     }
 
@@ -407,8 +429,22 @@ public class CurrentData : MonoBehaviour
         }
     }
 
+    public List<PlatformPiece> GetAvaiablePiece()
+    {
+        List<PlatformPiece> avaiable = new();
+        List<PlatformPiece> pieces = levelInfo.allPieces;
+        foreach (PlatformPiece piece in pieces)
+        {
+            if (piece.pieces.Count == 0)
+                avaiable.Add(piece);
+        }
+        return avaiable;
+    }
+
     private void OnApplicationQuit()
     {
         SaveCurrentData();
     }
+
+
 }

@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe386d7514270840ab1dd864d6327e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goalScore: 20
+  goalScore: 10
   maxcolorStart: 3
   lockPieces: []
   allPieces:

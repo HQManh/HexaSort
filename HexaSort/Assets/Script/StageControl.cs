@@ -35,7 +35,6 @@ public class StageControl : MonoBehaviour
     {
         GlobalControll.CurrentStage = ScreenStage.InGame;
         UIController.Instance.ShowLevelBreak(StartLevel);     
-        CurrentData.Instance.StartGame();
     }
 
 
