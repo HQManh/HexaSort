@@ -7,6 +7,7 @@ public enum PlatType
     Open,
     Lock,
     Ads,
+    Ticket,
     None,
     Ice,
     Plank

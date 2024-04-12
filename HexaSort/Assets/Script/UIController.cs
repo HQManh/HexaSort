@@ -43,6 +43,7 @@ public class UIController : MonoBehaviour
     public TextMeshProUGUI levelIngame;
     public BoosterControl boosterControl;
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI ticketText;
     bool isSettingOn = false;
     [Header("EndUI")]
     public ParticleSystem confetti;
@@ -104,6 +105,7 @@ public class UIController : MonoBehaviour
         StartGameAnim();
         levelIngame.text = "Level " + (id+1).ToString();
         coinText.text = GlobalControll.Coin.ToString();
+        ticketText.text = GlobalControll.Ticket.ToString();
     }
 
     void StartGameAnim()
@@ -288,7 +290,7 @@ public class UIController : MonoBehaviour
         var imageTemp = Instantiate(breakImage,des, Quaternion.identity,transform);
         yield return null;
         imageTemp.color = CurrentData.Instance.materialsColor[id].color;
-        imageTemp.GetComponent<TrailRenderer>().material.color = CurrentData.Instance.materialsColor[id].color;
+        imageTemp.GetComponent<TrailRenderer>().startColor = CurrentData.Instance.materialsColor[id].color;
         List<Vector3> points = new();
         var t = des;
         points.Add(t);
@@ -303,7 +305,7 @@ public class UIController : MonoBehaviour
         points.Add(t);
         points.Add(progressText.transform.position);
         yield return null;
-        LeanTween.move(imageTemp.gameObject, points.ToArray(), .5f).setOnComplete(() =>
+        LeanTween.move(imageTemp.gameObject, points.ToArray(), .5f).setSpeed(175f).setOnComplete(() =>
         {
             CurrentData.Instance.UpdateScore(score);
         }).setDestroyOnComplete(true);

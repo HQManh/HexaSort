@@ -33,6 +33,11 @@ public class LevelControl : Singleton<LevelControl>
         currentLevel = id;
         level = transform.GetComponentInChildren<LevelInfo>();
         LevelData data = DataControl.Instance.LoadData();
+        if(data == null)
+        {
+            CurrentData.Instance.StartGame();
+            return;
+        }
         if (data.level == GlobalControll.CurrentLevelIndex)
         {
             CurrentData.Instance.StartGame(data);

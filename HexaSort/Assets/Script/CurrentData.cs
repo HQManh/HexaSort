@@ -1,8 +1,8 @@
-using System;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MovingPiece
 {
@@ -22,12 +22,12 @@ public class CurrentData : MonoBehaviour
     public static List<List<PiecePro>> numPiece = new();
     public static List<PiecePro> currentPick = new();
     public static PlatformPiece currenPlat;
-    public static int freePieces =0;
+    public static int freePieces = 0;
     public static int lastTween;
     public static LevelInfo levelInfo;
-    public int currentProgress =0;
+    public int currentProgress = 0;
     public static List<PlatformPiece> canBreak = new();
-    public static int numOfCheck =0;
+    public static int numOfCheck = 0;
     public static Stack<MovingPiece> movingStack = new();
     public static bool isMove = false;
     public static bool isHammer = false;
@@ -36,6 +36,8 @@ public class CurrentData : MonoBehaviour
     public static List<PlatformPiece> needCheckPieces = new();
     [SerializeField]
     PiecesGenerator piecesGenerator;
+    [SerializeField]
+    AudioClip movingClip;
     public Transform progressBar;
     public GameObject breakObject;
     public PiecePro piecePre;
@@ -43,18 +45,18 @@ public class CurrentData : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;  
+        Instance = this;
     }
 
     public void UpdateScore(int score)
     {
         currentProgress += score;
-        UIController.Instance.SetProgress((float)(currentProgress) / (float) levelInfo.goalScore);
+        UIController.Instance.SetProgress((float)(currentProgress) / (float)levelInfo.goalScore);
         levelInfo.CheckUnlock(currentProgress);
         levelInfo.CheckProcess(currentProgress);
     }
 
-    
+
     public void EndGameAnim()
     {
         levelInfo.EndGameAnim();
@@ -70,7 +72,6 @@ public class CurrentData : MonoBehaviour
         }
         else
         {
-            Debug.Log("?");
             numPiece.Clear();
             StartCoroutine(piecesGenerator.GeneratePieces(false));
         }
@@ -80,7 +81,7 @@ public class CurrentData : MonoBehaviour
     public void CheckPiece()
     {
         numPiece.Remove(currentPick);
-        if(numPiece.Count == 0)
+        if (numPiece.Count == 0)
         {
             StartCoroutine(piecesGenerator.GeneratePieces(false));
         }
@@ -89,9 +90,9 @@ public class CurrentData : MonoBehaviour
     List<int> GetPiecesHead()
     {
         List<int> ids = new();
-        foreach(var t in numPiece)
+        foreach (var t in numPiece)
         {
-            if (ids.Contains(t[^1].id)) continue; 
+            if (ids.Contains(t[^1].id)) continue;
             ids.Add(t[^1].id);
         }
         return ids;
@@ -104,17 +105,17 @@ public class CurrentData : MonoBehaviour
         List<int> piecesHead = GetPiecesHead();
         List<PlatformPiece> currentPieces = levelInfo.allPieces;
         List<PlatformPiece> canBreakPieces = new();
-        for(int i=0; i<piecesHead.Count; i++)
+        for (int i = 0; i < piecesHead.Count; i++)
         {
-            for(int j=0;j<currentPieces.Count; j++)
+            for (int j = 0; j < currentPieces.Count; j++)
             {
                 if (currentPieces[j].pieces.Count == 0) continue;
                 if (currentPieces[j].pieces[^1].id == piecesHead[i])
                 {
                     var temp = currentPieces[j];
-                    foreach(var t in temp.neighbor)
+                    foreach (var t in temp.neighbor)
                     {
-                        if (canBreakPieces.Contains(t) || t.pieces.Count ==0 || t.pieces[^1].id == piecesHead[i]) continue;
+                        if (canBreakPieces.Contains(t) || t.pieces.Count == 0 || t.pieces[^1].id == piecesHead[i]) continue;
                         canBreakPieces.Add(t);
                     }
                 }
@@ -122,12 +123,12 @@ public class CurrentData : MonoBehaviour
         }
 
         List<PlatformPiece> breakList = new();
-        if(canBreakPieces.Count > numOfBreak)
+        if (canBreakPieces.Count > numOfBreak)
         {
             breakList = canBreakPieces;
-            for(int i=0;i<numOfBreak - breakList.Count; i++)
+            for (int i = 0; i < numOfBreak - breakList.Count; i++)
             {
-                int t = UnityEngine.Random.Range(0,currentPieces.Count);
+                int t = UnityEngine.Random.Range(0, currentPieces.Count);
                 while (breakList.Contains(currentPieces[t]))
                 {
                     t = UnityEngine.Random.Range(0, currentPieces.Count);
@@ -138,21 +139,21 @@ public class CurrentData : MonoBehaviour
         }
         else
         {
-            for(int i=0; i < numOfBreak; i++)
+            for (int i = 0; i < numOfBreak; i++)
             {
                 int t = UnityEngine.Random.Range(0, canBreakPieces.Count);
                 breakList.Add(canBreakPieces[t]);
                 canBreakPieces.RemoveAt(t);
             }
         }
-        for(int i=0;i< numOfBreak; i++)
+        for (int i = 0; i < numOfBreak; i++)
         {
             var t = Instantiate(breakObject);
             LeanTween.move(t, breakList[i].transform.position, .8f).setOnComplete(() =>
             {
                 StartCoroutine(breakList[i].BreakPieceHammer());
             });
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0f,0.5f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.5f));
         }
         yield return null;
     }
@@ -176,10 +177,10 @@ public class CurrentData : MonoBehaviour
 
     public IEnumerator CheckAvaiablePlat()
     {
-        if(isEnd)  yield break;
-        yield return new WaitUntil(() => numOfCheck ==0 && movingStack.Count == 0);
+        if (isEnd) yield break;
+        yield return new WaitUntil(() => numOfCheck == 0 && movingStack.Count == 0);
         int c = 0;
-        foreach(var piece in levelInfo.allPieces)
+        foreach (var piece in levelInfo.allPieces)
         {
             if (piece.pieces.Count == 0 || piece.platType != PlatType.Open)
                 yield break;
@@ -199,7 +200,7 @@ public class CurrentData : MonoBehaviour
     {
         isMove = false;
         numOfCheck = canBreak.Count;
-        foreach(var des in canBreak)
+        foreach (var des in canBreak)
         {
             des.CheckBreak();
         }
@@ -213,31 +214,33 @@ public class CurrentData : MonoBehaviour
         MovingPiece piece = movingStack.Pop();
         var f = piece.from;
         var t = piece.to;
-        if(f.pieces.Count < piece.amount)
+        if (f.pieces.Count < piece.amount)
         {
             yield break;
         }
-        Vector3 pos2 = t.pieces[^1].transform.localPosition;
-        Vector3 pos1 = f.pieces[^1].transform.localPosition;
-        Vector3 axis = Vector3.right;
-        //axis = Vector3.Cross(axis, Vector3.up);
-        float amount = RotateAdd(pos1, pos2);
-        for (int i=0; i < piece.amount; i++)
+        Vector3 pos2 = t.pieces[^1].transform.position;
+        Vector3 vTemp = t.pieces[^1].transform.localPosition;
+        Vector3 pos1 = f.pieces[^1].transform.position;
+        Vector3 axis = RotateAxis(pos1, pos2);
+        Debug.Log(axis);
+        for (int i = 0; i < piece.amount; i++)
         {
             var fPiece = f.pieces[^1];
-            List<Vector3> list = new ();
+            List<Vector3> list = new();
             fPiece.transform.parent = t.container;
             pos1 = fPiece.transform.localPosition;
             t.pieces.Add(fPiece);
             f.pieces.RemoveAt(f.pieces.Count - 1);
-            var posTemp = pos2 - new Vector3(0f, 0f, 0.2f) * (i + 1);
-            Vector3 midPos = new((pos1.x + posTemp.x) / 2, (pos1.y + posTemp.y) / 2,Mathf.Min(pos1.z-.5f, posTemp.z -0.2f*(i+1)) - 1.5f);
+            var posTemp = vTemp - new Vector3(0f, 0f, 0.2f) * (i + 1);
+            Vector3 midPos = new((pos1.x + posTemp.x) / 2, (pos1.y + posTemp.y) / 2, Mathf.Min(pos1.z - .5f, posTemp.z - 0.2f * (i + 1)) - 1.5f);
             list.Add(pos1);
             list.Add(midPos);
             list.Add(midPos);
             list.Add(posTemp);
-            lastTween = LeanTween.moveLocal(fPiece.gameObject,list.ToArray(), 0.4f).setEaseInOutSine().id;
-            LeanTween.rotateAroundLocal(fPiece.gameObject, axis, amount, 0.4f);
+            lastTween = LeanTween.moveLocal(fPiece.gameObject, list.ToArray(), 0.4f).setEaseInOutSine().id;
+            LeanTween.rotateAroundLocal(fPiece.gameObject, axis, 180f, 0.4f).setEaseInOutSine();
+            SoundControl.Instance.PlaySfx(movingClip);
+            //fPiece.transform.DOLocalRotate(fPiece.transform.localEulerAngles + axis, 0.4f, RotateMode.FastBeyond360);
             if (!canBreak.Contains(t))
             {
                 canBreak.Add(t);
@@ -258,52 +261,72 @@ public class CurrentData : MonoBehaviour
         yield return null;
     }
 
-    float RotateAdd( Vector2 pos1, Vector2 pos2)
+    Vector3 RotateAxis(Vector3 pos1, Vector3 pos2)
     {
-        Debug.Log(pos1 + "  " + pos2);
-        float amount = 0;
-        if (pos1.x == pos2.x)
+        Vector3 direc = pos1 - pos2;
+        if (direc.x == 0)
         {
-            if (pos1.y < pos2.y)
+            if (direc.z < 0)
             {
-                amount = 180f;
+                return Vector3.left;
             }
             else
             {
-                amount = -180f;
+                return Vector3.right;
             }
         }
         else
         {
-            //if (pos1.x < pos2.x)
+            if (direc.x * direc.z < 0)
             {
-                //if(pos1.y < pos2.y)
-                {
-                    amount =180f;
-                }
-                //else
-                {
-                    amount = -180f;
-                }
+                return new Vector3(1f, 0f, Mathf.Sqrt(3f));
             }
-            //else
+            else
             {
-                //if (pos1.y < pos2.y)
-                //{
-                //    Debug.Log("3");
-                //    direc = new Vector3(-120f, -90f, 90f);
-                //}
-                //else
-                //{
-                //    Debug.Log("4");
-                //    direc = new Vector3(-120, -90f, 90);
-                //}
+                return new Vector3(1f, 0f, -Mathf.Sqrt(3f));
             }
         }
-        return amount; 
+        //Vector3 direc = Vector3.zero;
+        //if(pos1.x == pos2.x)
+        //{
+        //    if(pos1.y > pos2.y)
+        //    {
+        //        direc.x = 180f;
+        //        return direc;
+        //    }
+        //    else
+        //    {
+        //        direc.x = -180f;
+        //        return direc;
+        //    }
+        //}
+        //else
+        //{
+        //    if(pos1.y < pos2.y)
+        //    {
+        //        if(pos1.x< pos2.x)
+        //        {
+        //            return new Vector3(60f, 90f, -90f);
+        //        }
+        //        else
+        //        {
+        //            return new Vector3(-60f, 90f, -90f);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if(pos1.x> pos2.x)
+        //        {
+        //            return new Vector3(60f, -90f, 90f);
+        //        }
+        //        else
+        //        {
+        //            return new Vector3(-60f, -90f, 90f);
+        //        }
+        //    }
+        //}
+
     }
-
-
 
     void SaveCurrentData()
     {
@@ -316,7 +339,7 @@ public class CurrentData : MonoBehaviour
             {
                 case "Pos1":
                     list += "1";
-                    foreach(var p in piece)
+                    foreach (var p in piece)
                     {
                         list += " " + (p.id).ToString();
                     }
@@ -364,50 +387,52 @@ public class CurrentData : MonoBehaviour
     void LoadPlatInfo(List<string> info)
     {
         List<List<int>> platInfo = new();
-        foreach(var s in info)
+        foreach (var s in info)
         {
             string[] t = s.Split(' ');
             List<int> list = new();
-            for(int i=0;i< t.Length; i++)
+            for (int i = 0; i < t.Length; i++)
             {
                 if (int.TryParse(t[i], out int j))
                 {
                     list.Add(j);
-                }          
+                }
             }
             platInfo.Add(list);
         }
+        if (platInfo.Count == 0) return;
         LevelControl.Instance.loadedLevel.LoadDataPlat(platInfo);
     }
 
     void LoadPieceData(List<string> info)
     {
         List<List<int>> pieceInfo = new();
-        foreach(var s in info)
+        foreach (var s in info)
         {
-            string[] t= s.Split(" ");
+            string[] t = s.Split(" ");
             List<int> list = new();
-            for(int i=0;i< t.Length ; i++)
+            for (int i = 0; i < t.Length; i++)
             {
-                if (int.TryParse(t[i],out int j))
+                if (int.TryParse(t[i], out int j))
                 {
                     list.Add(j);
                 }
             }
             pieceInfo.Add(list);
         }
-        if(info.Count == 0)
+        if (info.Count == 0)
         {
-            StartCoroutine(piecesGenerator.GeneratePieces(false)); 
-        }else
-        StartCoroutine(piecesGenerator.LoadPiece(pieceInfo));
+            StartCoroutine(piecesGenerator.GeneratePieces(false));
+        }
+        else
+            StartCoroutine(piecesGenerator.LoadPiece(pieceInfo));
     }
 
 
     void LoadProgress(int progress)
     {
         currentProgress = progress;
-        UIController.Instance.SetProgress( (float)progress/ (float)LevelControl.Instance.loadedLevel.goalScore, 0f);
+        UIController.Instance.SetProgress((float)progress / (float)LevelControl.Instance.loadedLevel.goalScore, 0f);
     }
 
     private void Update()
@@ -418,12 +443,12 @@ public class CurrentData : MonoBehaviour
         }
 
         if (movingStack.Count != 0 && numOfCheck == 0)
-        {           
+        {
             StartCoroutine(Move());
             return;
         }
 
-        if(movingStack.Count == 0 && isMove && numOfCheck ==0)
+        if (movingStack.Count == 0 && isMove && numOfCheck == 0)
         {
             CheckMoving();
         }

@@ -34,7 +34,7 @@ public class PiecesGenerator : MonoBehaviour
             float r = Random.value;
             if (r < percen)
             {
-                PieceControl();
+                
             }
             var t = GetInfo(isSingle);
             var rootTemp = piecePos.GetChild(i);
@@ -67,9 +67,6 @@ public class PiecesGenerator : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-
-
-
 
 
     public IEnumerator LoadPiece(List<List<int>> piecesInfo)
@@ -116,7 +113,7 @@ public class PiecesGenerator : MonoBehaviour
         }
     }
 
-    void PieceControl()
+    List<int> GetColorsUnmatch()
     {
         List<int> infos = new();
         for(int i = 0; i < CurrentData.Instance.materialsColor.Count; i++)
@@ -135,7 +132,15 @@ public class PiecesGenerator : MonoBehaviour
                 }
             }
         }
+        return infos;
+    }
 
+
+    PieceDetail[] GetInfoHard()
+    {
+        List<PieceDetail> info = new();
+        List<int> ids = GetColorsUnmatch();
+        return info.ToArray();
     }
 
 

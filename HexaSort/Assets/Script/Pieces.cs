@@ -6,6 +6,8 @@ public class Pieces : MonoBehaviour
 {
     public List<PiecePro> piecePros = new();
     Vector3 startPos;
+    [SerializeField]
+    AudioClip placeClip;
 
     private void Start()
     {
@@ -45,10 +47,10 @@ public class Pieces : MonoBehaviour
             CurrentData.currenPlat.SetPos();
             CurrentData.Instance.CheckPiece();
             CurrentData.isPick = false;
+            SoundControl.Instance.PlaySfx(placeClip);
             Destroy(this.transform.GetChild(0).gameObject);
             transform.localPosition = startPos;
-        }
-        
+        }       
     }
 
 

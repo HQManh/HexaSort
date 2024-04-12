@@ -10,6 +10,10 @@ public class PlatformPiece : MonoBehaviour
     [SerializeField]
     GameObject adsState;
     [SerializeField]
+    GameObject ticketState;
+    [SerializeField]
+    GameObject iceState;
+    [SerializeField]
     ParticleSystem breakPieceParticle;
     public PlatType platType = PlatType.Open;
     public int lockNumber;
@@ -19,6 +23,7 @@ public class PlatformPiece : MonoBehaviour
     public List<PlatformPiece> neighbor = new();
     public Transform container;
     public int id;
+    float timeBreak = 0.03f;
     bool currentPick = false;
     MeshRenderer meshRenderer;
 
@@ -213,7 +218,7 @@ public class PlatformPiece : MonoBehaviour
             var t = pieces[^1];
             pieces.RemoveAt(pieces.Count - 1);
             CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(timeBreak);
         }
         numOfColor[id] = 0;
         CurrentData.Instance.CheckBreak();
@@ -236,7 +241,7 @@ public class PlatformPiece : MonoBehaviour
             var t = pieces[^1];
             pieces.RemoveAt(pieces.Count -1);
             CurrentData.lastTween = LeanTween.scale(t.gameObject, Vector3.zero, 0.15f).setDestroyOnComplete(true).id;
-            yield return new WaitForSeconds(0.04f);
+            yield return new WaitForSeconds(timeBreak);
         }
         numOfColor.Clear();
         yield return null;
@@ -270,7 +275,7 @@ public class PlatformPiece : MonoBehaviour
     public void CheckAround()
     {
         if (pieces.Count == 0) return;
-        List<PlatformPiece> nextPieces = LookAround(pieces[^1].id);
+        List<PlatformPiece> nextPieces = LookAround();
         if (nextPieces.Count != 0)
         {
             switch (nextPieces.Count)
@@ -291,9 +296,10 @@ public class PlatformPiece : MonoBehaviour
         }
     }
 
-    List<PlatformPiece> LookAround(int id)
+    public List<PlatformPiece> LookAround()
     {
         GetAmount();
+        id = pieces[^1].id;
         var platPieces = new List<PlatformPiece>();
         foreach (var t in neighbor)
         {
@@ -313,10 +319,15 @@ public class PlatformPiece : MonoBehaviour
     {
         var next = nextPieces[0];
         var head = pieces[^1].id;
+        if (nextPieces[0].LookAround().Count > 1)
+        {
+            nextPieces[0].CheckAround();
+            return;
+        }
         if (numOfColor.Count > 1)
         {
             var nextHead = pieces[^numOfColor[head]];
-            if (LookAround(nextHead.id).Count > 0)
+            if (LookAround().Count > 0)
             {
                 MovingPiece m = new()
                 {
@@ -356,6 +367,14 @@ public class PlatformPiece : MonoBehaviour
     {
         int min = Mathf.Min(numOfColor.Count, nextPieces[0].numOfColor.Count, nextPieces[1].numOfColor.Count);
         int id = pieces[^1].id;
+        foreach(PlatformPiece piece in nextPieces)
+        {
+            if (piece.LookAround().Count >2)
+            {
+                piece.CheckAround();
+                return;
+            }
+        }
         if (min == numOfColor.Count)
         {
             MovingPiece m = new()
@@ -399,11 +418,19 @@ public class PlatformPiece : MonoBehaviour
     void MoveTripple(List<PlatformPiece> nextPieces)
     {
         int id = pieces[^1].id;
+        int i = 0;
+        foreach (PlatformPiece piece in nextPieces)
+        {
+            if (piece.LookAround().Count == 3)
+            {
+                i++;
+            }
+        }
         MovingPiece m = new()
         {
-            from = nextPieces[0],
+            from = nextPieces[i],
             to = this,
-            amount = nextPieces[0].numOfColor[id],
+            amount = nextPieces[i].numOfColor[id],
         };
         CurrentData.movingStack.Push((m));
         return;
