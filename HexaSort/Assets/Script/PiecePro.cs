@@ -7,6 +7,8 @@ public class PiecePro : MonoBehaviour
     public int id = -1;
     [SerializeField]
     MeshRenderer meshRenderer;
+    [SerializeField] private GameObject holder;
+    public GameObject Holder => holder;
 
     private void Start()
     {
@@ -19,5 +21,9 @@ public class PiecePro : MonoBehaviour
     public void SetColor()
     {
         meshRenderer.material = CurrentData.Instance.materialsColor[id];
+    }
+    public void SetLayer(int layer)
+    {
+        meshRenderer.gameObject.layer = layer;
     }
 }

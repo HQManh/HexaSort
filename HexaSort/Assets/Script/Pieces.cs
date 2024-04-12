@@ -18,7 +18,7 @@ public class Pieces : MonoBehaviour
     {
         foreach (var p in piecePros)
         {
-            p.gameObject.layer = 2;
+            p.SetLayer(2);
         }
         CurrentData.isPick = true;
         CurrentData.currentPick = piecePros;       
@@ -38,7 +38,7 @@ public class Pieces : MonoBehaviour
         {
             foreach (var p in piecePros)
             {
-                p.gameObject.layer = 0;
+                p.SetLayer(0);
             }
             LeanTween.moveLocal(gameObject, startPos, 0.2f);
         }

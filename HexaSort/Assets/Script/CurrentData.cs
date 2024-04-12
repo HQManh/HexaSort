@@ -221,7 +221,8 @@ public class CurrentData : MonoBehaviour
         Vector3 pos2 = t.pieces[^1].transform.position;
         Vector3 vTemp = t.pieces[^1].transform.localPosition;
         Vector3 pos1 = f.pieces[^1].transform.position;
-        Vector3 axis = RotateAxis(pos1, pos2);
+        Vector3 axis = pos1 - pos2;
+        axis = Vector3.Cross(axis, Vector3.up);
         Debug.Log(axis);
         for (int i = 0; i < piece.amount; i++)
         {
@@ -237,10 +238,20 @@ public class CurrentData : MonoBehaviour
             list.Add(midPos);
             list.Add(midPos);
             list.Add(posTemp);
-            lastTween = LeanTween.moveLocal(fPiece.gameObject, list.ToArray(), 0.4f).setEaseInOutSine().id;
-            LeanTween.rotateAroundLocal(fPiece.gameObject, axis, 180f, 0.4f).setEaseInOutSine();
+            Vector3 dir = posTemp - fPiece.transform.localPosition;
+            dir.z = 0;
+            var rotation = Quaternion.LookRotation(Vector3.forward, dir);
+            fPiece.transform.rotation = rotation;
+            lastTween = LeanTween.moveLocal(fPiece.gameObject, list.ToArray(), 0.4f).setOnUpdate((float f) =>
+            {
+
+            }).setEaseInOutSine().id;
+            //LeanTween.rotateAroundLocal(fPiece.gameObject, axis, 180, 0.4f).setEaseInOutSine();
             SoundControl.Instance.PlaySfx(movingClip);
-            //fPiece.transform.DOLocalRotate(fPiece.transform.localEulerAngles + axis, 0.4f, RotateMode.FastBeyond360);
+            fPiece.Holder.transform.DOLocalRotate(new Vector3(180, 0, 0), 0.4f).OnComplete(() =>
+            {
+                fPiece.Holder.transform.localRotation = Quaternion.identity;
+            });
             if (!canBreak.Contains(t))
             {
                 canBreak.Add(t);
