@@ -221,9 +221,6 @@ public class CurrentData : MonoBehaviour
         Vector3 pos2 = t.pieces[^1].transform.position;
         Vector3 vTemp = t.pieces[^1].transform.localPosition;
         Vector3 pos1 = f.pieces[^1].transform.position;
-        Vector3 axis = pos1 - pos2;
-        axis = Vector3.Cross(axis, Vector3.up);
-        Debug.Log(axis);
         for (int i = 0; i < piece.amount; i++)
         {
             var fPiece = f.pieces[^1];
@@ -242,11 +239,7 @@ public class CurrentData : MonoBehaviour
             dir.z = 0;
             var rotation = Quaternion.LookRotation(Vector3.forward, dir);
             fPiece.transform.rotation = rotation;
-            lastTween = LeanTween.moveLocal(fPiece.gameObject, list.ToArray(), 0.4f).setOnUpdate((float f) =>
-            {
-
-            }).setEaseInOutSine().id;
-            //LeanTween.rotateAroundLocal(fPiece.gameObject, axis, 180, 0.4f).setEaseInOutSine();
+            lastTween = LeanTween.moveLocal(fPiece.gameObject, list.ToArray(), 0.4f).setEaseInOutSine().id;
             SoundControl.Instance.PlaySfx(movingClip);
             fPiece.Holder.transform.DOLocalRotate(new Vector3(180, 0, 0), 0.4f).OnComplete(() =>
             {
@@ -256,7 +249,6 @@ public class CurrentData : MonoBehaviour
             {
                 canBreak.Add(t);
             }
-            //f.canBreakPieces[^1].transform.localPosition = t.canBreakPieces[^1].transform.localPosition - new Vector3(0f, 0f, 0.35f);
             yield return new WaitForSeconds(0.025f);
             //yield return null;
         }
@@ -270,73 +262,6 @@ public class CurrentData : MonoBehaviour
         //    CheckMovingPiece();
         //}
         yield return null;
-    }
-
-    Vector3 RotateAxis(Vector3 pos1, Vector3 pos2)
-    {
-        Vector3 direc = pos1 - pos2;
-        if (direc.x == 0)
-        {
-            if (direc.z < 0)
-            {
-                return Vector3.left;
-            }
-            else
-            {
-                return Vector3.right;
-            }
-        }
-        else
-        {
-            if (direc.x * direc.z < 0)
-            {
-                return new Vector3(1f, 0f, Mathf.Sqrt(3f));
-            }
-            else
-            {
-                return new Vector3(1f, 0f, -Mathf.Sqrt(3f));
-            }
-        }
-        //Vector3 direc = Vector3.zero;
-        //if(pos1.x == pos2.x)
-        //{
-        //    if(pos1.y > pos2.y)
-        //    {
-        //        direc.x = 180f;
-        //        return direc;
-        //    }
-        //    else
-        //    {
-        //        direc.x = -180f;
-        //        return direc;
-        //    }
-        //}
-        //else
-        //{
-        //    if(pos1.y < pos2.y)
-        //    {
-        //        if(pos1.x< pos2.x)
-        //        {
-        //            return new Vector3(60f, 90f, -90f);
-        //        }
-        //        else
-        //        {
-        //            return new Vector3(-60f, 90f, -90f);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if(pos1.x> pos2.x)
-        //        {
-        //            return new Vector3(60f, -90f, 90f);
-        //        }
-        //        else
-        //        {
-        //            return new Vector3(-60f, -90f, 90f);
-        //        }
-        //    }
-        //}
-
     }
 
     void SaveCurrentData()
